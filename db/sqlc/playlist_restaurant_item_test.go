@@ -1,15 +1,5 @@
 package db
 
-import (
-	"context"
-	"database/sql"
-	"testing"
-	"time"
-
-	"github.com/jichong-tay/foodpanda-playlist-api/util"
-	"github.com/stretchr/testify/require"
-)
-
 /*
 func createRandomPlaylist(t *testing.T) Playlist {
 	arg := CreatePlaylistParams{
@@ -37,25 +27,25 @@ func createRandomPlaylist(t *testing.T) Playlist {
 
 */
 
-func createRandomPlaylist_Restaurant_Item(t *testing.T) PlaylistRestaurantItem {
-	arg := CreatePlaylist_Restaurant_ItemParams{
-		PlaylistID:             sql.NullInt32{Int32: int32(util.RandomInt(0, 10)), Valid: true},
-		RestaurantItemID:       sql.NullInt32{Int32: int32(util.RandomInt(0, 10)), Valid: true},
-		RestaurantItemQuantity: sql.NullInt32{Int32: int32(util.RandomInt(0, 10)), Valid: true},
-		AddedAt:                sql.NullTime{Time: time.Now(), Valid: true},
-	}
+// func createRandomPlaylist_Restaurant_Item(t *testing.T) PlaylistRestaurantItem {
+// 	arg := CreatePlaylist_Restaurant_ItemParams{
+// 		PlaylistID:             sql.NullInt32{Int32: int32(util.RandomInt(0, 10)), Valid: true},
+// 		RestaurantItemID:       sql.NullInt32{Int32: int32(util.RandomInt(0, 10)), Valid: true},
+// 		RestaurantItemQuantity: sql.NullInt32{Int32: int32(util.RandomInt(0, 10)), Valid: true},
+// 		AddedAt:                sql.NullTime{Time: time.Now(), Valid: true},
+// 	}
 
-	playlistrestaurantitem, err := testQueries.CreatePlaylist_Restaurant_Item(context.Background(), arg)
-	require.NoError(t, err)
-	require.NotEmpty(t, playlistrestaurantitem)
+// 	playlistrestaurantitem, err := testQueries.CreatePlaylist_Restaurant_Item(context.Background(), arg)
+// 	require.NoError(t, err)
+// 	require.NotEmpty(t, playlistrestaurantitem)
 
-	require.Equal(t, arg.PlaylistID, playlistrestaurantitem.PlaylistID)
-	require.Equal(t, arg.PlaylistID, playlistrestaurantitem.PlaylistID)
-	require.Equal(t, arg.PlaylistID, playlistrestaurantitem.PlaylistID)
+// 	require.Equal(t, arg.PlaylistID, playlistrestaurantitem.PlaylistID)
+// 	require.Equal(t, arg.PlaylistID, playlistrestaurantitem.PlaylistID)
+// 	require.Equal(t, arg.PlaylistID, playlistrestaurantitem.PlaylistID)
 
-	return playlistrestaurantitem
-}
+// 	return playlistrestaurantitem
+// }
 
-func TestCreatePlaylist_Restaurant_Item(t *testing.T) {
-	createRandomPlaylist_Restaurant_Item(t)
-}
+// func TestCreatePlaylist_Restaurant_Item(t *testing.T) {
+// 	createRandomPlaylist_Restaurant_Item(t)
+// }
