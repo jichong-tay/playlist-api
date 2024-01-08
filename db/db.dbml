@@ -1,0 +1,57 @@
+
+//Creating Table
+	Table users {
+  id bigserial [pk]
+  username varchar
+  email varchar
+  password_hash varchar
+  address varchar
+}
+
+Table restaurants {
+  id bigserial [pk]
+  name varchar
+  description varchar
+  location varchar
+  cuisine varchar
+  image_url varchar
+}
+
+Table restaurant_items {
+  id bigserial [pk]
+  restaurant_id int [ref: > restaurants.id]
+  is_available bool
+  name varchar
+  description varchar
+  price decimal(10, 2)  // Example: 10 digits total, 2 decimal places
+  cuisine varchar
+  image_url varchar
+}
+
+Table user_playlist {
+  id bigserial [pk]
+  user_id int [ref: > users.id]
+  playlist_id int [ref: > playlist.id]
+  delivery_day varchar
+  delivery_time varchar
+  status varchar
+}
+
+Table playlist_restaurant_items {
+  id bigserial [pk]
+  playlist_id int [ref: > playlist.id]
+  restaurant_item_id int [ref: > restaurant_items.id]  
+  restaurant_item_quantity int
+  added_at timestamptz [default: `now()`]
+}
+
+Table playlist {
+  id bigserial [pk]
+  name varchar
+  description varchar
+  image_url varchar
+  is_public bool
+  delivery_day varchar
+  category varchar
+}
+
