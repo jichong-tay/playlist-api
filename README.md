@@ -13,4 +13,4 @@ create test case for
   user_playlist
 
 DONE
-test case for playlist2
+test case for playlist
