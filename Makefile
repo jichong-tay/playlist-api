@@ -22,4 +22,10 @@ test:
 sqlc:
 	sqlc generate
 
-.PHONY: postgres-image postgres createdb dropdb migrateup migratedown sqlc test
+dev-up:
+	docker-compose up -d
+
+dev-down:
+	docker-compose down
+
+.PHONY: postgres-image postgres createdb dropdb migrateup migratedown sqlc test dev-up dev-down
