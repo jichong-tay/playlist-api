@@ -28,4 +28,7 @@ dev-up:
 dev-down:
 	docker-compose down
 
-.PHONY: postgres-image postgres createdb dropdb migrateup migratedown sqlc test dev-up dev-down
+run:
+	go run ./cmd/
+
+.PHONY: postgres-image postgres createdb dropdb migrateup migratedown sqlc test dev-up dev-down run
