@@ -55,9 +55,7 @@ func CreateUser(dbClient DBClient) func(c *gin.Context) {
 			return
 		}
 
-		c.JSON(http.StatusCreated, gin.H{
-			"message": "pong",
-		})
+		c.Status(http.StatusCreated)
 	}
 }
 

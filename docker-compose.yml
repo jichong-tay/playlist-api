@@ -9,6 +9,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: foodpanda-playlist
+    ports:
+      - 5432:5432
     volumes:
       - ./scripts/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 

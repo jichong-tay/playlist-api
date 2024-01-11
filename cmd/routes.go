@@ -1,20 +1,17 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+
+	"github.com/jichong-tay/foodpanda-playlist-api/internal/db"
+	"github.com/jichong-tay/foodpanda-playlist-api/internal/handlers"
 )
 
 // setupRoutes sets up the routes for the application.
-func setupRoutes() *gin.Engine {
+func setupRoutes(dbClient *db.Client) *gin.Engine {
 	r := gin.Default()
 
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	r.POST("/users", handlers.CreateUser(dbClient))
 
 	return r
 }
