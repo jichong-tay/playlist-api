@@ -1,5 +1,5 @@
--- name: CreateRestaurant_Item :one
-INSERT INTO restaurant_items (
+-- name: CreateDish :one
+INSERT INTO dishes (
   restaurant_id,
   is_available,
   name,
@@ -7,24 +7,26 @@ INSERT INTO restaurant_items (
   price,
   cuisine,
   image_url
+
 ) 
 VALUES (
   $1, $2, $3, $4, $5, $6, $7
 )
 RETURNING *;
 
--- name: GetRestaurant_Item :one
-SELECT * FROM restaurant_items
+-- name: GetDish :one
+SELECT * FROM dishes
 WHERE id = $1 LIMIT 1;
 
--- name: ListRestaurant_Items :many
-SELECT * FROM restaurant_items
+-- name: ListDishes :many
+SELECT * FROM dishes
+WHERE id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2;
+LIMIT $2
+OFFSET $3;
 
--- name: UpdateRestaurant_Item :one
-UPDATE restaurant_items
+-- name: UpdateDish :one
+UPDATE dishes
 SET 
   restaurant_id = $2,
   is_available = $3,
@@ -37,6 +39,6 @@ WHERE
   id = $1
 RETURNING *;
 
--- name: DeleteRestaurant_Item :exec
-DELETE FROM restaurant_items
+-- name: DeleteDish :exec
+DELETE FROM dishes
 WHERE id = $1;

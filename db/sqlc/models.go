@@ -5,66 +5,79 @@
 package db
 
 import (
-	"database/sql"
+	"time"
+
+	null "gopkg.in/guregu/null.v4"
 )
+
+// Stores dishes
+type Dish struct {
+	ID           int64       `json:"id"`
+	RestaurantID int64       `json:"restaurant_id"`
+	IsAvailable  bool        `json:"is_available"`
+	Name         string      `json:"name"`
+	Description  null.String `json:"description"`
+	Price        float64     `json:"price"`
+	Cuisine      null.String `json:"cuisine"`
+	ImageUrl     null.String `json:"image_url"`
+}
 
 // Stores playlist
 type Playlist struct {
-	ID          int64          `json:"id"`
-	Name        sql.NullString `json:"name"`
-	Description sql.NullString `json:"description"`
-	ImageUrl    sql.NullString `json:"image_url"`
-	IsPublic    sql.NullBool   `json:"is_public"`
-	DeliveryDay sql.NullString `json:"delivery_day"`
-	Category    sql.NullString `json:"category"`
+	ID          int64       `json:"id"`
+	Name        string      `json:"name"`
+	Description null.String `json:"description"`
+	ImageUrl    null.String `json:"image_url"`
+	IsPublic    bool        `json:"is_public"`
+	DeliveryDay null.String `json:"delivery_day"`
+	Category    null.String `json:"category"`
+	CreatedAt   time.Time   `json:"created_at"`
+	AddedAt     time.Time   `json:"added_at"`
 }
 
-// Stores playlist restaurant items
-type PlaylistRestaurantItem struct {
-	ID                     int64         `json:"id"`
-	PlaylistID             sql.NullInt32 `json:"playlist_id"`
-	RestaurantItemID       sql.NullInt32 `json:"restaurant_item_id"`
-	RestaurantItemQuantity sql.NullInt32 `json:"restaurant_item_quantity"`
-	AddedAt                sql.NullTime  `json:"added_at"`
+// Stores playlist dishes
+type PlaylistDish struct {
+	ID           int64     `json:"id"`
+	OrderID      int64     `json:"order_id"`
+	PlaylistID   int64     `json:"playlist_id"`
+	DishID       int64     `json:"dish_id"`
+	DishQuantity int64     `json:"dish_quantity"`
+	CreatedAt    time.Time `json:"created_at"`
+	AddedAt      time.Time `json:"added_at"`
 }
 
 // Stores restaurants
 type Restaurant struct {
-	ID          int64          `json:"id"`
-	Name        sql.NullString `json:"name"`
-	Description sql.NullString `json:"description"`
-	Location    sql.NullString `json:"location"`
-	Cuisine     sql.NullString `json:"cuisine"`
-	ImageUrl    sql.NullString `json:"image_url"`
+	ID          int64       `json:"id"`
+	Name        null.String `json:"name"`
+	Description null.String `json:"description"`
+	Location    null.String `json:"location"`
+	Cuisine     null.String `json:"cuisine"`
+	ImageUrl    null.String `json:"image_url"`
 }
 
-// Stores restaurant items
-type RestaurantItem struct {
-	ID           int64          `json:"id"`
-	RestaurantID sql.NullInt32  `json:"restaurant_id"`
-	IsAvailable  sql.NullBool   `json:"is_available"`
-	Name         sql.NullString `json:"name"`
-	Description  sql.NullString `json:"description"`
-	Price        sql.NullString `json:"price"`
-	Cuisine      sql.NullString `json:"cuisine"`
-	ImageUrl     sql.NullString `json:"image_url"`
+// Stores user searches
+type Search struct {
+	ID      int64       `json:"id"`
+	UserID  int64       `json:"user_id"`
+	Keyword null.String `json:"keyword"`
 }
 
 // Stores user data
 type User struct {
-	ID           int64          `json:"id"`
-	Username     sql.NullString `json:"username"`
-	Email        sql.NullString `json:"email"`
-	PasswordHash sql.NullString `json:"password_hash"`
-	Address      sql.NullString `json:"address"`
+	ID           int64       `json:"id"`
+	Username     string      `json:"username"`
+	Email        string      `json:"email"`
+	PasswordHash string      `json:"password_hash"`
+	Address      null.String `json:"address"`
 }
 
 // Stores user playlist
 type UserPlaylist struct {
-	ID           int64          `json:"id"`
-	UserID       sql.NullInt32  `json:"user_id"`
-	PlaylistID   sql.NullInt32  `json:"playlist_id"`
-	DeliveryDay  sql.NullString `json:"delivery_day"`
-	DeliveryTime sql.NullString `json:"delivery_time"`
-	Status       sql.NullString `json:"status"`
+	ID           int64       `json:"id"`
+	UserID       int64       `json:"user_id"`
+	PlaylistID   int64       `json:"playlist_id"`
+	DeliveryDay  null.String `json:"delivery_day"`
+	DeliveryTime null.Time   `json:"delivery_time"`
+	Status       null.String `json:"status"`
 }

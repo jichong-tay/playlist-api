@@ -1,0 +1,84 @@
+
+//Creating Table
+
+Table searches{
+  id bigserial [pk]
+  keyword varchar [not null]
+  
+  Note: 'Stores searches'
+}
+
+Table user_searches{
+  id bigserial [pk]
+  searches_id int [ref: > searches.id, not null]
+  user_id int [ref: > users.id, not null]  
+ 
+  Note: 'Stores user searches'
+}
+
+Table users {
+  id bigserial [pk]
+  username varchar [not null]
+  email varchar [unique, not null]
+  password_hash varchar [not null]
+  address varchar
+  
+  Note: 'Stores user data'
+}
+
+Table user_playlists {
+  id bigserial [pk]
+  user_id int [ref: > users.id, not null]
+  playlist_id int [ref: > playlists.id, not null]
+  delivery_day varchar
+  delivery_time varchar
+  status varchar
+
+  Note: 'Stores user playlist'
+}
+
+Table playlists {
+  id bigserial [pk]
+  name varchar [not null]
+  description varchar
+  image_url varchar
+  is_public bool [not null]
+  delivery_day varchar
+  category varchar
+  created_at timestamptz [default: `now()`, not null] // Default value set to current timestamp
+  added_at timestamptz [default: `now()`, not null] // Default value set to current timestamp
+  Note: 'Stores playlist'
+}
+
+Table playlist_dishes{
+  id bigserial [pk]
+  order_id bigserial [not null]
+  playlist_id int [ref: > playlists.id, not null]
+  dish_id int [ref: > dishes.id, not null]  
+  dish_quantity int [not null]
+  created_at timestamptz [default: `now()`, not null] // Default value set to current timestamp
+  added_at timestamptz [default: `now()`, not null] // Default value set to current timestamp
+  Note: 'Stores playlist dishes'
+}
+
+Table dishes {
+  id bigserial [pk]
+  restaurant_id int [ref: > restaurants.id]
+  is_available bool [not null]
+  name varchar [not null]
+  description varchar
+  price decimal(10, 2)  // Example: 10 digits total, 2 decimal places
+  cuisine varchar
+  image_url varchar
+  Note: 'Stores dishes'
+}
+
+Table restaurants {
+  id bigserial [pk]
+  name varchar
+  description varchar
+  location varchar
+  cuisine varchar
+  image_url varchar
+  Note: 'Stores restaurants'
+}

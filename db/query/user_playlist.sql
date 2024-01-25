@@ -17,9 +17,10 @@ WHERE id = $1 LIMIT 1;
 
 -- name: ListUser_Playlists :many
 SELECT * FROM user_playlists
+WHERE user_id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2;
+LIMIT $2
+OFFSET $3;
 
 -- name: UpdateUser_Playlist :one
 UPDATE user_playlists

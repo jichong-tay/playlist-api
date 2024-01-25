@@ -7,7 +7,8 @@ package db
 
 import (
 	"context"
-	"database/sql"
+
+	null "gopkg.in/guregu/null.v4"
 )
 
 const createUser_Playlist = `-- name: CreateUser_Playlist :one
@@ -25,11 +26,11 @@ RETURNING id, user_id, playlist_id, delivery_day, delivery_time, status
 `
 
 type CreateUser_PlaylistParams struct {
-	UserID       sql.NullInt32  `json:"user_id"`
-	PlaylistID   sql.NullInt32  `json:"playlist_id"`
-	DeliveryDay  sql.NullString `json:"delivery_day"`
-	DeliveryTime sql.NullString `json:"delivery_time"`
-	Status       sql.NullString `json:"status"`
+	UserID       int64       `json:"user_id"`
+	PlaylistID   int64       `json:"playlist_id"`
+	DeliveryDay  null.String `json:"delivery_day"`
+	DeliveryTime null.Time   `json:"delivery_time"`
+	Status       null.String `json:"status"`
 }
 
 func (q *Queries) CreateUser_Playlist(ctx context.Context, arg CreateUser_PlaylistParams) (UserPlaylist, error) {
@@ -83,23 +84,25 @@ func (q *Queries) GetUser_Playlist(ctx context.Context, id int64) (UserPlaylist,
 
 const listUser_Playlists = `-- name: ListUser_Playlists :many
 SELECT id, user_id, playlist_id, delivery_day, delivery_time, status FROM user_playlists
+WHERE user_id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2
+LIMIT $2
+OFFSET $3
 `
 
 type ListUser_PlaylistsParams struct {
+	UserID int64 `json:"user_id"`
 	Limit  int32 `json:"limit"`
 	Offset int32 `json:"offset"`
 }
 
 func (q *Queries) ListUser_Playlists(ctx context.Context, arg ListUser_PlaylistsParams) ([]UserPlaylist, error) {
-	rows, err := q.db.QueryContext(ctx, listUser_Playlists, arg.Limit, arg.Offset)
+	rows, err := q.db.QueryContext(ctx, listUser_Playlists, arg.UserID, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []UserPlaylist
+	items := []UserPlaylist{}
 	for rows.Next() {
 		var i UserPlaylist
 		if err := rows.Scan(
@@ -137,12 +140,12 @@ RETURNING id, user_id, playlist_id, delivery_day, delivery_time, status
 `
 
 type UpdateUser_PlaylistParams struct {
-	ID           int64          `json:"id"`
-	UserID       sql.NullInt32  `json:"user_id"`
-	PlaylistID   sql.NullInt32  `json:"playlist_id"`
-	DeliveryDay  sql.NullString `json:"delivery_day"`
-	DeliveryTime sql.NullString `json:"delivery_time"`
-	Status       sql.NullString `json:"status"`
+	ID           int64       `json:"id"`
+	UserID       int64       `json:"user_id"`
+	PlaylistID   int64       `json:"playlist_id"`
+	DeliveryDay  null.String `json:"delivery_day"`
+	DeliveryTime null.Time   `json:"delivery_time"`
+	Status       null.String `json:"status"`
 }
 
 func (q *Queries) UpdateUser_Playlist(ctx context.Context, arg UpdateUser_PlaylistParams) (UserPlaylist, error) {

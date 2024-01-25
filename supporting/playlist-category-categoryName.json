@@ -1,0 +1,787 @@
+{
+  "categoryTitle": "Dim Sum",
+  "list": [
+    {
+      "id": 1,
+      "name": "Dim Sum 1",
+      "description": "Indulge in a variety of traditional dim sum offerings, from steamed dumplings to crispy spring rolls.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Mon",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 7,
+          "restaurantId": 1,
+          "isAvailable": true,
+          "name": "Lo Mai Gai",
+          "description": "Sticky rice wrapped in lotus leaf",
+          "price": 6.8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 1,
+            "playlistId": 1,
+            "dishId": 7,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 12,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Lo Bak Gou",
+          "description": "Turnip cake with Chinese sausage and vegetables",
+          "price": 6.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 2,
+            "playlistId": 1,
+            "dishId": 12,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 2,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Har Gow",
+          "description": "Steamed shrimp dumplings",
+          "price": 6.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 3,
+            "playlistId": 1,
+            "dishId": 2,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 8,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Ngau Yuk Cheung Fun",
+          "description": "Beef rice noodle rolls",
+          "price": 8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 4,
+            "playlistId": 1,
+            "dishId": 8,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 6,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Fengzhua",
+          "description": "Phoenix claws - braised chicken feet",
+          "price": 5.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 5,
+            "playlistId": 1,
+            "dishId": 6,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 5,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Xiao Long Bao",
+          "description": "Soup-filled dumplings",
+          "price": 7.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 6,
+            "playlistId": 1,
+            "dishId": 5,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "65.60"
+    },
+    {
+      "id": 2,
+      "name": "Dim Sum 2",
+      "description": "Experience an array of bite-sized delights, crafted with finesse and filled with savory and sweet fillings.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Tue",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 6,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Fengzhua",
+          "description": "Phoenix claws - braised chicken feet",
+          "price": 5.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 7,
+            "playlistId": 2,
+            "dishId": 6,
+            "dishQuantity": 2,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "10.40"
+    },
+    {
+      "id": 3,
+      "name": "Dim Sum 3",
+      "description": "Explore the artistry of dim sum, featuring a medley of flavors and textures in each exquisite piece.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Wed",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 1,
+          "restaurantId": 1,
+          "isAvailable": true,
+          "name": "Siew Mai",
+          "description": "Steamed pork dumplings",
+          "price": 4.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 8,
+            "playlistId": 3,
+            "dishId": 1,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 6,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Fengzhua",
+          "description": "Phoenix claws - braised chicken feet",
+          "price": 5.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 9,
+            "playlistId": 3,
+            "dishId": 6,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "9.70"
+    },
+    {
+      "id": 4,
+      "name": "Dim Sum 4",
+      "description": "Delight in contemporary interpretations of dim sum classics, combining tradition with innovation.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Thu",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 9,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Dan Tat",
+          "description": "Egg custard tarts",
+          "price": 4.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 10,
+            "playlistId": 4,
+            "dishId": 9,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "4.50"
+    },
+    {
+      "id": 5,
+      "name": "Dim Sum 5",
+      "description": "Experience a fusion of flavors and techniques in dim sum, blending diverse culinary influences.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Fri",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 14,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Ham Sui Gok",
+          "description": "Deep-fried glutinous rice dumplings with minced pork",
+          "price": 4.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 11,
+            "playlistId": 5,
+            "dishId": 14,
+            "dishQuantity": 2,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 5,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Xiao Long Bao",
+          "description": "Soup-filled dumplings",
+          "price": 7.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 12,
+            "playlistId": 5,
+            "dishId": 5,
+            "dishQuantity": 2,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "24.00"
+    },
+    {
+      "id": 6,
+      "name": "Dim Sum 6",
+      "description": "Step into a wonderland of dim sum, where every bite unveils a world of taste and craftsmanship.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Sat",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 9,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Dan Tat",
+          "description": "Egg custard tarts",
+          "price": 4.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 13,
+            "playlistId": 6,
+            "dishId": 9,
+            "dishQuantity": 2,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 11,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Haam Sui Gok",
+          "description": "Fried glutinous rice dumplings filled with pork and mushrooms",
+          "price": 5.9,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 14,
+            "playlistId": 6,
+            "dishId": 11,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "26.70"
+    },
+    {
+      "id": 7,
+      "name": "Dim Sum 7",
+      "description": "Savor handcrafted dim sum masterpieces, showcasing culinary artistry and attention to detail.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Sun",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 6,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Fengzhua",
+          "description": "Phoenix claws - braised chicken feet",
+          "price": 5.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 15,
+            "playlistId": 7,
+            "dishId": 6,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 12,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Lo Bak Gou",
+          "description": "Turnip cake with Chinese sausage and vegetables",
+          "price": 6.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 16,
+            "playlistId": 7,
+            "dishId": 12,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 7,
+          "restaurantId": 1,
+          "isAvailable": true,
+          "name": "Lo Mai Gai",
+          "description": "Sticky rice wrapped in lotus leaf",
+          "price": 6.8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 17,
+            "playlistId": 7,
+            "dishId": 7,
+            "dishQuantity": 2,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 3,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Cheong Fun",
+          "description": "Rice noodle rolls",
+          "price": 5.8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 18,
+            "playlistId": 7,
+            "dishId": 3,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "44.10"
+    },
+    {
+      "id": 8,
+      "name": "Dim Sum Delightful Journeys",
+      "description": "Embark on delightful journeys through the world of dim sum, featuring a myriad of taste sensations.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Mon",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 10,
+          "restaurantId": 1,
+          "isAvailable": true,
+          "name": "Ma Lai Gao",
+          "description": "Steamed sponge cake",
+          "price": 3.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 19,
+            "playlistId": 8,
+            "dishId": 10,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 9,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Dan Tat",
+          "description": "Egg custard tarts",
+          "price": 4.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 20,
+            "playlistId": 8,
+            "dishId": 9,
+            "dishQuantity": 2,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 12,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Lo Bak Gou",
+          "description": "Turnip cake with Chinese sausage and vegetables",
+          "price": 6.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 21,
+            "playlistId": 8,
+            "dishId": 12,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "38.10"
+    },
+    {
+      "id": 9,
+      "name": "Dim Sum Blissful Bites",
+      "description": "Discover pure bliss in every bite with an assortment of delicate and flavorful dim sum selections.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Tue",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 8,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Ngau Yuk Cheung Fun",
+          "description": "Beef rice noodle rolls",
+          "price": 8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 22,
+            "playlistId": 9,
+            "dishId": 8,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "8.00"
+    },
+    {
+      "id": 10,
+      "name": "Dim Sum 8",
+      "description": "Satisfy your cravings with an array of tempting dim sum treats, each offering a burst of deliciousness.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Wed",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 4,
+          "restaurantId": 1,
+          "isAvailable": true,
+          "name": "Char Siu Bao",
+          "description": "Fluffy barbecue pork buns",
+          "price": 3.8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 23,
+            "playlistId": 10,
+            "dishId": 4,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "11.40"
+    },
+    {
+      "id": 11,
+      "name": "Dim Sum 9",
+      "description": "Experience an eclectic ensemble of dim sum delights, ranging from traditional to modern culinary creations.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Thu",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 14,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Ham Sui Gok",
+          "description": "Deep-fried glutinous rice dumplings with minced pork",
+          "price": 4.5,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 24,
+            "playlistId": 11,
+            "dishId": 14,
+            "dishQuantity": 2,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 4,
+          "restaurantId": 1,
+          "isAvailable": true,
+          "name": "Char Siu Bao",
+          "description": "Fluffy barbecue pork buns",
+          "price": 3.8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 25,
+            "playlistId": 11,
+            "dishId": 4,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 6,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Fengzhua",
+          "description": "Phoenix claws - braised chicken feet",
+          "price": 5.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 26,
+            "playlistId": 11,
+            "dishId": 6,
+            "dishQuantity": 2,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "30.80"
+    },
+    {
+      "id": 12,
+      "name": "Dim Sum 10",
+      "description": "Treat yourself to a symphony of flavors and textures harmonized perfectly in every dim sum dish.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Fri",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 3,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Cheong Fun",
+          "description": "Rice noodle rolls",
+          "price": 5.8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 27,
+            "playlistId": 12,
+            "dishId": 3,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 2,
+          "restaurantId": 8,
+          "isAvailable": true,
+          "name": "Har Gow",
+          "description": "Steamed shrimp dumplings",
+          "price": 6.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 28,
+            "playlistId": 12,
+            "dishId": 2,
+            "dishQuantity": 1,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "12.00"
+    },
+    {
+      "id": 13,
+      "name": "Dim Sum 11",
+      "description": "Elevate your dining experience with elegantly crafted dim sum, showcasing refined flavors and presentation.",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Sat",
+      "category": "Dim Sum",
+      "createdAt": "2024-01-01T07:21:27.857Z",
+      "updatedAt": "2024-01-01T07:21:27.857Z",
+      "dishes": [
+        {
+          "id": 15,
+          "restaurantId": 15,
+          "isAvailable": true,
+          "name": "Fengzhua",
+          "description": "Braised chicken feet in black bean sauce",
+          "price": 5.2,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 29,
+            "playlistId": 13,
+            "dishId": 15,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        },
+        {
+          "id": 7,
+          "restaurantId": 1,
+          "isAvailable": true,
+          "name": "Lo Mai Gai",
+          "description": "Sticky rice wrapped in lotus leaf",
+          "price": 6.8,
+          "cuisine": "Chinese",
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "createdAt": "2024-01-01T07:21:27.868Z",
+          "updatedAt": "2024-01-01T07:21:27.868Z",
+          "PlaylistDish": {
+            "id": 30,
+            "playlistId": 13,
+            "dishId": 7,
+            "dishQuantity": 3,
+            "createdAt": "2024-01-01T07:21:27.882Z",
+            "updatedAt": "2024-01-01T07:21:27.882Z"
+          }
+        }
+      ],
+      "cost": "36.00"
+    }
+  ]
+}

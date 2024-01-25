@@ -7,7 +7,9 @@ package db
 
 import (
 	"context"
-	"database/sql"
+	"time"
+
+	null "gopkg.in/guregu/null.v4"
 )
 
 const createPlaylist = `-- name: CreatePlaylist :one
@@ -22,16 +24,16 @@ INSERT INTO playlists (
 VALUES (
   $1, $2, $3, $4, $5, $6
 )
-RETURNING id, name, description, image_url, is_public, delivery_day, category
+RETURNING id, name, description, image_url, is_public, delivery_day, category, created_at, added_at
 `
 
 type CreatePlaylistParams struct {
-	Name        sql.NullString `json:"name"`
-	Description sql.NullString `json:"description"`
-	ImageUrl    sql.NullString `json:"image_url"`
-	IsPublic    sql.NullBool   `json:"is_public"`
-	DeliveryDay sql.NullString `json:"delivery_day"`
-	Category    sql.NullString `json:"category"`
+	Name        string      `json:"name"`
+	Description null.String `json:"description"`
+	ImageUrl    null.String `json:"image_url"`
+	IsPublic    bool        `json:"is_public"`
+	DeliveryDay null.String `json:"delivery_day"`
+	Category    null.String `json:"category"`
 }
 
 func (q *Queries) CreatePlaylist(ctx context.Context, arg CreatePlaylistParams) (Playlist, error) {
@@ -52,6 +54,8 @@ func (q *Queries) CreatePlaylist(ctx context.Context, arg CreatePlaylistParams) 
 		&i.IsPublic,
 		&i.DeliveryDay,
 		&i.Category,
+		&i.CreatedAt,
+		&i.AddedAt,
 	)
 	return i, err
 }
@@ -67,7 +71,7 @@ func (q *Queries) DeletePlaylist(ctx context.Context, id int64) error {
 }
 
 const getPlaylist = `-- name: GetPlaylist :one
-SELECT id, name, description, image_url, is_public, delivery_day, category FROM playlists
+SELECT id, name, description, image_url, is_public, delivery_day, category, created_at, added_at FROM playlists
 WHERE id = $1 LIMIT 1
 `
 
@@ -82,29 +86,33 @@ func (q *Queries) GetPlaylist(ctx context.Context, id int64) (Playlist, error) {
 		&i.IsPublic,
 		&i.DeliveryDay,
 		&i.Category,
+		&i.CreatedAt,
+		&i.AddedAt,
 	)
 	return i, err
 }
 
 const listPlaylists = `-- name: ListPlaylists :many
-SELECT id, name, description, image_url, is_public, delivery_day, category FROM playlists
+SELECT id, name, description, image_url, is_public, delivery_day, category, created_at, added_at FROM playlists
+WHERE id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2
+LIMIT $2
+OFFSET $3
 `
 
 type ListPlaylistsParams struct {
+	ID     int64 `json:"id"`
 	Limit  int32 `json:"limit"`
 	Offset int32 `json:"offset"`
 }
 
 func (q *Queries) ListPlaylists(ctx context.Context, arg ListPlaylistsParams) ([]Playlist, error) {
-	rows, err := q.db.QueryContext(ctx, listPlaylists, arg.Limit, arg.Offset)
+	rows, err := q.db.QueryContext(ctx, listPlaylists, arg.ID, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Playlist
+	items := []Playlist{}
 	for rows.Next() {
 		var i Playlist
 		if err := rows.Scan(
@@ -115,6 +123,8 @@ func (q *Queries) ListPlaylists(ctx context.Context, arg ListPlaylistsParams) ([
 			&i.IsPublic,
 			&i.DeliveryDay,
 			&i.Category,
+			&i.CreatedAt,
+			&i.AddedAt,
 		); err != nil {
 			return nil, err
 		}
@@ -137,20 +147,22 @@ SET
   image_url = $4,
   is_public = $5,
   delivery_day = $6,
-  category = $7
+  category = $7,
+  added_at = $8
 WHERE 
   id = $1
-RETURNING id, name, description, image_url, is_public, delivery_day, category
+RETURNING id, name, description, image_url, is_public, delivery_day, category, created_at, added_at
 `
 
 type UpdatePlaylistParams struct {
-	ID          int64          `json:"id"`
-	Name        sql.NullString `json:"name"`
-	Description sql.NullString `json:"description"`
-	ImageUrl    sql.NullString `json:"image_url"`
-	IsPublic    sql.NullBool   `json:"is_public"`
-	DeliveryDay sql.NullString `json:"delivery_day"`
-	Category    sql.NullString `json:"category"`
+	ID          int64       `json:"id"`
+	Name        string      `json:"name"`
+	Description null.String `json:"description"`
+	ImageUrl    null.String `json:"image_url"`
+	IsPublic    bool        `json:"is_public"`
+	DeliveryDay null.String `json:"delivery_day"`
+	Category    null.String `json:"category"`
+	AddedAt     time.Time   `json:"added_at"`
 }
 
 func (q *Queries) UpdatePlaylist(ctx context.Context, arg UpdatePlaylistParams) (Playlist, error) {
@@ -162,6 +174,7 @@ func (q *Queries) UpdatePlaylist(ctx context.Context, arg UpdatePlaylistParams) 
 		arg.IsPublic,
 		arg.DeliveryDay,
 		arg.Category,
+		arg.AddedAt,
 	)
 	var i Playlist
 	err := row.Scan(
@@ -172,6 +185,8 @@ func (q *Queries) UpdatePlaylist(ctx context.Context, arg UpdatePlaylistParams) 
 		&i.IsPublic,
 		&i.DeliveryDay,
 		&i.Category,
+		&i.CreatedAt,
+		&i.AddedAt,
 	)
 	return i, err
 }

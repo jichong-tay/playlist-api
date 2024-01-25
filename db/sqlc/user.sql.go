@@ -7,7 +7,8 @@ package db
 
 import (
 	"context"
-	"database/sql"
+
+	null "gopkg.in/guregu/null.v4"
 )
 
 const createUser = `-- name: CreateUser :one
@@ -24,10 +25,10 @@ RETURNING id, username, email, password_hash, address
 `
 
 type CreateUserParams struct {
-	Username     sql.NullString `json:"username"`
-	Email        sql.NullString `json:"email"`
-	PasswordHash sql.NullString `json:"password_hash"`
-	Address      sql.NullString `json:"address"`
+	Username     string      `json:"username"`
+	Email        string      `json:"email"`
+	PasswordHash string      `json:"password_hash"`
+	Address      null.String `json:"address"`
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
@@ -78,23 +79,25 @@ func (q *Queries) GetUser(ctx context.Context, id int64) (User, error) {
 
 const listUsers = `-- name: ListUsers :many
 SELECT id, username, email, password_hash, address FROM users
+WHERE id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2
+LIMIT $2
+OFFSET $3
 `
 
 type ListUsersParams struct {
+	ID     int64 `json:"id"`
 	Limit  int32 `json:"limit"`
 	Offset int32 `json:"offset"`
 }
 
 func (q *Queries) ListUsers(ctx context.Context, arg ListUsersParams) ([]User, error) {
-	rows, err := q.db.QueryContext(ctx, listUsers, arg.Limit, arg.Offset)
+	rows, err := q.db.QueryContext(ctx, listUsers, arg.ID, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []User
+	items := []User{}
 	for rows.Next() {
 		var i User
 		if err := rows.Scan(
@@ -130,11 +133,11 @@ RETURNING id, username, email, password_hash, address
 `
 
 type UpdateUserParams struct {
-	ID           int64          `json:"id"`
-	Username     sql.NullString `json:"username"`
-	Email        sql.NullString `json:"email"`
-	PasswordHash sql.NullString `json:"password_hash"`
-	Address      sql.NullString `json:"address"`
+	ID           int64       `json:"id"`
+	Username     string      `json:"username"`
+	Email        string      `json:"email"`
+	PasswordHash string      `json:"password_hash"`
+	Address      null.String `json:"address"`
 }
 
 func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error) {

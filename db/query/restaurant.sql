@@ -17,9 +17,10 @@ WHERE id = $1 LIMIT 1;
 
 -- name: ListRestaurants :many
 SELECT * FROM restaurants
+WHERE id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2;
+LIMIT $2
+OFFSET $3;
 
 -- name: UpdateRestaurant :one
 UPDATE restaurants

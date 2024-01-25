@@ -1,0 +1,72 @@
+{
+  "id": 1,
+  "name": "Dim Sum 1",
+  "deliveryDay": "Mon",
+  "isPublic": true,
+  "foodItems": [
+    {
+      "restaurantName": "Lucky Dragon",
+      "foodItems": [
+        {
+          "name": "Lo Mai Gai",
+          "description": "Sticky rice wrapped in lotus leaf",
+          "quantity": 1,
+          "price": 6.8,
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "dishId": 7
+        }
+      ]
+    },
+    {
+      "restaurantName": "Ming's Dynasty",
+      "foodItems": [
+        {
+          "name": "Har Gow",
+          "description": "Steamed shrimp dumplings",
+          "quantity": 1,
+          "price": 6.2,
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "dishId": 2
+        },
+        {
+          "name": "Xiao Long Bao",
+          "description": "Soup-filled dumplings",
+          "quantity": 3,
+          "price": 7.5,
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "dishId": 5
+        },
+        {
+          "name": "Ngau Yuk Cheung Fun",
+          "description": "Beef rice noodle rolls",
+          "quantity": 1,
+          "price": 8,
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "dishId": 8
+        }
+      ]
+    },
+    {
+      "restaurantName": "Spicy Szechuan House",
+      "foodItems": [
+        {
+          "name": "Fengzhua",
+          "description": "Phoenix claws - braised chicken feet",
+          "quantity": 3,
+          "price": 5.2,
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "dishId": 6
+        },
+        {
+          "name": "Lo Bak Gou",
+          "description": "Turnip cake with Chinese sausage and vegetables",
+          "quantity": 1,
+          "price": 6.5,
+          "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=5070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "dishId": 12
+        }
+      ]
+    }
+  ],
+  "cost": "65.60"
+}

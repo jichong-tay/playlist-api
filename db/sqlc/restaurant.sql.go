@@ -7,7 +7,8 @@ package db
 
 import (
 	"context"
-	"database/sql"
+
+	null "gopkg.in/guregu/null.v4"
 )
 
 const createRestaurant = `-- name: CreateRestaurant :one
@@ -25,11 +26,11 @@ RETURNING id, name, description, location, cuisine, image_url
 `
 
 type CreateRestaurantParams struct {
-	Name        sql.NullString `json:"name"`
-	Description sql.NullString `json:"description"`
-	Location    sql.NullString `json:"location"`
-	Cuisine     sql.NullString `json:"cuisine"`
-	ImageUrl    sql.NullString `json:"image_url"`
+	Name        null.String `json:"name"`
+	Description null.String `json:"description"`
+	Location    null.String `json:"location"`
+	Cuisine     null.String `json:"cuisine"`
+	ImageUrl    null.String `json:"image_url"`
 }
 
 func (q *Queries) CreateRestaurant(ctx context.Context, arg CreateRestaurantParams) (Restaurant, error) {
@@ -83,23 +84,25 @@ func (q *Queries) GetRestaurant(ctx context.Context, id int64) (Restaurant, erro
 
 const listRestaurants = `-- name: ListRestaurants :many
 SELECT id, name, description, location, cuisine, image_url FROM restaurants
+WHERE id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2
+LIMIT $2
+OFFSET $3
 `
 
 type ListRestaurantsParams struct {
+	ID     int64 `json:"id"`
 	Limit  int32 `json:"limit"`
 	Offset int32 `json:"offset"`
 }
 
 func (q *Queries) ListRestaurants(ctx context.Context, arg ListRestaurantsParams) ([]Restaurant, error) {
-	rows, err := q.db.QueryContext(ctx, listRestaurants, arg.Limit, arg.Offset)
+	rows, err := q.db.QueryContext(ctx, listRestaurants, arg.ID, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Restaurant
+	items := []Restaurant{}
 	for rows.Next() {
 		var i Restaurant
 		if err := rows.Scan(
@@ -137,12 +140,12 @@ RETURNING id, name, description, location, cuisine, image_url
 `
 
 type UpdateRestaurantParams struct {
-	ID          int64          `json:"id"`
-	Name        sql.NullString `json:"name"`
-	Description sql.NullString `json:"description"`
-	Location    sql.NullString `json:"location"`
-	Cuisine     sql.NullString `json:"cuisine"`
-	ImageUrl    sql.NullString `json:"image_url"`
+	ID          int64       `json:"id"`
+	Name        null.String `json:"name"`
+	Description null.String `json:"description"`
+	Location    null.String `json:"location"`
+	Cuisine     null.String `json:"cuisine"`
+	ImageUrl    null.String `json:"image_url"`
 }
 
 func (q *Queries) UpdateRestaurant(ctx context.Context, arg UpdateRestaurantParams) (Restaurant, error) {

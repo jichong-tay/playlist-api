@@ -18,9 +18,10 @@ WHERE id = $1 LIMIT 1;
 
 -- name: ListPlaylists :many
 SELECT * FROM playlists
+WHERE id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2;
+LIMIT $2
+OFFSET $3;
 
 -- name: UpdatePlaylist :one
 UPDATE playlists
@@ -30,7 +31,8 @@ SET
   image_url = $4,
   is_public = $5,
   delivery_day = $6,
-  category = $7
+  category = $7,
+  added_at = $8
 WHERE 
   id = $1
 RETURNING *;
