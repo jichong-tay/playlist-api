@@ -16,8 +16,9 @@ postgres:
 	docker run --name postgres16 --network playlist-network -p 5433:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine
 
 .PHONY: wait-for-postgres
+
 wait-for-postgres:
-	sleep 5  # Adjust the sleep time as needed
+	sleep 5  # wait time to run make createdb
 
 .PHONY: createdb
 createdb: wait-for-postgres
