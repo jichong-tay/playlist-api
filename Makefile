@@ -1,4 +1,12 @@
 
+.PHONY: start-and-migrate
+start-and-migrate: stop-and-delete postgres-image postgres wait-for-postgres createdb migrateup
+
+.PHONY: stop-and-delete
+stop-and-delete:
+	-docker stop postgres16
+	-docker rm postgres16
+
 .PHONY: postgres-image
 postgres-image:
 	docker pull postgres:16-alpine
@@ -7,8 +15,12 @@ postgres-image:
 postgres:
 	docker run --name postgres16 --network playlist-network -p 5433:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine
 
-.PHONY: creaedb
-createdb:
+.PHONY: wait-for-postgres
+wait-for-postgres:
+	sleep 5  # Adjust the sleep time as needed
+
+.PHONY: createdb
+createdb: wait-for-postgres
 	docker exec -it postgres16 createdb --username=root --owner=root foodpanda-playlist
 
 .PHONY: dropdb

@@ -1,4 +1,18 @@
 Steps to run
+
+Ensure Golang is install.
+
+Run the following cmd
+
+```
+make start-and-migrate
+```
+
+Start WebServer
+```
+go run main.go
+```
+
 1. make postgres-image (download postgres image)
 2. make postgres (start container)
 3. make createdb (make dropdb)
