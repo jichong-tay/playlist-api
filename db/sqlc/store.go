@@ -4,24 +4,27 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+
+	null "gopkg.in/guregu/null.v4"
 )
 
 // Store provides all function to execute db queries and transactions
 type Store interface {
 	Querier
+	CreatePlaylistTx(ctx context.Context, arg CreatePlaylistTxParams) (Playlist, error)
 }
 
 // SQLStore provides all function to execute db queries and transactions
 type SQLStore struct {
-	*Queries
 	db *sql.DB
+	*Queries
 }
 
 // NewStore creates a new store
 func NewStore(db *sql.DB) Store {
 	return &SQLStore{
-		Queries: New(db),
 		db:      db,
+		Queries: New(db),
 	}
 }
 
@@ -46,79 +49,57 @@ func (store *SQLStore) execTx(ctx context.Context, fn func(*Queries) error) erro
 
 /*
 Transaction to create
-
 //1. Generate a playlist based on cuisine and number of restaurant item, and budget (per restaurant item)
 		- create a playlist
 		- insert
-//2. create a playlist, add item to playlist
-
+//2. create a playlist, add dishes to playlist
 */
 
-/*
-=======================
-// TransferTxParams contains the input parameters of the transfer transaction
-type TransferTxParams struct {
-	FromAccountID int64 `json:"from_account_id"`
-	ToAccountID   int64 `json:"to_account_id"`
-	Amount        int64 `json:"amount"`
+type CreatePlaylistTxParams struct {
+	Name         string      `json:"name"`
+	Description  null.String `json:"description"`
+	ImageUrl     null.String `json:"image_url"`
+	IsPublic     bool        `json:"is_public"`
+	DeliveryDay  null.String `json:"delivery_day"`
+	Category     null.String `json:"category"`
+	UserID       int64       `json:"user_id"`
+	PlaylistID   int64       `json:"playlist_id"`
+	DeliveryTime null.Time   `json:"delivery_time"`
+	Status       null.String `json:"status"`
 }
 
-type Transfer Playlist
-type Account Playlist
-type Entry Playlist
+func (store *SQLStore) CreatePlaylistTx(ctx context.Context, arg CreatePlaylistTxParams) (Playlist, error) {
 
-// TranferTxResult is the result of the transfer transaction
-type TransferTxResult struct {
-	Transfer    Transfer `json:"transfer"`
-	FromAccount Account  `json:"from_account"`
-	ToAccount   Account  `json:"to_account"`
-	FromEntry   Entry    `json:"from_entry"`
-	ToEntry     Entry    `json:"to_entry"`
-}
+	var playlist Playlist
+	var err error
 
-// TransferTx performs a money transfer from one account to the other.
-// It creates a transfer record , add account entries, and  update accounts's balance within a single database transaction
-func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
-	var result TransferTxResult
+	err = store.execTx(ctx, func(q *Queries) error {
 
-	err := store.execTx(ctx, func(q *Queries) error {
-		var err error
-
-		result.Transfer, err = q.CreateTransfer(ctx, CreateTransferParams{
-			FromAccountID: arg.FromAccountID,
-			toAccountID:   arg.ToAccountID,
-			Amount:        arg.Amount,
+		playlist, err = q.CreatePlaylist(ctx, CreatePlaylistParams{
+			Name:        arg.Name,
+			Description: arg.Description,
+			ImageUrl:    arg.ImageUrl,
+			IsPublic:    arg.IsPublic,
+			DeliveryDay: arg.DeliveryDay,
+			Category:    arg.Category,
 		})
-
 		if err != nil {
 			return err
 		}
 
-
-		result.FromEntry, err = q.CreateEntry(ctx, CreateEntryParams{
-			AccountID: arg.FromAccountID,
-			Amount:    -arg.Amount,
+		_, err = q.CreateUser_Playlist(ctx, CreateUser_PlaylistParams{
+			UserID:       arg.UserID,
+			PlaylistID:   playlist.ID,
+			DeliveryDay:  arg.DeliveryDay,
+			DeliveryTime: arg.DeliveryTime,
+			Status:       arg.Status,
 		})
-
 		if err != nil {
 			return err
-		}
-
-
-		result.ToEntry, err = q.CreateEntry(ctx, CreateEntryParams{
-			AccountID: arg.ToAccountID,
-			Amount:    arg.Amount,
-		})
-
-		if err != nil {
-			return err
-
 		}
 
 		return nil
 	})
 
-	return result, err
+	return playlist, err
 }
-
-*/
