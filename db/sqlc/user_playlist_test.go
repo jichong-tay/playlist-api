@@ -101,12 +101,12 @@ func TestListUser_Playlist(t *testing.T) {
 		Offset: 5,
 	}
 
-	playlists, err := testQueries.ListUser_Playlists(context.Background(), arg)
+	user_playlists, err := testQueries.ListUser_Playlists(context.Background(), arg)
 	require.NoError(t, err)
 	//require.Len(t, playlists, 5)
 
-	for _, playlist := range playlists {
-		require.NotEmpty(t, playlist)
-		require.Equal(t, arg.UserID, playlist.UserID)
+	for _, user_playlist := range user_playlists {
+		require.NotEmpty(t, user_playlist)
+		require.Equal(t, arg.UserID, user_playlist.UserID)
 	}
 }

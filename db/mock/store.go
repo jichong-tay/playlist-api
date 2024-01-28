@@ -70,6 +70,21 @@ func (mr *MockStoreMockRecorder) CreatePlaylist(arg0, arg1 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePlaylist", reflect.TypeOf((*MockStore)(nil).CreatePlaylist), arg0, arg1)
 }
 
+// CreatePlaylistTx mocks base method.
+func (m *MockStore) CreatePlaylistTx(arg0 context.Context, arg1 db.CreatePlaylistTxParams) (db.Playlist, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreatePlaylistTx", arg0, arg1)
+	ret0, _ := ret[0].(db.Playlist)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreatePlaylistTx indicates an expected call of CreatePlaylistTx.
+func (mr *MockStoreMockRecorder) CreatePlaylistTx(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePlaylistTx", reflect.TypeOf((*MockStore)(nil).CreatePlaylistTx), arg0, arg1)
+}
+
 // CreatePlaylist_Dish mocks base method.
 func (m *MockStore) CreatePlaylist_Dish(arg0 context.Context, arg1 db.CreatePlaylist_DishParams) (db.PlaylistDish, error) {
 	m.ctrl.T.Helper()

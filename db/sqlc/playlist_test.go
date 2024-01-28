@@ -17,7 +17,7 @@ func createRandomPlaylist(t *testing.T) Playlist {
 		Description: null.NewString(util.RandomName(), true),
 		ImageUrl:    null.NewString(util.RandomName(), true),
 		IsPublic:    true,
-		DeliveryDay: null.NewString("01-01-2024", true),
+		DeliveryDay: null.NewString("Monday", true),
 		Category:    null.NewString(util.RandomName(), true),
 	}
 
@@ -63,7 +63,7 @@ func TestUpdatePlaylist(t *testing.T) {
 		Description: null.NewString(util.RandomName(), true),
 		ImageUrl:    null.NewString(util.RandomName(), true),
 		IsPublic:    true,
-		DeliveryDay: null.NewString("01-01-2024", true),
+		DeliveryDay: null.NewString("Monday", true),
 		Category:    null.NewString(util.RandomName(), true),
 		AddedAt:     time.Now(),
 	}
