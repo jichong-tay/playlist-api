@@ -49,7 +49,7 @@ type PlaylistDish struct {
 // Stores restaurants
 type Restaurant struct {
 	ID          int64       `json:"id"`
-	Name        null.String `json:"name"`
+	Name        string      `json:"name"`
 	Description null.String `json:"description"`
 	Location    null.String `json:"location"`
 	Cuisine     null.String `json:"cuisine"`

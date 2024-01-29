@@ -56,7 +56,7 @@ CREATE TABLE "dishes" (
 
 CREATE TABLE "restaurants" (
   "id" bigserial PRIMARY KEY,
-  "name" varchar,
+  "name" varchar NOT NULL,
   "description" varchar,
   "location" varchar,
   "cuisine" varchar,

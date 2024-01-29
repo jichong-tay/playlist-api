@@ -12,7 +12,7 @@ import (
 
 func createRandomRestaurant(t *testing.T) Restaurant {
 	arg := CreateRestaurantParams{
-		Name:        null.NewString(util.RandomName(), true),
+		Name:        util.RandomName(),
 		Description: null.NewString(util.RandomName(), true),
 		Location:    null.NewString(util.RandomName(), true),
 		Cuisine:     null.NewString(util.RandomName(), true),
@@ -54,7 +54,7 @@ func TestUpdateRestaurant(t *testing.T) {
 
 	arg := UpdateRestaurantParams{
 		ID:          Restaurant1.ID,
-		Name:        null.NewString(util.RandomName(), true),
+		Name:        util.RandomName(),
 		Description: null.NewString(util.RandomName(), true),
 		Location:    null.NewString(util.RandomName(), true),
 		Cuisine:     null.NewString(util.RandomName(), true),
