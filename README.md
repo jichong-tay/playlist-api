@@ -23,7 +23,7 @@ make start-and-migrate
 
 4. Start Backend Server
 ```
-go run main.go
+make server
 ```
 
 #### Notes

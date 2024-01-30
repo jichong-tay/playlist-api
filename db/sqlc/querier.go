@@ -30,6 +30,7 @@ type Querier interface {
 	GetUser(ctx context.Context, id int64) (User, error)
 	GetUser_Playlist(ctx context.Context, id int64) (UserPlaylist, error)
 	ListDishes(ctx context.Context, arg ListDishesParams) ([]Dish, error)
+	ListPlaylistPublicAndCategory(ctx context.Context, arg ListPlaylistPublicAndCategoryParams) ([]Playlist, error)
 	ListPlaylist_Dishes(ctx context.Context, arg ListPlaylist_DishesParams) ([]PlaylistDish, error)
 	ListPlaylist_DishesByPlaylistID(ctx context.Context, playlistID int64) ([]PlaylistDish, error)
 	ListPlaylists(ctx context.Context, arg ListPlaylistsParams) ([]Playlist, error)

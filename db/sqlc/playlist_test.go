@@ -94,12 +94,11 @@ func TestDeletePlaylist(t *testing.T) {
 }
 
 func TestListPlaylist(t *testing.T) {
-	var lastPlaylist Playlist
+
 	for i := 0; i < 10; i++ {
-		lastPlaylist = createRandomPlaylist(t)
+		createRandomPlaylist(t)
 	}
 	arg := ListPlaylistsParams{
-		ID:     lastPlaylist.ID,
 		Limit:  5,
 		Offset: 5,
 	}

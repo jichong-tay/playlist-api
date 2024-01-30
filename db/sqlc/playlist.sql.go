@@ -94,20 +94,18 @@ func (q *Queries) GetPlaylist(ctx context.Context, id int64) (Playlist, error) {
 
 const listPlaylists = `-- name: ListPlaylists :many
 SELECT id, name, description, image_url, is_public, delivery_day, category, created_at, added_at FROM playlists
-WHERE id = $1
 ORDER BY id
-LIMIT $2
-OFFSET $3
+LIMIT $1
+OFFSET $2
 `
 
 type ListPlaylistsParams struct {
-	ID     int64 `json:"id"`
 	Limit  int32 `json:"limit"`
 	Offset int32 `json:"offset"`
 }
 
 func (q *Queries) ListPlaylists(ctx context.Context, arg ListPlaylistsParams) ([]Playlist, error) {
-	rows, err := q.db.QueryContext(ctx, listPlaylists, arg.ID, arg.Limit, arg.Offset)
+	rows, err := q.db.QueryContext(ctx, listPlaylists, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}

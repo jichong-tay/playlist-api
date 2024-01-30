@@ -19,7 +19,7 @@ func createRandomPlaylist_Dish(t *testing.T) PlaylistDish {
 		OrderID:      util.RandomInt(0, 100),
 		PlaylistID:   playlist.ID,
 		DishID:       dish.ID,
-		DishQuantity: util.RandomInt(0, 5),
+		DishQuantity: util.RandomInt(1, 5),
 	}
 
 	playlist_dish, err := testQueries.CreatePlaylist_Dish(context.Background(), arg)

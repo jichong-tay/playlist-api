@@ -9,6 +9,52 @@ import (
 	"context"
 )
 
+const listPlaylistPublicAndCategory = `-- name: ListPlaylistPublicAndCategory :many
+SELECT id, name, description, image_url, is_public, delivery_day, category, created_at, added_at
+FROM playlists
+WHERE is_public = true
+LIMIT $1
+OFFSET $2
+`
+
+type ListPlaylistPublicAndCategoryParams struct {
+	Limit  int32 `json:"limit"`
+	Offset int32 `json:"offset"`
+}
+
+func (q *Queries) ListPlaylistPublicAndCategory(ctx context.Context, arg ListPlaylistPublicAndCategoryParams) ([]Playlist, error) {
+	rows, err := q.db.QueryContext(ctx, listPlaylistPublicAndCategory, arg.Limit, arg.Offset)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Playlist{}
+	for rows.Next() {
+		var i Playlist
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.Description,
+			&i.ImageUrl,
+			&i.IsPublic,
+			&i.DeliveryDay,
+			&i.Category,
+			&i.CreatedAt,
+			&i.AddedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listPlaylist_DishesByPlaylistID = `-- name: ListPlaylist_DishesByPlaylistID :many
 SELECT id, order_id, playlist_id, dish_id, dish_quantity, created_at, added_at FROM playlist_dishes
 WHERE playlist_id = $1
@@ -47,15 +93,15 @@ func (q *Queries) ListPlaylist_DishesByPlaylistID(ctx context.Context, playlistI
 }
 
 const listRestaurantNameByDishID = `-- name: ListRestaurantNameByDishID :one
-SELECT r.name AS restaurant_name
-FROM dishes d
-JOIN restaurants r ON d.restaurant_id = r.id
-WHERE d.id = $1
+SELECT restaurants.name
+FROM dishes
+JOIN restaurants ON dishes.restaurant_id = restaurants.id
+WHERE dishes.id = $1
 `
 
 func (q *Queries) ListRestaurantNameByDishID(ctx context.Context, id int64) (string, error) {
 	row := q.db.QueryRowContext(ctx, listRestaurantNameByDishID, id)
-	var restaurant_name string
-	err := row.Scan(&restaurant_name)
-	return restaurant_name, err
+	var name string
+	err := row.Scan(&name)
+	return name, err
 }
