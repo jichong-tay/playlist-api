@@ -1,6 +1,7 @@
 
 -- name: ListPlaylist_DishesByPlaylistID :many
-SELECT * FROM playlist_dishes
+SELECT * 
+FROM playlist_dishes
 WHERE playlist_id = $1
 ORDER BY id;
 
@@ -17,3 +18,22 @@ WHERE is_public = true
 LIMIT $1
 OFFSET $2;
 
+-- name: ListPlaylistsByUserID :many
+SELECT
+    playlists.id,
+    playlists.name,
+    playlists.description,
+    playlists.image_url,
+    playlists.is_public,
+    playlists.delivery_day,
+    playlists.category,
+    playlists.created_at,
+    playlists.added_at
+FROM
+    playlists
+JOIN
+    user_playlists ON playlists.id = user_playlists.playlist_id
+WHERE
+    user_playlists.user_id = $1
+LIMIT $2
+OFFSET $3;

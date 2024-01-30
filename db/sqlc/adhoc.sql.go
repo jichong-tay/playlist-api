@@ -56,7 +56,8 @@ func (q *Queries) ListPlaylistPublicAndCategory(ctx context.Context, arg ListPla
 }
 
 const listPlaylist_DishesByPlaylistID = `-- name: ListPlaylist_DishesByPlaylistID :many
-SELECT id, order_id, playlist_id, dish_id, dish_quantity, created_at, added_at FROM playlist_dishes
+SELECT id, order_id, playlist_id, dish_id, dish_quantity, created_at, added_at 
+FROM playlist_dishes
 WHERE playlist_id = $1
 ORDER BY id
 `
@@ -76,6 +77,66 @@ func (q *Queries) ListPlaylist_DishesByPlaylistID(ctx context.Context, playlistI
 			&i.PlaylistID,
 			&i.DishID,
 			&i.DishQuantity,
+			&i.CreatedAt,
+			&i.AddedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listPlaylistsByUserID = `-- name: ListPlaylistsByUserID :many
+SELECT
+    playlists.id,
+    playlists.name,
+    playlists.description,
+    playlists.image_url,
+    playlists.is_public,
+    playlists.delivery_day,
+    playlists.category,
+    playlists.created_at,
+    playlists.added_at
+FROM
+    playlists
+JOIN
+    user_playlists ON playlists.id = user_playlists.playlist_id
+WHERE
+    user_playlists.user_id = $1
+LIMIT $2
+OFFSET $3
+`
+
+type ListPlaylistsByUserIDParams struct {
+	UserID int64 `json:"user_id"`
+	Limit  int32 `json:"limit"`
+	Offset int32 `json:"offset"`
+}
+
+func (q *Queries) ListPlaylistsByUserID(ctx context.Context, arg ListPlaylistsByUserIDParams) ([]Playlist, error) {
+	rows, err := q.db.QueryContext(ctx, listPlaylistsByUserID, arg.UserID, arg.Limit, arg.Offset)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Playlist{}
+	for rows.Next() {
+		var i Playlist
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.Description,
+			&i.ImageUrl,
+			&i.IsPublic,
+			&i.DeliveryDay,
+			&i.Category,
 			&i.CreatedAt,
 			&i.AddedAt,
 		); err != nil {
