@@ -22,9 +22,30 @@ make start-and-migrate
 ```
 
 4. Start Backend Server
+
 ```
 make server
 ```
+
+## Others
+
+Install SQLC
+
+https://docs.sqlc.dev/en/latest/overview/install.html
+
+Install Go Mock
+
+```
+go install go.uber.org/mock/mockgen@latest
+```
+
+Add Path
+
+```
+nano ~/.zshrc
+export PATH=$PATH:~/go/bin
+```
+
 
 #### Notes
 1. make postgres-image (download postgres image)

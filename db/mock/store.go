@@ -364,6 +364,21 @@ func (mr *MockStoreMockRecorder) ListDishes(arg0, arg1 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDishes", reflect.TypeOf((*MockStore)(nil).ListDishes), arg0, arg1)
 }
 
+// ListPlaylistByCategory mocks base method.
+func (m *MockStore) ListPlaylistByCategory(arg0 context.Context, arg1 string) ([]db.Playlist, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListPlaylistByCategory", arg0, arg1)
+	ret0, _ := ret[0].([]db.Playlist)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListPlaylistByCategory indicates an expected call of ListPlaylistByCategory.
+func (mr *MockStoreMockRecorder) ListPlaylistByCategory(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPlaylistByCategory", reflect.TypeOf((*MockStore)(nil).ListPlaylistByCategory), arg0, arg1)
+}
+
 // ListPlaylistPublicAndCategory mocks base method.
 func (m *MockStore) ListPlaylistPublicAndCategory(arg0 context.Context, arg1 db.ListPlaylistPublicAndCategoryParams) ([]db.Playlist, error) {
 	m.ctrl.T.Helper()

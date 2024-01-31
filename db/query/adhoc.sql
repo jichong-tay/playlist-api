@@ -37,3 +37,10 @@ WHERE
     user_playlists.user_id = $1
 LIMIT $2
 OFFSET $3;
+
+-- name: ListPlaylistByCategory :many
+SELECT *
+FROM
+    playlists
+WHERE
+    LOWER(category) = LOWER($1);

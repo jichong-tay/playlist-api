@@ -89,8 +89,6 @@ func (server *Server) getPlaylistLatest(ctx *gin.Context) {
 		Offset: int32((req.PublicPageID - 1) * req.PublicPageSize),
 	}
 
-	fmt.Println(argPublic)
-
 	// build publicPlaylist
 	var publicplaylistlist []publicPlaylist
 	var publicplaylist publicPlaylist
