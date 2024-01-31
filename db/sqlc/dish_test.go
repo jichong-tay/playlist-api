@@ -63,7 +63,7 @@ func TestUpdateDish(t *testing.T) {
 
 	arg := UpdateDishParams{
 		ID:           dish1.ID,
-		RestaurantID: dish1.ID,
+		RestaurantID: dish1.RestaurantID,
 		IsAvailable:  false,
 		Name:         util.RandomName(),
 		Description:  null.NewString(util.RandomName(), true),
