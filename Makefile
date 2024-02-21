@@ -1,11 +1,12 @@
 
 .PHONY: start-and-migrate
-start-and-migrate: stop-and-delete postgres-image postgres wait-for-postgres createdb migrateup
+start-and-migrate: stop-and-delete networkcreate postgres-image postgres wait-for-postgres createdb migrateup
 
 .PHONY: stop-and-delete
 stop-and-delete:
 	-docker stop postgres16
 	-docker rm postgres16
+	-docker network rm playlist-network
 
 .PHONY: postgres-image
 postgres-image:
@@ -62,7 +63,11 @@ mock:
 
 .PHONY: networkcreate
 networkcreate:
-	docker network create playlist-network
+	-docker network create playlist-network
+
+.PHONY: delete-network
+delete-network:
+	-docker network rm playlist-network
 
 .PHONY: networkconnectdb
 networkconnectdb:
