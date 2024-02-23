@@ -31,6 +31,7 @@ make server
 
 Docker replacement
 ```
+brew install docker docker-compose
 brew install colima
 colima start
 ```
