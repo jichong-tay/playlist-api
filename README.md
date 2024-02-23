@@ -29,6 +29,12 @@ make server
 
 ## Others
 
+Docker replacement
+```
+brew install colima
+colima start
+```
+
 Install SQLC
 
 https://docs.sqlc.dev/en/latest/overview/install.html
