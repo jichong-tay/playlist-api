@@ -1,0 +1,69 @@
+{
+  "publicPlaylist": [
+    {
+      "id": 1,
+      "name": "Dim Sum 1",
+      "imageUrl": "https://images.unsplash.com/photo-1607857530521-53448b220fe8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Mon",
+      "category": "Dim Sum",
+      "cost": "65.60"
+    },
+    {
+      "id": 14,
+      "name": "Seoul 1",
+      "imageUrl": "https://images.unsplash.com/photo-1559660526-de9cb4e63b55?q=80&w=1468&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Mon",
+      "category": "Korean Street Food",
+      "cost": "15.20"
+    },
+    {
+      "id": 31,
+      "name": "Sushi 1",
+      "imageUrl": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Mon",
+      "category": "Sushi",
+      "cost": "98.20"
+    },
+    {
+      "id": 45,
+      "name": "Burger 1",
+      "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1599&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": true,
+      "deliveryDay": "Mon",
+      "category": "Hamburger",
+      "cost": "55.80"
+    }
+  ],
+  "userPlaylist": [
+    {
+      "id": 27,
+      "name": "Subscribed 1",
+      "imageUrl": "https://images.unsplash.com/photo-1669808118592-d120b3965cd1?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": false,
+      "deliveryDay": "Mon",
+      "category": "Noodle",
+      "cost": "106.50"
+    },
+    {
+      "id": 28,
+      "name": "Subscribed 2",
+      "imageUrl": "https://images.unsplash.com/photo-1523986371872-9d3ba2e2a389?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": false,
+      "deliveryDay": "Tue",
+      "category": "Mediterranean",
+      "cost": "67.00"
+    },
+    {
+      "id": 29,
+      "name": "Subscribed 3",
+      "imageUrl": "https://images.unsplash.com/photo-1570780775848-bc1897788ce0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "isPublic": false,
+      "deliveryDay": "Wed",
+      "category": "Japanese",
+      "cost": "101.60"
+    }
+  ]
+}
