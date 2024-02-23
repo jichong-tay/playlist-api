@@ -22,14 +22,15 @@ type playlist_dishesMainJSON struct {
 	FoodItems      []playlist_dishesJSON `form:"foodItems" json:"foodItems"`
 }
 
-type getPlaylistCurrentRequestJSON struct {
-	ID          int64                     `form:"id" json:"id"`
-	Name        string                    `form:"name" json:"name"`
-	DeliveryDay string                    `form:"deliveryDay" json:"deliveryDay"`
-	IsPublic    bool                      `form:"isPublic" json:"isPublic"`
-	FoodItems   []playlist_dishesMainJSON `form:"foodItems" json:"foodItems"`
-	Cost        string                    `form:"cost" json:"cost"`
-}
+// TODO Clean Up
+// type getPlaylistCurrentRequestJSON struct {
+// 	ID          int64                     `form:"id" json:"id"`
+// 	Name        string                    `form:"name" json:"name"`
+// 	DeliveryDay string                    `form:"deliveryDay" json:"deliveryDay"`
+// 	IsPublic    bool                      `form:"isPublic" json:"isPublic"`
+// 	FoodItems   []playlist_dishesMainJSON `form:"foodItems" json:"foodItems"`
+// 	Cost        string                    `form:"cost" json:"cost"`
+// }
 
 type getPlaylistCurrentResponseJSON struct {
 	ID          int64                     `form:"id" json:"id"`
