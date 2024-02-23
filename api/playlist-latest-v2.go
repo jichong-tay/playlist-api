@@ -8,14 +8,40 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type playlistLatestResponsev2 struct {
+	PublicPlaylist []publicplaylistv2 `form:"publicPlaylist" json:"publicPlaylist"`
+	UserPlaylist   []userPlaylistv2   `form:"userPlaylist" json:"userPlaylist"`
+}
+
 type getPlaylistLatestV2Request struct {
 	UserID int64 `form:"user_id" binding:"required,min=0"`
+}
+
+type publicplaylistv2 struct {
+	ID          int64  `form:"id" json:"id"`
+	Name        string `form:"name" json:"name"`
+	ImageURL    string `form:"imageUrl" json:"imageUrl"`
+	IsPublic    bool   `form:"isPublic" json:"isPublic"`
+	DeliveryDay string `form:"deliveryDay" json:"deliveryDay"`
+	Category    string `form:"category" json:"category"`
+	Cost        string `form:"cost" json:"cost"`
+}
+
+type userPlaylistv2 struct {
+	ID          int64  `form:"id" json:"id"`
+	Name        string `form:"name" json:"name"`
+	Description string `form:"description" json:"description"`
+	ImageURL    string `form:"imageUrl" json:"imageUrl"`
+	IsPublic    bool   `form:"isPublic" json:"isPublic"`
+	DeliveryDay string `form:"deliveryDay" json:"deliveryDay"`
+	Category    string `form:"category" json:"category"`
+	Cost        string `form:"cost" json:"cost"`
 }
 
 func (server *Server) getPlaylistLatestV2(ctx *gin.Context) {
 
 	var req getPlaylistLatestV2Request
-	var resp playlistLatestResponse
+	var resp playlistLatestResponsev2
 
 	if err := ctx.ShouldBindQuery(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
@@ -23,12 +49,9 @@ func (server *Server) getPlaylistLatestV2(ctx *gin.Context) {
 	}
 
 	// build publicPlaylist
-	var publicplaylistlist []publicPlaylist
-	var publicplaylist publicPlaylist
-	var publicplaylistMap = make(map[string][]playlistList)
-	var playlistlists []playlistList
-	var playlistlist playlistList
-	var dishesSlice []dishes
+	var publicplaylists []publicplaylistv2
+	var publicplaylist publicplaylistv2
+	// var dishesSlice []dishes // TODO Clean Up
 	var dish dishes
 	var costPublic float64
 
@@ -83,43 +106,25 @@ func (server *Server) getPlaylistLatestV2(ctx *gin.Context) {
 				UpdatedAt:    playlistdishDB.AddedAt,
 			}
 
-			dishesSlice = append(dishesSlice, dish)
+			// dishesSlice = append(dishesSlice, dish) // TODO Clean Up
 			costPublic += dishDB.Price * float64(playlistdishDB.DishQuantity)
 		}
 
-		playlistlist.ID = publicPlaylistDB.ID
-		playlistlist.Name = publicPlaylistDB.Name
-		playlistlist.Description = publicPlaylistDB.Description.String
-		playlistlist.ImageURL = publicPlaylistDB.ImageUrl.String
-		playlistlist.IsPublic = publicPlaylistDB.IsPublic
-		playlistlist.DeliveryDay = publicPlaylistDB.DeliveryDay.String
-		playlistlist.Category = publicPlaylistDB.Category.String
-		playlistlist.CreatedAt = publicPlaylistDB.CreatedAt
-		playlistlist.UpdatedAt = publicPlaylistDB.AddedAt
-		playlistlist.Dishes = dishesSlice
-		playlistlist.Cost = fmt.Sprintf("%.2f", costPublic)
+		publicplaylist.ID = publicPlaylistDB.ID
+		publicplaylist.Name = publicPlaylistDB.Name
+		publicplaylist.ImageURL = publicPlaylistDB.ImageUrl.String
+		publicplaylist.IsPublic = publicPlaylistDB.IsPublic
+		publicplaylist.DeliveryDay = publicPlaylistDB.DeliveryDay.String
+		publicplaylist.Category = publicPlaylistDB.Category.String
+		publicplaylist.Cost = fmt.Sprintf("%.2f", costPublic)
 
-		// Check if the category name already exists in the map
-		var found bool
-		if playlistlists, found = publicplaylistMap[publicPlaylistDB.Category.String]; found {
-			publicplaylistMap[publicPlaylistDB.Category.String] = append(playlistlists, playlistlist)
-		} else {
-			publicplaylistMap[publicPlaylistDB.Category.String] = []playlistList{playlistlist}
-		}
-
-	}
-
-	for categoryTitle, playlistList := range publicplaylistMap {
-		publicplaylist.CategoryTitle = categoryTitle
-		publicplaylist.PlaylistList = playlistList
-
-		publicplaylistlist = append(publicplaylistlist, publicplaylist)
+		publicplaylists = append(publicplaylists, publicplaylist)
 	}
 
 	//build userPlaylist
-	var userplaylistlist []userPlaylist
-	var userplaylist userPlaylist
-	var dishesSliceUser []dishes
+	var userplaylistlist []userPlaylistv2
+	var userplaylist userPlaylistv2
+	// var dishesSliceUser []dishes // TODO Clean Up
 	var dishUser dishes
 	var costUser float64
 
@@ -176,7 +181,7 @@ func (server *Server) getPlaylistLatestV2(ctx *gin.Context) {
 				UpdatedAt:    playlistdishDB.AddedAt,
 			}
 
-			dishesSliceUser = append(dishesSliceUser, dishUser)
+			// dishesSliceUser = append(dishesSliceUser, dishUser) // TODO Clean Up
 			costUser += dishDB.Price * float64(playlistdishDB.DishQuantity)
 		}
 
@@ -187,9 +192,6 @@ func (server *Server) getPlaylistLatestV2(ctx *gin.Context) {
 		userplaylist.IsPublic = userPlaylistDB.IsPublic
 		userplaylist.DeliveryDay = userPlaylistDB.DeliveryDay.String
 		userplaylist.Category = userPlaylistDB.Category.String
-		userplaylist.CreatedAt = userPlaylistDB.CreatedAt
-		userplaylist.UpdatedAt = userPlaylistDB.AddedAt
-		userplaylist.Dishes = dishesSliceUser
 		userplaylist.Cost = fmt.Sprintf("%.2f", costUser)
 
 		userplaylistlist = append(userplaylistlist, userplaylist)
@@ -197,8 +199,8 @@ func (server *Server) getPlaylistLatestV2(ctx *gin.Context) {
 	}
 
 	//build response
-	resp = playlistLatestResponse{
-		PublicPlaylist: publicplaylistlist,
+	resp = playlistLatestResponsev2{
+		PublicPlaylist: publicplaylists,
 		UserPlaylist:   userplaylistlist,
 	}
 
