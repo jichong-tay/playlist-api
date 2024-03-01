@@ -46,11 +46,11 @@ type playlistv2 struct {
 
 func (server *Server) maptoModelV2(ctx *gin.Context, playlistsDB []db.Playlist) ([]playlistv2, error) {
 	var playlists []playlistv2
-	var playlist playlistv2
-	var dish dishes
-	var cost float64
 
 	for _, playlistDB := range playlistsDB {
+		var playlist playlistv2
+		var dish dishes
+		var cost float64
 
 		playlistdishesDB, err := server.store.ListPlaylist_DishesByPlaylistID(ctx, playlistDB.ID)
 		if err != nil {
