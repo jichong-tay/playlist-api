@@ -124,6 +124,7 @@ INSERT INTO playlist_dishes (order_id, playlist_id, dish_id, dish_quantity)
 VALUES
   (1, 1, 1, 2),
   (1, 1, 4, 1),
+  (1, 1, 10, 1),
   (2, 2, 7, 1),
   (2, 2, 8, 2),
   (3, 2, 10, 1),
