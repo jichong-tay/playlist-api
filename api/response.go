@@ -37,6 +37,7 @@ type playlistv2 struct {
 	DeliveryDay string `form:"deliveryDay" json:"deliveryDay"`
 	Category    string `form:"category" json:"category"`
 	Cost        string `form:"cost" json:"cost"`
+	Status      string `form:"status" json:"status"`
 }
 
 func (server *Server) maptoModelV2(ctx *gin.Context, playlistsDB []db.Playlist) ([]playlistv2, error) {
@@ -94,6 +95,9 @@ func (server *Server) maptoModelV2(ctx *gin.Context, playlistsDB []db.Playlist) 
 		playlist.DeliveryDay = playlistDB.DeliveryDay.String
 		playlist.Category = playlistDB.Category.String
 		playlist.Cost = fmt.Sprintf("%.2f", cost)
+
+		status, _ := server.store.ListStatusByPlaylistID(ctx, playlistDB.ID)
+		playlist.Status = status.String
 
 		playlists = append(playlists, playlist)
 	}

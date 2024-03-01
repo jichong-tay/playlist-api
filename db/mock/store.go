@@ -15,6 +15,7 @@ import (
 
 	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
 	gomock "go.uber.org/mock/gomock"
+	null "gopkg.in/guregu/null.v4"
 )
 
 // MockStore is a mock of Store interface.
@@ -484,21 +485,6 @@ func (mr *MockStoreMockRecorder) ListPlaylistsByUserIDAll(arg0, arg1 any) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPlaylistsByUserIDAll", reflect.TypeOf((*MockStore)(nil).ListPlaylistsByUserIDAll), arg0, arg1)
 }
 
-// ListPublicPlaylist mocks base method.
-func (m *MockStore) ListPublicPlaylist(arg0 context.Context) ([]db.Playlist, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListPublicPlaylist", arg0)
-	ret0, _ := ret[0].([]db.Playlist)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ListPublicPlaylist indicates an expected call of ListPublicPlaylist.
-func (mr *MockStoreMockRecorder) ListPublicPlaylist(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPublicPlaylist", reflect.TypeOf((*MockStore)(nil).ListPublicPlaylist), arg0)
-}
-
 // ListRestaurantNameByDishID mocks base method.
 func (m *MockStore) ListRestaurantNameByDishID(arg0 context.Context, arg1 int64) (string, error) {
 	m.ctrl.T.Helper()
@@ -542,6 +528,21 @@ func (m *MockStore) ListSearches(arg0 context.Context, arg1 db.ListSearchesParam
 func (mr *MockStoreMockRecorder) ListSearches(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSearches", reflect.TypeOf((*MockStore)(nil).ListSearches), arg0, arg1)
+}
+
+// ListStatusByPlaylistID mocks base method.
+func (m *MockStore) ListStatusByPlaylistID(arg0 context.Context, arg1 int64) (null.String, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListStatusByPlaylistID", arg0, arg1)
+	ret0, _ := ret[0].(null.String)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListStatusByPlaylistID indicates an expected call of ListStatusByPlaylistID.
+func (mr *MockStoreMockRecorder) ListStatusByPlaylistID(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListStatusByPlaylistID", reflect.TypeOf((*MockStore)(nil).ListStatusByPlaylistID), arg0, arg1)
 }
 
 // ListUser_Playlists mocks base method.

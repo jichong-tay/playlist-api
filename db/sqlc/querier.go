@@ -6,6 +6,8 @@ package db
 
 import (
 	"context"
+
+	null "gopkg.in/guregu/null.v4"
 )
 
 type Querier interface {
@@ -38,10 +40,10 @@ type Querier interface {
 	ListPlaylists(ctx context.Context, arg ListPlaylistsParams) ([]Playlist, error)
 	ListPlaylistsByUserID(ctx context.Context, arg ListPlaylistsByUserIDParams) ([]Playlist, error)
 	ListPlaylistsByUserIDAll(ctx context.Context, userID int64) ([]Playlist, error)
-	ListPublicPlaylist(ctx context.Context) ([]Playlist, error)
 	ListRestaurantNameByDishID(ctx context.Context, id int64) (string, error)
 	ListRestaurants(ctx context.Context, arg ListRestaurantsParams) ([]Restaurant, error)
 	ListSearches(ctx context.Context, arg ListSearchesParams) ([]Search, error)
+	ListStatusByPlaylistID(ctx context.Context, playlistID int64) (null.String, error)
 	ListUser_Playlists(ctx context.Context, arg ListUser_PlaylistsParams) ([]UserPlaylist, error)
 	ListUsers(ctx context.Context, arg ListUsersParams) ([]User, error)
 	UpdateDish(ctx context.Context, arg UpdateDishParams) (Dish, error)

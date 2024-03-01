@@ -67,3 +67,10 @@ FROM
     playlists
 WHERE
     LOWER(category) = LOWER($1);
+
+-- name: ListStatusByPlaylistID :one
+SELECT status
+FROM
+   user_playlists
+WHERE
+    user_playlists.playlist_id = $1;

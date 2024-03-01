@@ -7,6 +7,8 @@ package db
 
 import (
 	"context"
+
+	null "gopkg.in/guregu/null.v4"
 )
 
 const listPlaylistByCategory = `-- name: ListPlaylistByCategory :many
@@ -285,45 +287,6 @@ func (q *Queries) ListPlaylistsByUserIDAll(ctx context.Context, userID int64) ([
 	return items, nil
 }
 
-const listPublicPlaylist = `-- name: ListPublicPlaylist :many
-SELECT id, name, description, image_url, is_public, delivery_day, category, created_at, added_at
-FROM
-    playlists
-`
-
-func (q *Queries) ListPublicPlaylist(ctx context.Context) ([]Playlist, error) {
-	rows, err := q.db.QueryContext(ctx, listPublicPlaylist)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	items := []Playlist{}
-	for rows.Next() {
-		var i Playlist
-		if err := rows.Scan(
-			&i.ID,
-			&i.Name,
-			&i.Description,
-			&i.ImageUrl,
-			&i.IsPublic,
-			&i.DeliveryDay,
-			&i.Category,
-			&i.CreatedAt,
-			&i.AddedAt,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
 const listRestaurantNameByDishID = `-- name: ListRestaurantNameByDishID :one
 SELECT restaurants.name
 FROM dishes
@@ -336,4 +299,19 @@ func (q *Queries) ListRestaurantNameByDishID(ctx context.Context, id int64) (str
 	var name string
 	err := row.Scan(&name)
 	return name, err
+}
+
+const listStatusByPlaylistID = `-- name: ListStatusByPlaylistID :one
+SELECT status
+FROM
+   user_playlists
+WHERE
+    user_playlists.playlist_id = $1
+`
+
+func (q *Queries) ListStatusByPlaylistID(ctx context.Context, playlistID int64) (null.String, error) {
+	row := q.db.QueryRowContext(ctx, listStatusByPlaylistID, playlistID)
+	var status null.String
+	err := row.Scan(&status)
+	return status, err
 }
