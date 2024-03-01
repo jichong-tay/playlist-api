@@ -1,0 +1,152 @@
+[
+  {
+    "dishId": 48,
+    "name": "Classic Beef Burger",
+    "description": "Juicy beef patty, lettuce, tomato, and cheddar cheese in a sesame seed bun",
+    "price": 9.5,
+    "imageUrl": "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=3020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Le Petit Château",
+    "restaurantId": 5,
+    "quantity": 0
+  },
+  {
+    "dishId": 49,
+    "name": "Bacon Avocado Burger",
+    "description": "Beef patty with crispy bacon, avocado, lettuce, and mayo on a brioche bun",
+    "price": 11.8,
+    "imageUrl": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=2915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "La Petite Boulangerie",
+    "restaurantId": 12,
+    "quantity": 0
+  },
+  {
+    "dishId": 50,
+    "name": "Spicy Chicken Burger",
+    "description": "Crispy fried chicken, spicy sauce, lettuce, and pickles in a toasted bun",
+    "price": 10.5,
+    "imageUrl": "https://images.unsplash.com/photo-1610970878459-a0e464d7592b?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Piazza Italia",
+    "restaurantId": 7,
+    "quantity": 0
+  },
+  {
+    "dishId": 51,
+    "name": "Mushroom Swiss Burger",
+    "description": "Beef patty with melted Swiss cheese, sautéed mushrooms, and garlic aioli",
+    "price": 12.5,
+    "imageUrl": "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=3020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Pizzeria Roma",
+    "restaurantId": 14,
+    "quantity": 0
+  },
+  {
+    "dishId": 52,
+    "name": "BBQ Bacon Burger",
+    "description": "Beef patty topped with crispy bacon, BBQ sauce, and onion rings",
+    "price": 11.8,
+    "imageUrl": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=2915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Istanbul Delights",
+    "restaurantId": 6,
+    "quantity": 0
+  },
+  {
+    "dishId": 53,
+    "name": "Double Cheeseburger",
+    "description": "Two beef patties, double cheese, lettuce, tomato, and special sauce",
+    "price": 13.5,
+    "imageUrl": "https://images.unsplash.com/photo-1610970878459-a0e464d7592b?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Istanbul Palace",
+    "restaurantId": 13,
+    "quantity": 0
+  },
+  {
+    "dishId": 54,
+    "name": "Guacamole Burger",
+    "description": "Beef patty with fresh guacamole, pepper jack cheese, and salsa",
+    "price": 12.8,
+    "imageUrl": "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=3020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Pizzeria Roma",
+    "restaurantId": 14,
+    "quantity": 0
+  },
+  {
+    "dishId": 55,
+    "name": "Jalapeño Burger",
+    "description": "Beef patty with melted cheddar, jalapeños, and spicy mayo",
+    "price": 10.8,
+    "imageUrl": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=2915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Istanbul Delights",
+    "restaurantId": 6,
+    "quantity": 0
+  },
+  {
+    "dishId": 56,
+    "name": "Turkey Burger",
+    "description": "Grilled turkey patty, lettuce, tomato, and cranberry mayo on a whole wheat bun",
+    "price": 11.5,
+    "imageUrl": "https://images.unsplash.com/photo-1610970878459-a0e464d7592b?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Istanbul Palace",
+    "restaurantId": 13,
+    "quantity": 0
+  },
+  {
+    "dishId": 57,
+    "name": "Veggie Burger",
+    "description": "Plant-based patty, lettuce, tomato, pickles, and vegan mayo on a multigrain bun",
+    "price": 10.5,
+    "imageUrl": "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=3020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Le Petit Château",
+    "restaurantId": 5,
+    "quantity": 0
+  },
+  {
+    "dishId": 58,
+    "name": "Hawaiian Burger",
+    "description": "Beef patty with grilled pineapple, teriyaki sauce, and Swiss cheese",
+    "price": 12.8,
+    "imageUrl": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=2915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "La Petite Boulangerie",
+    "restaurantId": 12,
+    "quantity": 0
+  },
+  {
+    "dishId": 60,
+    "name": "Southwest Burger",
+    "description": "Beef patty with pepper jack cheese, guacamole, and chipotle mayo",
+    "price": 12.5,
+    "imageUrl": "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=3020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Pizzeria Roma",
+    "restaurantId": 14,
+    "quantity": 0
+  },
+  {
+    "dishId": 61,
+    "name": "Buffalo Burger",
+    "description": "Beef patty with buffalo sauce, blue cheese dressing, and lettuce",
+    "price": 11.8,
+    "imageUrl": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=2915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Istanbul Delights",
+    "restaurantId": 6,
+    "quantity": 0
+  },
+  {
+    "dishId": 62,
+    "name": "Portobello Mushroom Burger",
+    "description": "Grilled portobello mushroom, Swiss cheese, lettuce, and balsamic glaze",
+    "price": 12.8,
+    "imageUrl": "https://images.unsplash.com/photo-1610970878459-a0e464d7592b?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Istanbul Palace",
+    "restaurantId": 13,
+    "quantity": 0
+  },
+  {
+    "dishId": 63,
+    "name": "Breakfast Burger",
+    "description": "Beef patty with bacon, fried egg, cheddar cheese, and maple syrup",
+    "price": 11.5,
+    "imageUrl": "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=3020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "restaurantName": "Le Petit Château",
+    "restaurantId": 5,
+    "quantity": 0
+  }
+]
