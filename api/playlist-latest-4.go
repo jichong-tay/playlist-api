@@ -22,19 +22,6 @@ type playlistDish struct {
 	CreatedAt    time.Time `form:"createdAt" json:"createdAt"`
 	UpdatedAt    time.Time `form:"updatedAt" json:"updatedAt"`
 }
-type dishes struct {
-	ID           int64        `form:"id" json:"id"`
-	RestaurantID int64        `form:"restaurantId" json:"restaurantId"`
-	IsAvailable  bool         `form:"isAvailable" json:"isAvailable"`
-	Name         string       `form:"name" json:"name"`
-	Description  string       `form:"description" json:"description"`
-	Price        float64      `form:"price" json:"price"`
-	Cuisine      string       `form:"cuisine" json:"cuisine"`
-	ImageURL     string       `form:"imageUrl" json:"imageUrl"`
-	CreatedAt    time.Time    `form:"createdAt" json:"createdAt"`
-	UpdatedAt    time.Time    `form:"updatedAt" json:"updatedAt"`
-	PlaylistDish playlistDish `form:"PlaylistDish" json:"PlaylistDish"`
-}
 type playlistList struct {
 	ID          int64     `form:"id" json:"id"`
 	Name        string    `form:"name" json:"name"`
