@@ -29,6 +29,10 @@ type playlistLatestResponsev2 struct {
 	UserPlaylist   []playlistv2 `form:"userPlaylist" json:"userPlaylist"`
 }
 
+type playlistUserResponse struct {
+	UserPlaylist []playlistv2 `form:"userPlaylist" json:"userPlaylist"`
+}
+
 type playlistv2 struct {
 	ID          int64  `form:"id" json:"id"`
 	Name        string `form:"name" json:"name"`

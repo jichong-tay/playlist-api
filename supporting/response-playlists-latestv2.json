@@ -7,7 +7,8 @@
             "isPublic": true,
             "deliveryDay": "Saturday",
             "category": "Local Delights",
-            "cost": "18.00"
+            "cost": "33.00",
+            "status": ""
         },
         {
             "id": 2,
@@ -16,7 +17,8 @@
             "isPublic": true,
             "deliveryDay": "Sunday",
             "category": "Healthy Living",
-            "cost": "74.00"
+            "cost": "89.00",
+            "status": ""
         }
     ],
     "userPlaylist": [
@@ -27,7 +29,8 @@
             "isPublic": false,
             "deliveryDay": "Sunday",
             "category": "",
-            "cost": "29.00"
+            "cost": "29.00",
+            "status": "Pending"
         }
     ]
 }

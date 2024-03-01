@@ -29,9 +29,11 @@ func (server *Server) setupRouter() {
 	router.GET("/playlists", server.listPlaylist)
 	router.GET("/playlists/current/:id", server.getPlaylistCurrent)
 	router.GET("/playlists-latest", server.getPlaylistLatest)
-	router.GET("/playlists-latestv2", server.getPlaylistLatestV2)
 	router.GET("/playlists-category", server.getPlaylistCategory)
 	router.GET("/publicplaylists", server.getPublicPlaylist)
+
+	router.GET("/playlists-latestv2", server.getPlaylistLatestV2)
+	router.GET("/playlists-user", server.getPlaylistUser)
 
 	server.router = router
 }
