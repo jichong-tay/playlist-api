@@ -9,7 +9,7 @@ import (
 
 func (server *Server) getPublicPlaylist(ctx *gin.Context) {
 
-	playlistDB, err := server.store.ListPlaylistPublicAndCategoryAll(ctx)
+	playlistsDB, err := server.store.ListPlaylistPublicAndCategoryAll(ctx)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errResponse(err))
@@ -19,10 +19,10 @@ func (server *Server) getPublicPlaylist(ctx *gin.Context) {
 		return
 	}
 	// build publicPlaylist
-	publicPlaylist, _ := server.maptoModelV2(ctx, playlistDB)
+	publicPlaylists, _ := server.maptoModelV2(ctx, playlistsDB)
 
 	resp := playlistResponsev2{
-		Playlist: publicPlaylist,
+		Playlist: publicPlaylists,
 	}
 
 	ctx.JSON(http.StatusOK, resp)
