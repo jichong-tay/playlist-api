@@ -78,3 +78,11 @@ WHERE
 -- name: GetUserPlaylistByPlaylistID :one
 SELECT * FROM user_playlists
 WHERE playlist_id = $1 LIMIT 1;
+
+-- name: UpdateStatusForUser_Playlist :many
+UPDATE user_playlists
+SET 
+  status = $3
+WHERE 
+  user_id = $1 AND playlist_id = $2
+RETURNING *;

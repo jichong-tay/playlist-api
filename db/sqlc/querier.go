@@ -51,6 +51,7 @@ type Querier interface {
 	UpdatePlaylist(ctx context.Context, arg UpdatePlaylistParams) (Playlist, error)
 	UpdatePlaylist_Dish(ctx context.Context, arg UpdatePlaylist_DishParams) (PlaylistDish, error)
 	UpdateRestaurant(ctx context.Context, arg UpdateRestaurantParams) (Restaurant, error)
+	UpdateStatusForUser_Playlist(ctx context.Context, arg UpdateStatusForUser_PlaylistParams) ([]UserPlaylist, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 	UpdateUser_Playlist(ctx context.Context, arg UpdateUser_PlaylistParams) (UserPlaylist, error)
 }

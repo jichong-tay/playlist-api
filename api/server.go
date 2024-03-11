@@ -33,6 +33,9 @@ func (server *Server) setupRouter() {
 	router.GET("/publicplaylists", server.getPublicPlaylist)
 	router.GET("/userplaylists/:userid", server.getUserPlaylist)
 
+	router.POST("/playlist/:userid/:playlistid", server.updateUserPlaylistStatus) // This post request is just to update the status to Pending for testing purpose.
+	router.PUT("/playlist/:userid/:playlistid", server.updateUserPlaylistStatus)
+
 	router.GET("/playlists-latestv2", server.getPlaylistLatestV2)
 	router.GET("/playlists-user", server.getPlaylistUser)
 

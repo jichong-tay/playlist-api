@@ -334,3 +334,48 @@ func (q *Queries) ListStatusByPlaylistID(ctx context.Context, playlistID int64) 
 	err := row.Scan(&status)
 	return status, err
 }
+
+const updateStatusForUser_Playlist = `-- name: UpdateStatusForUser_Playlist :many
+UPDATE user_playlists
+SET 
+  status = $3
+WHERE 
+  user_id = $1 AND playlist_id = $2
+RETURNING id, user_id, playlist_id, delivery_day, delivery_time, status
+`
+
+type UpdateStatusForUser_PlaylistParams struct {
+	UserID     int64       `json:"user_id"`
+	PlaylistID int64       `json:"playlist_id"`
+	Status     null.String `json:"status"`
+}
+
+func (q *Queries) UpdateStatusForUser_Playlist(ctx context.Context, arg UpdateStatusForUser_PlaylistParams) ([]UserPlaylist, error) {
+	rows, err := q.db.QueryContext(ctx, updateStatusForUser_Playlist, arg.UserID, arg.PlaylistID, arg.Status)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []UserPlaylist{}
+	for rows.Next() {
+		var i UserPlaylist
+		if err := rows.Scan(
+			&i.ID,
+			&i.UserID,
+			&i.PlaylistID,
+			&i.DeliveryDay,
+			&i.DeliveryTime,
+			&i.Status,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
