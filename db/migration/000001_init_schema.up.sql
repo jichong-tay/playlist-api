@@ -9,7 +9,9 @@ CREATE TABLE "users" (
   "username" varchar NOT NULL,
   "email" varchar UNIQUE NOT NULL,
   "password_hash" varchar NOT NULL,
-  "address" varchar
+  "address" varchar,
+  "uuid" varchar NOT NULL
+
 );
 
 CREATE TABLE "user_playlists" (

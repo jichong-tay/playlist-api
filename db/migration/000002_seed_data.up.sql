@@ -96,9 +96,11 @@ VALUES
 
 
 -- Insert sample users
-INSERT INTO users (username, email, password_hash, address)
+INSERT INTO users (username, email, password_hash, address, uuid)
 VALUES
-  ('john_doe', 'john@example.com', 'hashed_password', '123 Main Street, Singapore');
+  ('john_doe', 'john@example.com', 'hashed_password', '123 Main Street, Singapore', 'uuid1'),
+  ('jane_smith', 'jane@example.com', 'hashed_password', '456 Orchard Road, Singapore', 'uuid2'),
+  ('singapore_user', 'user@example.com', 'hashed_password', '789 Marina Bay Sands, Singapore', 'uuid3');
 
 -- Insert sample searches
 INSERT INTO searches (user_id, keyword)
