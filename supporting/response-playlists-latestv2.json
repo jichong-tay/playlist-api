@@ -1,36 +1,36 @@
 {
-    "publicPlaylist": [
-        {
-            "id": 1,
-            "name": "Best of Singapore",
-            "imageUrl": "best_of_singapore_image_url",
-            "isPublic": true,
-            "deliveryDay": "Saturday",
-            "category": "Local Delights",
-            "cost": "33.00",
-            "status": ""
-        },
-        {
-            "id": 2,
-            "name": "Healthy Choices",
-            "imageUrl": "healthy_choices_image_url",
-            "isPublic": true,
-            "deliveryDay": "Sunday",
-            "category": "Healthy Living",
-            "cost": "89.00",
-            "status": ""
-        }
-    ],
-    "userPlaylist": [
-        {
-            "id": 3,
-            "name": "User 1 Playlist",
-            "imageUrl": "user_1_playlist_image_url",
-            "isPublic": false,
-            "deliveryDay": "Sunday",
-            "category": "",
-            "cost": "29.00",
-            "status": "Pending"
-        }
-    ]
+  "publicPlaylist": [
+      {
+          "id": 1,
+          "name": "Best of Singapore",
+          "imageUrl": "best_of_singapore_image_url",
+          "isPublic": true,
+          "deliveryDay": "Saturday",
+          "category": "Local Delights",
+          "cost": "33.00",
+          "status": ""
+      },
+      {
+          "id": 2,
+          "name": "Healthy Choices",
+          "imageUrl": "healthy_choices_image_url",
+          "isPublic": true,
+          "deliveryDay": "Sunday",
+          "category": "Healthy Living",
+          "cost": "56.00",
+          "status": ""
+      }
+  ],
+  "userPlaylist": [
+      {
+          "id": 3,
+          "name": "User 1 Playlist",
+          "imageUrl": "user_1_playlist_image_url",
+          "isPublic": false,
+          "deliveryDay": "Sunday",
+          "category": "",
+          "cost": "29.00",
+          "status": "Pending"
+      }
+  ]
 }

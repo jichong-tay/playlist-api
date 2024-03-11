@@ -9,8 +9,8 @@ import (
 )
 
 type playlistCategoryResponse struct {
-	CategoryTitle string         `form:"categoryTitle" json:"categoryTitle"`
-	PlaylistList  []playlistList `form:"list" json:"list"`
+	CategoryTitle string       `form:"categoryTitle" json:"categoryTitle"`
+	PlaylistList  []playlistv1 `form:"list" json:"list"`
 }
 
 type listPlaylistByCategory struct {
@@ -26,11 +26,11 @@ func (server *Server) getPlaylistCategory(ctx *gin.Context) {
 		return
 	}
 
-	var playlistlist playlistList
-	var categoryplaylistMap = make(map[string][]playlistList)
-	var playlistlists []playlistList
-	var dishesSlice []dishes
-	var dish dishes
+	var playlistlist playlistv1
+	var categoryplaylistMap = make(map[string][]playlistv1)
+	var playlistlists []playlistv1
+	var dishes []dish
+	var dish dish
 	var costCat float64
 
 	arg := req.Category
@@ -85,7 +85,7 @@ func (server *Server) getPlaylistCategory(ctx *gin.Context) {
 				UpdatedAt:    playlistdishDB.AddedAt,
 			}
 
-			dishesSlice = append(dishesSlice, dish)
+			dishes = append(dishes, dish)
 			costCat += dishDB.Price * float64(playlistdishDB.DishQuantity)
 		}
 
@@ -98,7 +98,7 @@ func (server *Server) getPlaylistCategory(ctx *gin.Context) {
 		playlistlist.Category = PlaylistDB.Category.String
 		playlistlist.CreatedAt = PlaylistDB.CreatedAt
 		playlistlist.UpdatedAt = PlaylistDB.AddedAt
-		playlistlist.Dishes = dishesSlice
+		playlistlist.Dishes = dishes
 		playlistlist.Cost = fmt.Sprintf("%.2f", costCat)
 
 		// Check if the category name already exists in the map
@@ -106,7 +106,7 @@ func (server *Server) getPlaylistCategory(ctx *gin.Context) {
 		if playlistlists, found = categoryplaylistMap[PlaylistDB.Category.String]; found {
 			categoryplaylistMap[PlaylistDB.Category.String] = append(playlistlists, playlistlist)
 		} else {
-			categoryplaylistMap[PlaylistDB.Category.String] = []playlistList{playlistlist}
+			categoryplaylistMap[PlaylistDB.Category.String] = []playlistv1{playlistlist}
 		}
 
 	}
