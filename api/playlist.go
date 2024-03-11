@@ -50,7 +50,7 @@ func (server *Server) createPlaylist(ctx *gin.Context) {
 }
 
 type getPlaylistRequest struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID int64 `uri:"playlistid" binding:"required,min=1"`
 }
 
 func (server *Server) getPlaylist(ctx *gin.Context) {
