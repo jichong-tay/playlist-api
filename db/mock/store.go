@@ -335,6 +335,21 @@ func (mr *MockStoreMockRecorder) GetUser(arg0, arg1 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUser", reflect.TypeOf((*MockStore)(nil).GetUser), arg0, arg1)
 }
 
+// GetUserPlaylistByPlaylistID mocks base method.
+func (m *MockStore) GetUserPlaylistByPlaylistID(arg0 context.Context, arg1 int64) (db.UserPlaylist, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserPlaylistByPlaylistID", arg0, arg1)
+	ret0, _ := ret[0].(db.UserPlaylist)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserPlaylistByPlaylistID indicates an expected call of GetUserPlaylistByPlaylistID.
+func (mr *MockStoreMockRecorder) GetUserPlaylistByPlaylistID(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserPlaylistByPlaylistID", reflect.TypeOf((*MockStore)(nil).GetUserPlaylistByPlaylistID), arg0, arg1)
+}
+
 // GetUser_Playlist mocks base method.
 func (m *MockStore) GetUser_Playlist(arg0 context.Context, arg1 int64) (db.UserPlaylist, error) {
 	m.ctrl.T.Helper()

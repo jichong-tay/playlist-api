@@ -55,10 +55,18 @@ func (server *Server) getPlaylistCurrent(ctx *gin.Context) {
 
 	restuarant_foodItems, cost, _ := server.maptoModelFoodItems(ctx, playlistDishes)
 
+	userPlaylist, _ := server.store.GetUserPlaylistByPlaylistID(ctx, req.ID)
+
+	deliveryTime := userPlaylist.DeliveryTime.Time.Format("15:04:05")
+	if deliveryTime == "00:00:00" {
+		deliveryTime = ""
+	}
+
 	resp := getPlaylistCurrentResponse{
 		ID:                   playlist.ID,
 		Name:                 playlist.Name,
 		DeliveryDay:          playlist.DeliveryDay.String,
+		DeliveryTime:         deliveryTime,
 		IsPublic:             playlist.IsPublic,
 		Restuarant_FoodItems: restuarant_foodItems,
 		Cost:                 fmt.Sprintf("%.2f", cost),

@@ -11,6 +11,25 @@ import (
 	null "gopkg.in/guregu/null.v4"
 )
 
+const getUserPlaylistByPlaylistID = `-- name: GetUserPlaylistByPlaylistID :one
+SELECT id, user_id, playlist_id, delivery_day, delivery_time, status FROM user_playlists
+WHERE playlist_id = $1 LIMIT 1
+`
+
+func (q *Queries) GetUserPlaylistByPlaylistID(ctx context.Context, playlistID int64) (UserPlaylist, error) {
+	row := q.db.QueryRowContext(ctx, getUserPlaylistByPlaylistID, playlistID)
+	var i UserPlaylist
+	err := row.Scan(
+		&i.ID,
+		&i.UserID,
+		&i.PlaylistID,
+		&i.DeliveryDay,
+		&i.DeliveryTime,
+		&i.Status,
+	)
+	return i, err
+}
+
 const listPlaylistByCategory = `-- name: ListPlaylistByCategory :many
 SELECT id, name, description, image_url, is_public, delivery_day, category, created_at, added_at
 FROM

@@ -30,6 +30,7 @@ type Querier interface {
 	GetRestaurant(ctx context.Context, id int64) (Restaurant, error)
 	GetSearch(ctx context.Context, id int64) (Search, error)
 	GetUser(ctx context.Context, id int64) (User, error)
+	GetUserPlaylistByPlaylistID(ctx context.Context, playlistID int64) (UserPlaylist, error)
 	GetUser_Playlist(ctx context.Context, id int64) (UserPlaylist, error)
 	ListDishes(ctx context.Context, arg ListDishesParams) ([]Dish, error)
 	ListPlaylistByCategory(ctx context.Context, lower string) ([]Playlist, error)

@@ -309,6 +309,7 @@ type getPlaylistCurrentResponse struct {
 	ID                   int64                 `form:"id" json:"id"`
 	Name                 string                `form:"name" json:"name"`
 	DeliveryDay          string                `form:"deliveryDay" json:"deliveryDay"`
+	DeliveryTime         string                `form:"deliveryTime" json:"deliveryTime"`
 	IsPublic             bool                  `form:"isPublic" json:"isPublic"`
 	Restuarant_FoodItems []restaurant_foodItem `form:"foodItems" json:"foodItems"`
 	Cost                 string                `form:"cost" json:"cost"`

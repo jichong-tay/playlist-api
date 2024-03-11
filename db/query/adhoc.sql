@@ -74,3 +74,7 @@ FROM
    user_playlists
 WHERE
     user_playlists.playlist_id = $1;
+
+-- name: GetUserPlaylistByPlaylistID :one
+SELECT * FROM user_playlists
+WHERE playlist_id = $1 LIMIT 1;
