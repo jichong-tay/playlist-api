@@ -1,0 +1,22 @@
+[
+  {
+      "id": 2,
+      "name": "Healthy Choices",
+      "imageUrl": "healthy_choices_image_url",
+      "isPublic": true,
+      "deliveryDay": "Sunday",
+      "category": "Healthy Living",
+      "cost": "56.00",
+      "status": "Pending"
+  },
+  {
+      "id": 3,
+      "name": "User 1 Playlist",
+      "imageUrl": "user_1_playlist_image_url",
+      "isPublic": false,
+      "deliveryDay": "Sunday",
+      "category": "",
+      "cost": "29.00",
+      "status": "Pending"
+  }
+]

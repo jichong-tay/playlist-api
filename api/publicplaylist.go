@@ -21,9 +21,7 @@ func (server *Server) getPublicPlaylist(ctx *gin.Context) {
 	// build publicPlaylist
 	publicPlaylists, _ := server.maptoModelV2(ctx, playlistsDB)
 
-	resp := playlistResponsev2{
-		Playlist: publicPlaylists,
-	}
+	resp := publicPlaylists
 
 	ctx.JSON(http.StatusOK, resp)
 }

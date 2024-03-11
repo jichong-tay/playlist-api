@@ -1,43 +1,52 @@
 {
-    "id": 1,
-    "name": "Best of Singapore",
-    "deliveryDay": "Saturday",
-    "isPublic": true,
-    "foodItems": [
-        {
-            "restaurantName": "Chicken Rice Express",
-            "foodItems": [
-                {
-                    "name": "Hainanese Chicken Rice",
-                    "description": "Classic Hainanese chicken with fragrant rice",
-                    "quantity": 2,
-                    "price": 5.5,
-                    "imageUrl": "chicken_rice_image_url_1",
-                    "dishId": 1
-                },
-                {
-                    "name": "Spicy Chicken Noodles",
-                    "description": "Spicy chicken noodles with a kick",
-                    "quantity": 1,
-                    "price": 7,
-                    "imageUrl": "chicken_rice_image_url_4",
-                    "dishId": 4
-                }
-            ]
-        },
-        {
-            "restaurantName": "Sushi Haven",
-            "foodItems": [
-                {
-                    "name": "Sashimi Deluxe",
-                    "description": "Premium slices of assorted sashimi",
-                    "quantity": 1,
-                    "price": 15,
-                    "imageUrl": "sushi_image_url_2",
-                    "dishId": 10
-                }
-            ]
-        }
-    ],
-    "cost": "33.00"
+  "id": 2,
+  "name": "Healthy Choices",
+  "deliveryDay": "Sunday",
+  "deliveryTime": "12:00:00",
+  "isPublic": true,
+  "foodItems": [
+      {
+          "restaurantName": "Sushi Haven",
+          "foodItems": [
+              {
+                  "name": "Sashimi Deluxe",
+                  "description": "Premium slices of assorted sashimi",
+                  "quantity": 1,
+                  "price": 15,
+                  "imageUrl": "sushi_image_url_2",
+                  "dishId": 10
+              },
+              {
+                  "name": "Dragon Roll",
+                  "description": "Sushi roll with eel, avocado, and cucumber",
+                  "quantity": 1,
+                  "price": 14,
+                  "imageUrl": "sushi_image_url_4",
+                  "dishId": 12
+              }
+          ]
+      },
+      {
+          "restaurantName": "Noodle Delight",
+          "foodItems": [
+              {
+                  "name": "Char Kway Teow",
+                  "description": "Stir-fried flat rice noodles with prawns and Chinese sausage",
+                  "quantity": 1,
+                  "price": 10,
+                  "imageUrl": "noodle_image_url_3",
+                  "dishId": 7
+              },
+              {
+                  "name": "Wonton Noodle Soup",
+                  "description": "Noodle soup with wontons and BBQ pork",
+                  "quantity": 2,
+                  "price": 8.5,
+                  "imageUrl": "noodle_image_url_4",
+                  "dishId": 8
+              }
+          ]
+      }
+  ],
+  "cost": "56.00"
 }

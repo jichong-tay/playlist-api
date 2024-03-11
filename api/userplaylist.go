@@ -35,9 +35,7 @@ func (server *Server) getUserPlaylist(ctx *gin.Context) {
 
 	userplaylists, _ = server.maptoModelV2(ctx, userPlaylistsDB)
 
-	resp := playlistResponsev2{
-		Playlist: userplaylists,
-	}
+	resp := userplaylists
 
 	ctx.JSON(http.StatusOK, resp)
 }
