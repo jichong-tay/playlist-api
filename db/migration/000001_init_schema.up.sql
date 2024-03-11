@@ -10,8 +10,7 @@ CREATE TABLE "users" (
   "email" varchar UNIQUE NOT NULL,
   "password_hash" varchar NOT NULL,
   "address" varchar,
-  "uuid" varchar NOT NULL
-
+  "uuid" varchar NOT NULL CHECK ("uuid" <> '')
 );
 
 CREATE TABLE "user_playlists" (
