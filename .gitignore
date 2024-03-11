@@ -5,6 +5,13 @@
 *.so
 *.dylib
 
+# Ignore temporary files
+*.tmp
+.DS_Store
+
+# Ignore notes
+.notes
+
 # Test binary, built with `go test -c`
 *.test
 
