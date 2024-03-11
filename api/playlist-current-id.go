@@ -62,7 +62,7 @@ func (server *Server) getPlaylistCurrent(ctx *gin.Context) {
 		deliveryTime = ""
 	}
 
-	resp := getPlaylistCurrentResponse{
+	resp := currentPlaylist{
 		ID:                   playlist.ID,
 		Name:                 playlist.Name,
 		DeliveryDay:          playlist.DeliveryDay.String,

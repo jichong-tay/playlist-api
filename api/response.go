@@ -305,7 +305,7 @@ func (server *Server) maptoModelCategory(ctx *gin.Context, playlistsDB []db.Play
 	return categoryPlaylists, nil
 }
 
-type getPlaylistCurrentResponse struct {
+type currentPlaylist struct {
 	ID                   int64                 `form:"id" json:"id"`
 	Name                 string                `form:"name" json:"name"`
 	DeliveryDay          string                `form:"deliveryDay" json:"deliveryDay"`
