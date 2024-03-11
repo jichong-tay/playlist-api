@@ -304,3 +304,88 @@ func (server *Server) maptoModelCategory(ctx *gin.Context, playlistsDB []db.Play
 
 	return categoryPlaylists, nil
 }
+
+type getPlaylistCurrentResponse struct {
+	ID                   int64                 `form:"id" json:"id"`
+	Name                 string                `form:"name" json:"name"`
+	DeliveryDay          string                `form:"deliveryDay" json:"deliveryDay"`
+	IsPublic             bool                  `form:"isPublic" json:"isPublic"`
+	Restuarant_FoodItems []restaurant_foodItem `form:"foodItems" json:"foodItems"`
+	Cost                 string                `form:"cost" json:"cost"`
+}
+
+type restaurant_foodItem struct {
+	RestaurantName string     `form:"restaurantName" json:"restaurantName"`
+	FoodItems      []foodItem `form:"foodItems" json:"foodItems"`
+}
+
+type foodItem struct {
+	Name        string  `form:"name" json:"name"`
+	Description string  `form:"description" json:"description"`
+	Quantity    int64   `form:"quantity" json:"quantity"`
+	Price       float64 `form:"price" json:"price"`
+	ImageURL    string  `form:"imageUrl" json:"imageUrl"`
+	DishID      int64   `form:"dishId" json:"dishId"`
+}
+
+func (server *Server) maptoModelFoodItems(ctx *gin.Context, playlistDishesDB []db.PlaylistDish) ([]restaurant_foodItem, float64, error) {
+
+	var restaurant_fooditem restaurant_foodItem
+	var foodItems []foodItem
+	var restaurant_foodItems []restaurant_foodItem
+	var playlistDishesMap = make(map[string][]foodItem)
+	var cost float64
+
+	// Loop through the playlist_dishes and create the map
+	for _, playlistDishDB := range playlistDishesDB {
+		var fooditem foodItem
+
+		restaurantName, err := server.store.ListRestaurantNameByDishID(ctx, playlistDishDB.DishID)
+		if err != nil {
+			if err == sql.ErrNoRows {
+				ctx.JSON(http.StatusNotFound, errResponse(err))
+				return nil, 0, err
+			}
+			ctx.JSON(http.StatusInternalServerError, errResponse(err))
+			return nil, 0, err
+		}
+
+		// Map database model to JSON response
+		dish, err := server.store.GetDish(ctx, playlistDishDB.DishID)
+		if err != nil {
+			if err == sql.ErrNoRows {
+				ctx.JSON(http.StatusNotFound, errResponse(err))
+				return nil, 0, err
+			}
+			ctx.JSON(http.StatusInternalServerError, errResponse(err))
+			return nil, 0, err
+		}
+
+		fooditem.Name = dish.Name
+		fooditem.Description = dish.Description.String
+		fooditem.Quantity = playlistDishDB.DishQuantity
+		fooditem.Price = dish.Price
+		fooditem.ImageURL = dish.ImageUrl.String
+		fooditem.DishID = dish.ID
+		cost += dish.Price * float64(playlistDishDB.DishQuantity)
+
+		// Check if the restaurant name already exists in the map
+		var found bool
+		if foodItems, found = playlistDishesMap[restaurantName]; found {
+			playlistDishesMap[restaurantName] = append(foodItems, fooditem)
+		} else {
+			playlistDishesMap[restaurantName] = []foodItem{fooditem}
+		}
+
+	}
+
+	for restaurantName, dishes := range playlistDishesMap {
+
+		restaurant_fooditem.RestaurantName = restaurantName
+		restaurant_fooditem.FoodItems = dishes
+
+		restaurant_foodItems = append(restaurant_foodItems, restaurant_fooditem)
+	}
+
+	return restaurant_foodItems, cost, nil
+}
