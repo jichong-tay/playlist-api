@@ -70,6 +70,7 @@ type User struct {
 	Email        string      `json:"email"`
 	PasswordHash string      `json:"password_hash"`
 	Address      null.String `json:"address"`
+	Uuid         string      `json:"uuid"`
 }
 
 // Stores user playlist

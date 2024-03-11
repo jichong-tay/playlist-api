@@ -3,10 +3,11 @@ INSERT INTO users (
   username,
   email,
   password_hash,
-  address
+  address,
+  uuid
 ) 
 VALUES (
-  $1, $2, $3, $4
+  $1, $2, $3, $4, $5
 )
 RETURNING *;
 
@@ -27,7 +28,8 @@ SET
   username = $2,
   email = $3,
   password_hash = $4,
-  address = $5
+  address = $5,
+  uuid = $6
 WHERE 
   id = $1
 RETURNING *;

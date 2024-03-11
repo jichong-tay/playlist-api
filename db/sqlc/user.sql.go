@@ -16,12 +16,13 @@ INSERT INTO users (
   username,
   email,
   password_hash,
-  address
+  address,
+  uuid
 ) 
 VALUES (
-  $1, $2, $3, $4
+  $1, $2, $3, $4, $5
 )
-RETURNING id, username, email, password_hash, address
+RETURNING id, username, email, password_hash, address, uuid
 `
 
 type CreateUserParams struct {
@@ -29,6 +30,7 @@ type CreateUserParams struct {
 	Email        string      `json:"email"`
 	PasswordHash string      `json:"password_hash"`
 	Address      null.String `json:"address"`
+	Uuid         string      `json:"uuid"`
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
@@ -37,6 +39,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		arg.Email,
 		arg.PasswordHash,
 		arg.Address,
+		arg.Uuid,
 	)
 	var i User
 	err := row.Scan(
@@ -45,6 +48,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		&i.Email,
 		&i.PasswordHash,
 		&i.Address,
+		&i.Uuid,
 	)
 	return i, err
 }
@@ -60,7 +64,7 @@ func (q *Queries) DeleteUser(ctx context.Context, id int64) error {
 }
 
 const getUser = `-- name: GetUser :one
-SELECT id, username, email, password_hash, address FROM users
+SELECT id, username, email, password_hash, address, uuid FROM users
 WHERE id = $1 LIMIT 1
 `
 
@@ -73,12 +77,13 @@ func (q *Queries) GetUser(ctx context.Context, id int64) (User, error) {
 		&i.Email,
 		&i.PasswordHash,
 		&i.Address,
+		&i.Uuid,
 	)
 	return i, err
 }
 
 const listUsers = `-- name: ListUsers :many
-SELECT id, username, email, password_hash, address FROM users
+SELECT id, username, email, password_hash, address, uuid FROM users
 WHERE id = $1
 ORDER BY id
 LIMIT $2
@@ -106,6 +111,7 @@ func (q *Queries) ListUsers(ctx context.Context, arg ListUsersParams) ([]User, e
 			&i.Email,
 			&i.PasswordHash,
 			&i.Address,
+			&i.Uuid,
 		); err != nil {
 			return nil, err
 		}
@@ -126,10 +132,11 @@ SET
   username = $2,
   email = $3,
   password_hash = $4,
-  address = $5
+  address = $5,
+  uuid = $6
 WHERE 
   id = $1
-RETURNING id, username, email, password_hash, address
+RETURNING id, username, email, password_hash, address, uuid
 `
 
 type UpdateUserParams struct {
@@ -138,6 +145,7 @@ type UpdateUserParams struct {
 	Email        string      `json:"email"`
 	PasswordHash string      `json:"password_hash"`
 	Address      null.String `json:"address"`
+	Uuid         string      `json:"uuid"`
 }
 
 func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error) {
@@ -147,6 +155,7 @@ func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, e
 		arg.Email,
 		arg.PasswordHash,
 		arg.Address,
+		arg.Uuid,
 	)
 	var i User
 	err := row.Scan(
@@ -155,6 +164,7 @@ func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, e
 		&i.Email,
 		&i.PasswordHash,
 		&i.Address,
+		&i.Uuid,
 	)
 	return i, err
 }

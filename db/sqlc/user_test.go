@@ -19,6 +19,7 @@ func createRandomUser(t *testing.T) User {
 		Email:        util.RandomName(),
 		PasswordHash: hashedPassword,
 		Address:      null.NewString(util.RandomName(), true),
+		Uuid:         util.RandomString(6),
 	}
 
 	user, err := testQueries.CreateUser(context.Background(), arg)
@@ -29,6 +30,7 @@ func createRandomUser(t *testing.T) User {
 	require.Equal(t, arg.Email, user.Email)
 	require.Equal(t, arg.PasswordHash, user.PasswordHash)
 	require.Equal(t, arg.Address, user.Address)
+	require.Equal(t, arg.Uuid, user.Uuid)
 
 	return user
 }
@@ -45,6 +47,7 @@ func TestCreateUser(t *testing.T) {
 		Email:        user1.Email,
 		PasswordHash: hashedPassword,
 		Address:      null.NewString(util.RandomName(), true),
+		Uuid:         util.RandomString(6),
 	}
 
 	_, err = testQueries.CreateUser(context.Background(), arg)
@@ -72,6 +75,7 @@ func TestUpdateUser(t *testing.T) {
 		Email:        util.RandomName(),
 		PasswordHash: user1.PasswordHash,
 		Address:      null.NewString(util.RandomName(), true),
+		Uuid:         util.RandomString(6),
 	}
 
 	user2, err := testQueries.UpdateUser(context.Background(), arg)
@@ -81,8 +85,8 @@ func TestUpdateUser(t *testing.T) {
 	require.Equal(t, arg.Username, user2.Username)
 	require.Equal(t, arg.Email, user2.Email)
 	require.Equal(t, arg.PasswordHash, user2.PasswordHash)
-	require.Equal(t, arg.PasswordHash, user2.PasswordHash)
 	require.Equal(t, arg.Address, user2.Address)
+	require.Equal(t, arg.Uuid, user2.Uuid)
 
 }
 
