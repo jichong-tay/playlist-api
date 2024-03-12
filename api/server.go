@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
+	db "github.com/jichong-tay/playlist-api/db/sqlc"
 )
 
 // Server will serves HTTP requests
@@ -42,6 +42,8 @@ func (server *Server) setupRouter() {
 	router.GET("/recent-search/:userid/", server.getRecentSearch)
 	router.GET("/search/:userid/:search", server.searchDishes)
 	router.DELETE("/recent-search/:userid/:search", server.searchDishesDelete)
+
+	router.POST("/playlist/add/:userid", server.createUserPlaylist)
 
 	server.router = router
 }

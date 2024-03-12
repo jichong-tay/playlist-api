@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
+	db "github.com/jichong-tay/playlist-api/db/sqlc"
 )
 
 type dish struct {
@@ -312,7 +312,7 @@ type currentPlaylist struct {
 	DeliveryTime         string                `form:"deliveryTime" json:"deliveryTime"`
 	IsPublic             bool                  `form:"isPublic" json:"isPublic"`
 	Restuarant_FoodItems []restaurant_foodItem `form:"foodItems" json:"foodItems"`
-	Cost                 string                `form:"cost" json:"cost"`
+	Cost                 interface{}           `form:"cost" json:"cost"`
 }
 
 type restaurant_foodItem struct {
@@ -437,4 +437,35 @@ func (server *Server) maptoModelSearch(searches []db.Search) []searchResult {
 		result = append(result, searchResult)
 	}
 	return result
+}
+
+func (server *Server) maptoModelFoodItemV2(restuarantFoodItems []restaurant_foodItem) []db.Restaurant_foodItem {
+
+	var foodItemDB db.FoodItem
+
+	var restuarantFoodItemsDB []db.Restaurant_foodItem
+	var restuarantFoodItemDB db.Restaurant_foodItem
+
+	for _, restuarantfooditem := range restuarantFoodItems {
+		restuarantFoodItemDB.RestaurantName = restuarantfooditem.RestaurantName
+
+		var foodItemsDB []db.FoodItem
+		for _, fooditem := range restuarantfooditem.FoodItems {
+			foodItemDB = db.FoodItem{
+				Name:        fooditem.Name,
+				Description: fooditem.Description,
+				Quantity:    fooditem.Quantity,
+				Price:       fooditem.Price,
+				ImageURL:    fooditem.ImageURL,
+				DishID:      fooditem.DishID,
+			}
+			foodItemsDB = append(foodItemsDB, foodItemDB)
+		}
+
+		restuarantFoodItemDB.FoodItems = foodItemsDB
+
+		restuarantFoodItemsDB = append(restuarantFoodItemsDB, restuarantFoodItemDB)
+	}
+
+	return restuarantFoodItemsDB
 }

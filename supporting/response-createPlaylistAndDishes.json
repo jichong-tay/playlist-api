@@ -1,0 +1,49 @@
+{
+  "id": 65,
+  "name": "Seoul 1",
+  "deliveryDay": "Mon,Sat",
+  "deliveryTime": "",
+  "isPublic": false,
+  "foodItems": [
+      {
+          "restaurantName": "Curry House",
+          "foodItems": [
+              {
+                  "name": "Butter Chicken",
+                  "description": "Creamy and flavorful butter chicken curry",
+                  "quantity": 1,
+                  "price": 12,
+                  "imageUrl": "curry_image_url_3",
+                  "dishId": 23
+              }
+          ]
+      },
+      {
+          "restaurantName": "Thai Delights",
+          "foodItems": [
+              {
+                  "name": "Tom Yum Soup",
+                  "description": "Spicy and sour soup with shrimp",
+                  "quantity": 3,
+                  "price": 8.5,
+                  "imageUrl": "thai_image_url_1",
+                  "dishId": 25
+              }
+          ]
+      },
+      {
+          "restaurantName": "Ramen House",
+          "foodItems": [
+              {
+                  "name": "Spicy Tan Tan Ramen",
+                  "description": "Spicy sesame-based broth with ground pork",
+                  "quantity": 1,
+                  "price": 12,
+                  "imageUrl": "ramen_image_url_3",
+                  "dishId": 49
+              }
+          ]
+      }
+  ],
+  "cost": "49.50"
+}
