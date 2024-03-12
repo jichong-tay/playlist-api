@@ -11,6 +11,7 @@ package mockdb
 
 import (
 	context "context"
+	sql "database/sql"
 	reflect "reflect"
 
 	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
@@ -215,6 +216,21 @@ func (m *MockStore) DeleteRestaurant(arg0 context.Context, arg1 int64) error {
 func (mr *MockStoreMockRecorder) DeleteRestaurant(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRestaurant", reflect.TypeOf((*MockStore)(nil).DeleteRestaurant), arg0, arg1)
+}
+
+// DeleteSearchByKeyword mocks base method.
+func (m *MockStore) DeleteSearchByKeyword(arg0 context.Context, arg1 db.DeleteSearchByKeywordParams) ([]db.Search, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteSearchByKeyword", arg0, arg1)
+	ret0, _ := ret[0].([]db.Search)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteSearchByKeyword indicates an expected call of DeleteSearchByKeyword.
+func (mr *MockStoreMockRecorder) DeleteSearchByKeyword(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSearchByKeyword", reflect.TypeOf((*MockStore)(nil).DeleteSearchByKeyword), arg0, arg1)
 }
 
 // DeleteUser mocks base method.
@@ -545,6 +561,21 @@ func (mr *MockStoreMockRecorder) ListSearches(arg0, arg1 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSearches", reflect.TypeOf((*MockStore)(nil).ListSearches), arg0, arg1)
 }
 
+// ListSearchesByUserID mocks base method.
+func (m *MockStore) ListSearchesByUserID(arg0 context.Context, arg1 db.ListSearchesByUserIDParams) ([]db.Search, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListSearchesByUserID", arg0, arg1)
+	ret0, _ := ret[0].([]db.Search)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListSearchesByUserID indicates an expected call of ListSearchesByUserID.
+func (mr *MockStoreMockRecorder) ListSearchesByUserID(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSearchesByUserID", reflect.TypeOf((*MockStore)(nil).ListSearchesByUserID), arg0, arg1)
+}
+
 // ListStatusByPlaylistID mocks base method.
 func (m *MockStore) ListStatusByPlaylistID(arg0 context.Context, arg1 int64) (null.String, error) {
 	m.ctrl.T.Helper()
@@ -588,6 +619,21 @@ func (m *MockStore) ListUsers(arg0 context.Context, arg1 db.ListUsersParams) ([]
 func (mr *MockStoreMockRecorder) ListUsers(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListUsers", reflect.TypeOf((*MockStore)(nil).ListUsers), arg0, arg1)
+}
+
+// SearchDishes mocks base method.
+func (m *MockStore) SearchDishes(arg0 context.Context, arg1 sql.NullString) ([]db.SearchDishesRow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SearchDishes", arg0, arg1)
+	ret0, _ := ret[0].([]db.SearchDishesRow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SearchDishes indicates an expected call of SearchDishes.
+func (mr *MockStoreMockRecorder) SearchDishes(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchDishes", reflect.TypeOf((*MockStore)(nil).SearchDishes), arg0, arg1)
 }
 
 // UpdateDish mocks base method.

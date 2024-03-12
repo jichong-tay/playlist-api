@@ -7,9 +7,44 @@ package db
 
 import (
 	"context"
+	"database/sql"
 
 	null "gopkg.in/guregu/null.v4"
 )
+
+const deleteSearchByKeyword = `-- name: DeleteSearchByKeyword :many
+DELETE FROM searches
+WHERE keyword = $1 AND user_id = $2
+RETURNING id, user_id, keyword
+`
+
+type DeleteSearchByKeywordParams struct {
+	Keyword null.String `json:"keyword"`
+	UserID  int64       `json:"user_id"`
+}
+
+func (q *Queries) DeleteSearchByKeyword(ctx context.Context, arg DeleteSearchByKeywordParams) ([]Search, error) {
+	rows, err := q.db.QueryContext(ctx, deleteSearchByKeyword, arg.Keyword, arg.UserID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Search{}
+	for rows.Next() {
+		var i Search
+		if err := rows.Scan(&i.ID, &i.UserID, &i.Keyword); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
 
 const getUserPlaylistByPlaylistID = `-- name: GetUserPlaylistByPlaylistID :one
 SELECT id, user_id, playlist_id, delivery_day, delivery_time, status FROM user_playlists
@@ -320,6 +355,48 @@ func (q *Queries) ListRestaurantNameByDishID(ctx context.Context, id int64) (str
 	return name, err
 }
 
+const listSearchesByUserID = `-- name: ListSearchesByUserID :many
+SELECT id, user_id, keyword
+FROM (
+    SELECT DISTINCT ON (keyword) id, user_id, keyword
+    FROM searches
+    WHERE user_id = $1
+    ORDER BY keyword, id DESC
+) AS subquery
+ORDER BY id DESC
+LIMIT $2
+OFFSET $3
+`
+
+type ListSearchesByUserIDParams struct {
+	UserID int64 `json:"user_id"`
+	Limit  int32 `json:"limit"`
+	Offset int32 `json:"offset"`
+}
+
+func (q *Queries) ListSearchesByUserID(ctx context.Context, arg ListSearchesByUserIDParams) ([]Search, error) {
+	rows, err := q.db.QueryContext(ctx, listSearchesByUserID, arg.UserID, arg.Limit, arg.Offset)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Search{}
+	for rows.Next() {
+		var i Search
+		if err := rows.Scan(&i.ID, &i.UserID, &i.Keyword); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listStatusByPlaylistID = `-- name: ListStatusByPlaylistID :one
 SELECT status
 FROM
@@ -333,6 +410,60 @@ func (q *Queries) ListStatusByPlaylistID(ctx context.Context, playlistID int64) 
 	var status null.String
 	err := row.Scan(&status)
 	return status, err
+}
+
+const searchDishes = `-- name: SearchDishes :many
+SELECT d.id AS dish_id,
+       d.name AS dish_name,
+       d.description AS dish_description,
+       d.price AS dish_price,
+       d.image_url AS dish_imageURL,
+       r.name AS restaurant_name,
+       r.id AS restaurant_id
+FROM dishes d
+JOIN restaurants r ON d.restaurant_id = r.id
+WHERE d.name ILIKE '%'||$1||'%' OR d.description ILIKE '%'||$1||'%'
+`
+
+type SearchDishesRow struct {
+	DishID          int64       `json:"dish_id"`
+	DishName        string      `json:"dish_name"`
+	DishDescription null.String `json:"dish_description"`
+	DishPrice       float64     `json:"dish_price"`
+	DishImageurl    null.String `json:"dish_imageurl"`
+	RestaurantName  string      `json:"restaurant_name"`
+	RestaurantID    int64       `json:"restaurant_id"`
+}
+
+func (q *Queries) SearchDishes(ctx context.Context, dollar_1 sql.NullString) ([]SearchDishesRow, error) {
+	rows, err := q.db.QueryContext(ctx, searchDishes, dollar_1)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []SearchDishesRow{}
+	for rows.Next() {
+		var i SearchDishesRow
+		if err := rows.Scan(
+			&i.DishID,
+			&i.DishName,
+			&i.DishDescription,
+			&i.DishPrice,
+			&i.DishImageurl,
+			&i.RestaurantName,
+			&i.RestaurantID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }
 
 const updateStatusForUser_Playlist = `-- name: UpdateStatusForUser_Playlist :many

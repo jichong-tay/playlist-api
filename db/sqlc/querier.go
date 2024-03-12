@@ -6,6 +6,7 @@ package db
 
 import (
 	"context"
+	"database/sql"
 
 	null "gopkg.in/guregu/null.v4"
 )
@@ -22,6 +23,7 @@ type Querier interface {
 	DeletePlaylist(ctx context.Context, id int64) error
 	DeletePlaylist_Dish(ctx context.Context, id int64) error
 	DeleteRestaurant(ctx context.Context, id int64) error
+	DeleteSearchByKeyword(ctx context.Context, arg DeleteSearchByKeywordParams) ([]Search, error)
 	DeleteUser(ctx context.Context, id int64) error
 	DeleteUser_Playlist(ctx context.Context, id int64) error
 	GetDish(ctx context.Context, id int64) (Dish, error)
@@ -44,9 +46,11 @@ type Querier interface {
 	ListRestaurantNameByDishID(ctx context.Context, id int64) (string, error)
 	ListRestaurants(ctx context.Context, arg ListRestaurantsParams) ([]Restaurant, error)
 	ListSearches(ctx context.Context, arg ListSearchesParams) ([]Search, error)
+	ListSearchesByUserID(ctx context.Context, arg ListSearchesByUserIDParams) ([]Search, error)
 	ListStatusByPlaylistID(ctx context.Context, playlistID int64) (null.String, error)
 	ListUser_Playlists(ctx context.Context, arg ListUser_PlaylistsParams) ([]UserPlaylist, error)
 	ListUsers(ctx context.Context, arg ListUsersParams) ([]User, error)
+	SearchDishes(ctx context.Context, dollar_1 sql.NullString) ([]SearchDishesRow, error)
 	UpdateDish(ctx context.Context, arg UpdateDishParams) (Dish, error)
 	UpdatePlaylist(ctx context.Context, arg UpdatePlaylistParams) (Playlist, error)
 	UpdatePlaylist_Dish(ctx context.Context, arg UpdatePlaylist_DishParams) (PlaylistDish, error)

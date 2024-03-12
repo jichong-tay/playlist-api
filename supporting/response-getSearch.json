@@ -1,0 +1,101 @@
+[
+  {
+      "dishId": 1,
+      "name": "Hainanese Chicken Rice",
+      "description": "Classic Hainanese chicken with fragrant rice",
+      "price": 5.5,
+      "imageUrl": "chicken_rice_image_url_1",
+      "restaurantName": "Chicken Rice Express",
+      "restaurantId": 1
+  },
+  {
+      "dishId": 3,
+      "name": "Chicken Satay Rice",
+      "description": "Hainanese-style chicken rice with chicken satay",
+      "price": 8.5,
+      "imageUrl": "chicken_rice_image_url_3",
+      "restaurantName": "Chicken Rice Express",
+      "restaurantId": 1
+  },
+  {
+      "dishId": 6,
+      "name": "Beef Hor Fun",
+      "description": "Flat rice noodles with beef in a savory sauce",
+      "price": 9.5,
+      "imageUrl": "noodle_image_url_2",
+      "restaurantName": "Noodle Delight",
+      "restaurantId": 2
+  },
+  {
+      "dishId": 7,
+      "name": "Char Kway Teow",
+      "description": "Stir-fried flat rice noodles with prawns and Chinese sausage",
+      "price": 10,
+      "imageUrl": "noodle_image_url_3",
+      "restaurantName": "Noodle Delight",
+      "restaurantId": 2
+  },
+  {
+      "dishId": 11,
+      "name": "Chirashi Bowl",
+      "description": "Assorted sashimi over a bed of sushi rice",
+      "price": 18,
+      "imageUrl": "sushi_image_url_3",
+      "restaurantName": "Sushi Haven",
+      "restaurantId": 3
+  },
+  {
+      "dishId": 15,
+      "name": "Bibimbap",
+      "description": "Mixed rice with vegetables, beef, and a spicy sauce",
+      "price": 12,
+      "imageUrl": "spicy_noodle_image_url_3",
+      "restaurantName": "Spicy Noodle House",
+      "restaurantId": 4
+  },
+  {
+      "dishId": 16,
+      "name": "Spicy Kimchi Fried Rice",
+      "description": "Fried rice with spicy kimchi and pork",
+      "price": 10.5,
+      "imageUrl": "spicy_noodle_image_url_4",
+      "restaurantName": "Spicy Noodle House",
+      "restaurantId": 4
+  },
+  {
+      "dishId": 21,
+      "name": "Chicken Curry",
+      "description": "Spicy chicken curry with fragrant rice",
+      "price": 9,
+      "imageUrl": "curry_image_url_1",
+      "restaurantName": "Curry House",
+      "restaurantId": 6
+  },
+  {
+      "dishId": 27,
+      "name": "Mango Sticky Rice",
+      "description": "Sweet sticky rice topped with fresh mango",
+      "price": 6,
+      "imageUrl": "dessert_image_url_1",
+      "restaurantName": "Dessert Dreamland",
+      "restaurantId": 8
+  },
+  {
+      "dishId": 34,
+      "name": "Teriyaki Tofu Bowl",
+      "description": "Bowl with teriyaki tofu, brown rice, and vegetables",
+      "price": 11,
+      "imageUrl": "healthy_image_url_4",
+      "restaurantName": "Healthy Bites",
+      "restaurantId": 9
+  },
+  {
+      "dishId": 42,
+      "name": "Satay Fried Rice",
+      "description": "Fried rice with chopped chicken and beef satay",
+      "price": 12.5,
+      "imageUrl": "satay_image_url_4",
+      "restaurantName": "Satay Street",
+      "restaurantId": 11
+  }
+]

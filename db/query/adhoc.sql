@@ -86,3 +86,32 @@ SET
 WHERE 
   user_id = $1 AND playlist_id = $2
 RETURNING *;
+
+-- name: SearchDishes :many
+SELECT d.id AS dish_id,
+       d.name AS dish_name,
+       d.description AS dish_description,
+       d.price AS dish_price,
+       d.image_url AS dish_imageURL,
+       r.name AS restaurant_name,
+       r.id AS restaurant_id
+FROM dishes d
+JOIN restaurants r ON d.restaurant_id = r.id
+WHERE d.name ILIKE '%'||$1||'%' OR d.description ILIKE '%'||$1||'%';
+
+-- name: ListSearchesByUserID :many
+SELECT *
+FROM (
+    SELECT DISTINCT ON (keyword) *
+    FROM searches
+    WHERE user_id = $1
+    ORDER BY keyword, id DESC
+) AS subquery
+ORDER BY id DESC
+LIMIT $2
+OFFSET $3;
+
+-- name: DeleteSearchByKeyword :many
+DELETE FROM searches
+WHERE keyword = $1 AND user_id = $2
+RETURNING *;

@@ -39,6 +39,10 @@ func (server *Server) setupRouter() {
 	router.GET("/playlists-latestv2", server.getPlaylistLatestV2)
 	router.GET("/playlists-user", server.getPlaylistUser)
 
+	router.GET("/recent-search/:userid/", server.getRecentSearch)
+	router.GET("/search/:userid/:search", server.searchDishes)
+	router.DELETE("/recent-search/:userid/:search", server.searchDishesDelete)
+
 	server.router = router
 }
 

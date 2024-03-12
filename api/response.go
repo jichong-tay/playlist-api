@@ -390,3 +390,51 @@ func (server *Server) maptoModelFoodItems(ctx *gin.Context, playlistDishesDB []d
 
 	return restaurant_foodItems, cost, nil
 }
+
+type searchDish struct {
+	DishID         int64   `json:"dishId"`
+	Name           string  `json:"name"`
+	Description    string  `json:"description"`
+	Price          float64 `json:"price"`
+	ImageURL       string  `json:"imageUrl"`
+	RestaurantName string  `json:"restaurantName"`
+	RestaurantID   int64   `json:"restaurantId"`
+}
+
+func (server *Server) maptoModelSearchDish(searchDishesRow []db.SearchDishesRow) []searchDish {
+
+	var searchDishes []searchDish
+	var searchDish searchDish
+
+	for _, searchDishRow := range searchDishesRow {
+
+		searchDish.DishID = searchDishRow.DishID
+		searchDish.Name = searchDishRow.DishName
+		searchDish.Description = searchDishRow.DishDescription.String
+		searchDish.Price = searchDishRow.DishPrice
+		searchDish.ImageURL = searchDishRow.DishImageurl.String
+		searchDish.RestaurantName = searchDishRow.RestaurantName
+		searchDish.RestaurantID = searchDishRow.RestaurantID
+
+		searchDishes = append(searchDishes, searchDish)
+	}
+
+	return searchDishes
+}
+
+type searchResult struct {
+	ID       int64  `json:"keyword_id"`
+	Keywords string `json:"keyword"`
+}
+
+func (server *Server) maptoModelSearch(searches []db.Search) []searchResult {
+	var result []searchResult
+	for _, s := range searches {
+		searchResult := searchResult{
+			ID:       s.ID,
+			Keywords: s.Keyword.String,
+		}
+		result = append(result, searchResult)
+	}
+	return result
+}

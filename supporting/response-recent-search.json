@@ -1,0 +1,22 @@
+[
+  {
+      "keyword_id": 22,
+      "keyword": "rice"
+  },
+  {
+      "keyword_id": 21,
+      "keyword": "chicken rice"
+  },
+  {
+      "keyword_id": 3,
+      "keyword": "Pizza Paradise"
+  },
+  {
+      "keyword_id": 2,
+      "keyword": "Sushi Haven"
+  },
+  {
+      "keyword_id": 1,
+      "keyword": "Noodle Delight"
+  }
+]
