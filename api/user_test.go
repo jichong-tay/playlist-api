@@ -11,9 +11,9 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	mockdb "github.com/jichong-tay/foodpanda-playlist-api/db/mock"
-	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
-	"github.com/jichong-tay/foodpanda-playlist-api/util"
+	mockdb "github.com/jichong-tay/playlist-api/db/mock"
+	db "github.com/jichong-tay/playlist-api/db/sqlc"
+	"github.com/jichong-tay/playlist-api/util"
 	"github.com/lib/pq"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"

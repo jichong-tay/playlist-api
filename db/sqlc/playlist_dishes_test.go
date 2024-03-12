@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jichong-tay/foodpanda-playlist-api/util"
+	"github.com/jichong-tay/playlist-api/util"
 	"github.com/stretchr/testify/require"
 )
 

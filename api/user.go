@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
-	"github.com/jichong-tay/foodpanda-playlist-api/util"
+	db "github.com/jichong-tay/playlist-api/db/sqlc"
+	"github.com/jichong-tay/playlist-api/util"
 	"github.com/lib/pq"
 	"gopkg.in/guregu/null.v4"
 )

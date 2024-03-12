@@ -1,4 +1,4 @@
-module github.com/jichong-tay/foodpanda-playlist-api
+module github.com/jichong-tay/playlist-api
 
 go 1.21.5
 

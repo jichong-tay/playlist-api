@@ -59,7 +59,7 @@ server:
 
 .PHONY: mock
 mock:
-	mockgen -package mockdb -destination db/mock/store.go github.com/jichong-tay/foodpanda-playlist-api/db/sqlc Store
+	mockgen -package mockdb -destination db/mock/store.go github.com/jichong-tay/playlist-api/db/sqlc Store
 
 .PHONY: networkcreate
 networkcreate:

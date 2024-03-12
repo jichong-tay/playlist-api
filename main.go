@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/jichong-tay/foodpanda-playlist-api/api"
-	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
-	"github.com/jichong-tay/foodpanda-playlist-api/util"
+	"github.com/jichong-tay/playlist-api/api"
+	db "github.com/jichong-tay/playlist-api/db/sqlc"
+	"github.com/jichong-tay/playlist-api/util"
 	_ "github.com/lib/pq"
 )
 

@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
+	db "github.com/jichong-tay/playlist-api/db/sqlc"
 	"gopkg.in/guregu/null.v4"
 )
 

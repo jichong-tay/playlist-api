@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	db "github.com/jichong-tay/foodpanda-playlist-api/db/sqlc"
+	db "github.com/jichong-tay/playlist-api/db/sqlc"
 )
 
 type getPlaylistLatestRequest struct {

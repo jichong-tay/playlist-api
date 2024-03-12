@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/jichong-tay/foodpanda-playlist-api/util"
+	"github.com/jichong-tay/playlist-api/util"
 	_ "github.com/lib/pq"
 )
 
