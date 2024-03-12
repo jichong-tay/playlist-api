@@ -12,6 +12,43 @@ import (
 	null "gopkg.in/guregu/null.v4"
 )
 
+const deletePlaylistDishes = `-- name: DeletePlaylistDishes :many
+DELETE FROM playlist_dishes
+WHERE playlist_id = $1
+RETURNING id, order_id, playlist_id, dish_id, dish_quantity, created_at, added_at
+`
+
+func (q *Queries) DeletePlaylistDishes(ctx context.Context, playlistID int64) ([]PlaylistDish, error) {
+	rows, err := q.db.QueryContext(ctx, deletePlaylistDishes, playlistID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []PlaylistDish{}
+	for rows.Next() {
+		var i PlaylistDish
+		if err := rows.Scan(
+			&i.ID,
+			&i.OrderID,
+			&i.PlaylistID,
+			&i.DishID,
+			&i.DishQuantity,
+			&i.CreatedAt,
+			&i.AddedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const deleteSearchByKeyword = `-- name: DeleteSearchByKeyword :many
 DELETE FROM searches
 WHERE keyword = $1 AND user_id = $2
@@ -509,4 +546,43 @@ func (q *Queries) UpdateStatusForUser_Playlist(ctx context.Context, arg UpdateSt
 		return nil, err
 	}
 	return items, nil
+}
+
+const updateUser_PlaylistDelivery = `-- name: UpdateUser_PlaylistDelivery :one
+UPDATE user_playlists
+SET 
+  delivery_day = $3,
+  delivery_time = $4,
+  status = $5
+WHERE 
+  user_id = $1 AND playlist_id = $2
+RETURNING id, user_id, playlist_id, delivery_day, delivery_time, status
+`
+
+type UpdateUser_PlaylistDeliveryParams struct {
+	UserID       int64       `json:"user_id"`
+	PlaylistID   int64       `json:"playlist_id"`
+	DeliveryDay  null.String `json:"delivery_day"`
+	DeliveryTime null.Time   `json:"delivery_time"`
+	Status       null.String `json:"status"`
+}
+
+func (q *Queries) UpdateUser_PlaylistDelivery(ctx context.Context, arg UpdateUser_PlaylistDeliveryParams) (UserPlaylist, error) {
+	row := q.db.QueryRowContext(ctx, updateUser_PlaylistDelivery,
+		arg.UserID,
+		arg.PlaylistID,
+		arg.DeliveryDay,
+		arg.DeliveryTime,
+		arg.Status,
+	)
+	var i UserPlaylist
+	err := row.Scan(
+		&i.ID,
+		&i.UserID,
+		&i.PlaylistID,
+		&i.DeliveryDay,
+		&i.DeliveryTime,
+		&i.Status,
+	)
+	return i, err
 }

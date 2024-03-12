@@ -73,7 +73,7 @@ func (mr *MockStoreMockRecorder) CreatePlaylist(arg0, arg1 any) *gomock.Call {
 }
 
 // CreatePlaylistDishTx mocks base method.
-func (m *MockStore) CreatePlaylistDishTx(arg0 context.Context, arg1 db.CreatePlaylistDishTxParams) (db.Playlist, error) {
+func (m *MockStore) CreatePlaylistDishTx(arg0 context.Context, arg1 db.PlaylistDishTxParams) (db.Playlist, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreatePlaylistDishTx", arg0, arg1)
 	ret0, _ := ret[0].(db.Playlist)
@@ -203,6 +203,21 @@ func (m *MockStore) DeletePlaylist(arg0 context.Context, arg1 int64) error {
 func (mr *MockStoreMockRecorder) DeletePlaylist(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeletePlaylist", reflect.TypeOf((*MockStore)(nil).DeletePlaylist), arg0, arg1)
+}
+
+// DeletePlaylistDishes mocks base method.
+func (m *MockStore) DeletePlaylistDishes(arg0 context.Context, arg1 int64) ([]db.PlaylistDish, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeletePlaylistDishes", arg0, arg1)
+	ret0, _ := ret[0].([]db.PlaylistDish)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeletePlaylistDishes indicates an expected call of DeletePlaylistDishes.
+func (mr *MockStoreMockRecorder) DeletePlaylistDishes(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeletePlaylistDishes", reflect.TypeOf((*MockStore)(nil).DeletePlaylistDishes), arg0, arg1)
 }
 
 // DeletePlaylist_Dish mocks base method.
@@ -681,6 +696,21 @@ func (mr *MockStoreMockRecorder) UpdatePlaylist(arg0, arg1 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePlaylist", reflect.TypeOf((*MockStore)(nil).UpdatePlaylist), arg0, arg1)
 }
 
+// UpdatePlaylistDishTx mocks base method.
+func (m *MockStore) UpdatePlaylistDishTx(arg0 context.Context, arg1 db.PlaylistDishTxParams) (db.Playlist, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdatePlaylistDishTx", arg0, arg1)
+	ret0, _ := ret[0].(db.Playlist)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdatePlaylistDishTx indicates an expected call of UpdatePlaylistDishTx.
+func (mr *MockStoreMockRecorder) UpdatePlaylistDishTx(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePlaylistDishTx", reflect.TypeOf((*MockStore)(nil).UpdatePlaylistDishTx), arg0, arg1)
+}
+
 // UpdatePlaylist_Dish mocks base method.
 func (m *MockStore) UpdatePlaylist_Dish(arg0 context.Context, arg1 db.UpdatePlaylist_DishParams) (db.PlaylistDish, error) {
 	m.ctrl.T.Helper()
@@ -754,4 +784,19 @@ func (m *MockStore) UpdateUser_Playlist(arg0 context.Context, arg1 db.UpdateUser
 func (mr *MockStoreMockRecorder) UpdateUser_Playlist(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUser_Playlist", reflect.TypeOf((*MockStore)(nil).UpdateUser_Playlist), arg0, arg1)
+}
+
+// UpdateUser_PlaylistDelivery mocks base method.
+func (m *MockStore) UpdateUser_PlaylistDelivery(arg0 context.Context, arg1 db.UpdateUser_PlaylistDeliveryParams) (db.UserPlaylist, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateUser_PlaylistDelivery", arg0, arg1)
+	ret0, _ := ret[0].(db.UserPlaylist)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateUser_PlaylistDelivery indicates an expected call of UpdateUser_PlaylistDelivery.
+func (mr *MockStoreMockRecorder) UpdateUser_PlaylistDelivery(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUser_PlaylistDelivery", reflect.TypeOf((*MockStore)(nil).UpdateUser_PlaylistDelivery), arg0, arg1)
 }

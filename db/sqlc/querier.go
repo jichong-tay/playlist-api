@@ -21,6 +21,7 @@ type Querier interface {
 	CreateUser_Playlist(ctx context.Context, arg CreateUser_PlaylistParams) (UserPlaylist, error)
 	DeleteDish(ctx context.Context, id int64) error
 	DeletePlaylist(ctx context.Context, id int64) error
+	DeletePlaylistDishes(ctx context.Context, playlistID int64) ([]PlaylistDish, error)
 	DeletePlaylist_Dish(ctx context.Context, id int64) error
 	DeleteRestaurant(ctx context.Context, id int64) error
 	DeleteSearchByKeyword(ctx context.Context, arg DeleteSearchByKeywordParams) ([]Search, error)
@@ -58,6 +59,7 @@ type Querier interface {
 	UpdateStatusForUser_Playlist(ctx context.Context, arg UpdateStatusForUser_PlaylistParams) ([]UserPlaylist, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 	UpdateUser_Playlist(ctx context.Context, arg UpdateUser_PlaylistParams) (UserPlaylist, error)
+	UpdateUser_PlaylistDelivery(ctx context.Context, arg UpdateUser_PlaylistDeliveryParams) (UserPlaylist, error)
 }
 
 var _ Querier = (*Queries)(nil)

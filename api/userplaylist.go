@@ -120,7 +120,7 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 	//convert string to time
 	deliveryTime, _ := time.Parse(time.RFC3339, reqPlaylist.DeliveryTime)
 
-	arg := db.CreatePlaylistDishTxParams{
+	arg := db.PlaylistDishTxParams{
 		Name:         reqPlaylist.Name,
 		Description:  null.NewString("", true),
 		ImageUrl:     null.NewString("", true),
@@ -145,7 +145,61 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 		return
 	}
 
-	ctx.Params = append(ctx.Params, gin.Param{Key: "playlistid", Value: fmt.Sprintf("%d", userPlaylistsDB.ID)})
+	ctx.Params = append(ctx.Params, gin.Param{
+		Key:   "playlistid",
+		Value: fmt.Sprintf("%d", userPlaylistsDB.ID)})
+
+	server.getPlaylistCurrent(ctx)
+
+}
+
+func (server *Server) updateUserPlaylist(ctx *gin.Context) {
+
+	var reqUser getUserUri
+	var reqPlaylist currentPlaylist
+
+	if err := ctx.ShouldBindUri(&reqUser); err != nil {
+		ctx.JSON(http.StatusBadRequest, errResponse(err))
+		return
+	}
+
+	if err := ctx.ShouldBindJSON(&reqPlaylist); err != nil {
+		ctx.JSON(http.StatusBadRequest, errResponse(err))
+		return
+	}
+
+	//convert string to time
+	deliveryTime, _ := time.Parse(time.RFC3339, reqPlaylist.DeliveryTime)
+
+	arg := db.PlaylistDishTxParams{
+		Name:         reqPlaylist.Name,
+		Description:  null.NewString("", true),
+		ImageUrl:     null.NewString("", true),
+		IsPublic:     false,
+		DeliveryDay:  null.NewString(reqPlaylist.DeliveryDay, true),
+		Category:     null.NewString("", true),
+		UserID:       reqUser.UserID,
+		PlaylistID:   reqPlaylist.ID,
+		DeliveryTime: null.NewTime(deliveryTime, true),
+		Status:       null.NewString("Pending", true),
+		DishItems:    server.maptoModelFoodItemV2(reqPlaylist.Restuarant_FoodItems),
+	}
+
+	userPlaylistsDB, err := server.store.UpdatePlaylistDishTx(ctx, arg)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			ctx.JSON(http.StatusNotFound, errResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusInternalServerError, errResponse(err))
+		return
+	}
+
+	ctx.Params = append(ctx.Params, gin.Param{
+		Key:   "playlistid",
+		Value: fmt.Sprintf("%d", userPlaylistsDB.ID),
+	})
 
 	server.getPlaylistCurrent(ctx)
 

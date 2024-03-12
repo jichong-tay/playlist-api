@@ -44,6 +44,7 @@ func (server *Server) setupRouter() {
 	router.DELETE("/recent-search/:userid/:search", server.searchDishesDelete)
 
 	router.POST("/playlist/add/:userid", server.createUserPlaylist)
+	router.PUT("/playlist/update/:userid", server.updateUserPlaylist)
 
 	server.router = router
 }

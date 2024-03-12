@@ -12,7 +12,8 @@ import (
 type Store interface {
 	Querier
 	CreatePlaylistTx(ctx context.Context, arg CreatePlaylistTxParams) (Playlist, error)
-	CreatePlaylistDishTx(ctx context.Context, arg CreatePlaylistDishTxParams) (Playlist, error)
+	CreatePlaylistDishTx(ctx context.Context, arg PlaylistDishTxParams) (Playlist, error)
+	UpdatePlaylistDishTx(ctx context.Context, arg PlaylistDishTxParams) (Playlist, error)
 }
 
 // SQLStore provides all function to execute db queries and transactions
@@ -105,7 +106,7 @@ func (store *SQLStore) CreatePlaylistTx(ctx context.Context, arg CreatePlaylistT
 	return playlist, err
 }
 
-type CreatePlaylistDishTxParams struct {
+type PlaylistDishTxParams struct {
 	Name         string
 	Description  null.String
 	ImageUrl     null.String
@@ -132,7 +133,7 @@ type FoodItem struct {
 	DishID      int64   `form:"dishId" json:"dishId"`
 }
 
-func (store *SQLStore) CreatePlaylistDishTx(ctx context.Context, arg CreatePlaylistDishTxParams) (Playlist, error) {
+func (store *SQLStore) CreatePlaylistDishTx(ctx context.Context, arg PlaylistDishTxParams) (Playlist, error) {
 
 	var playlist Playlist
 	var err error
@@ -166,6 +167,71 @@ func (store *SQLStore) CreatePlaylistDishTx(ctx context.Context, arg CreatePlayl
 		for _, restaurant_foodItem := range arg.DishItems {
 			for _, foodItem := range restaurant_foodItem.FoodItems {
 				_, err = q.CreatePlaylist_Dish(ctx, CreatePlaylist_DishParams{
+					OrderID:      playlist.ID,
+					PlaylistID:   playlist.ID,
+					DishID:       foodItem.DishID,
+					DishQuantity: foodItem.Quantity,
+				})
+				if err != nil {
+					return err
+				}
+			}
+		}
+
+		return nil
+	})
+
+	return playlist, err
+}
+
+func (store *SQLStore) UpdatePlaylistDishTx(ctx context.Context, arg PlaylistDishTxParams) (Playlist, error) {
+
+	var playlist Playlist
+	var err error
+
+	err = store.execTx(ctx, func(q *Queries) error {
+
+		playlist, err = q.GetPlaylist(ctx, arg.PlaylistID)
+		if err != nil {
+			return err
+		}
+
+		playlistDishes, err := q.DeletePlaylistDishes(ctx, arg.PlaylistID)
+		if err != nil {
+			return err
+		}
+		if len(playlistDishes) == 0 {
+			return sql.ErrNoRows
+		}
+
+		_, err = q.UpdatePlaylist(ctx, UpdatePlaylistParams{
+			ID:          arg.PlaylistID,
+			Name:        arg.Name,
+			Description: arg.Description,
+			// ImageUrl:    arg.ImageUrl,
+			// IsPublic:    arg.IsPublic,
+			DeliveryDay: arg.DeliveryDay,
+			// Category:    arg.Category,
+		})
+		if err != nil {
+			return err
+		}
+
+		_, err = q.UpdateUser_PlaylistDelivery(ctx, UpdateUser_PlaylistDeliveryParams{
+			UserID:       arg.UserID,
+			PlaylistID:   arg.PlaylistID,
+			DeliveryDay:  arg.DeliveryDay,
+			DeliveryTime: arg.DeliveryTime,
+			Status:       arg.Status,
+		})
+		if err != nil {
+			return err
+		}
+
+		//create playlist_dishes
+		for _, restaurant_foodItem := range arg.DishItems {
+			for _, foodItem := range restaurant_foodItem.FoodItems {
+				_, err := q.CreatePlaylist_Dish(ctx, CreatePlaylist_DishParams{
 					OrderID:      playlist.ID,
 					PlaylistID:   playlist.ID,
 					DishID:       foodItem.DishID,

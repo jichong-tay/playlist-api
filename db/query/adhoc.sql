@@ -115,3 +115,18 @@ OFFSET $3;
 DELETE FROM searches
 WHERE keyword = $1 AND user_id = $2
 RETURNING *;
+
+-- name: DeletePlaylistDishes :many
+DELETE FROM playlist_dishes
+WHERE playlist_id = $1
+RETURNING *;
+
+-- name: UpdateUser_PlaylistDelivery :one
+UPDATE user_playlists
+SET 
+  delivery_day = $3,
+  delivery_time = $4,
+  status = $5
+WHERE 
+  user_id = $1 AND playlist_id = $2
+RETURNING *;
