@@ -57,8 +57,8 @@ func (server *Server) getPlaylistCurrent(ctx *gin.Context) {
 
 	userPlaylist, _ := server.store.GetUserPlaylistByPlaylistID(ctx, req.ID)
 
-	deliveryTime := userPlaylist.DeliveryTime.Time.Format("15:04:05")
-	if deliveryTime == "00:00:00" {
+	deliveryTime := userPlaylist.DeliveryTime.Time.Format("15:04") // TODO:userPlaylist.DeliveryTime.Time.Format("15:04:05")
+	if deliveryTime == "00:00" {
 		deliveryTime = ""
 	}
 

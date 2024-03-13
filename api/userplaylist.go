@@ -118,7 +118,8 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 	}
 
 	//convert string to time
-	deliveryTime, _ := time.Parse(time.RFC3339, reqPlaylist.DeliveryTime)
+	const timeFormat = "15:04"
+	deliveryTime, _ := time.Parse(timeFormat, reqPlaylist.DeliveryTime)
 
 	arg := db.PlaylistDishTxParams{
 		Name:         reqPlaylist.Name,
@@ -169,7 +170,8 @@ func (server *Server) updateUserPlaylist(ctx *gin.Context) {
 	}
 
 	//convert string to time
-	deliveryTime, _ := time.Parse(time.RFC3339, reqPlaylist.DeliveryTime)
+	const timeFormat = "15:04"
+	deliveryTime, _ := time.Parse(timeFormat, reqPlaylist.DeliveryTime)
 
 	arg := db.PlaylistDishTxParams{
 		Name:         reqPlaylist.Name,
