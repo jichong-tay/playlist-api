@@ -469,3 +469,65 @@ func (server *Server) maptoModelFoodItemV2(restuarantFoodItems []restaurant_food
 
 	return restuarantFoodItemsDB
 }
+
+func (server *Server) maptoModelDishes(ctx *gin.Context, dishesDB []db.Dish) ([]restaurant_foodItem, float64, error) {
+
+	var restaurant_fooditem restaurant_foodItem
+	var foodItems []foodItem
+	var restaurant_foodItems []restaurant_foodItem
+	var playlistDishesMap = make(map[string][]foodItem)
+	var cost float64
+
+	// Loop through the dishes and create the map
+	for _, dishDB := range dishesDB {
+		var fooditem foodItem
+
+		restaurantName, err := server.store.ListRestaurantNameByDishID(ctx, dishDB.ID)
+		if err != nil {
+			if err == sql.ErrNoRows {
+				ctx.JSON(http.StatusNotFound, errResponse(err))
+				return nil, 0, err
+			}
+			ctx.JSON(http.StatusInternalServerError, errResponse(err))
+			return nil, 0, err
+		}
+
+		// Map database model to JSON response
+		dish, err := server.store.GetDish(ctx, dishDB.ID)
+		if err != nil {
+			if err == sql.ErrNoRows {
+				ctx.JSON(http.StatusNotFound, errResponse(err))
+				return nil, 0, err
+			}
+			ctx.JSON(http.StatusInternalServerError, errResponse(err))
+			return nil, 0, err
+		}
+
+		fooditem.Name = dish.Name
+		fooditem.Description = dish.Description.String
+		fooditem.Quantity = 1
+		fooditem.Price = dish.Price
+		fooditem.ImageURL = dish.ImageUrl.String
+		fooditem.DishID = dish.ID
+		cost += dish.Price * float64(1)
+
+		// Check if the restaurant name already exists in the map
+		var found bool
+		if foodItems, found = playlistDishesMap[restaurantName]; found {
+			playlistDishesMap[restaurantName] = append(foodItems, fooditem)
+		} else {
+			playlistDishesMap[restaurantName] = []foodItem{fooditem}
+		}
+
+	}
+
+	for restaurantName, dishes := range playlistDishesMap {
+
+		restaurant_fooditem.RestaurantName = restaurantName
+		restaurant_fooditem.FoodItems = dishes
+
+		restaurant_foodItems = append(restaurant_foodItems, restaurant_fooditem)
+	}
+
+	return restaurant_foodItems, cost, nil
+}

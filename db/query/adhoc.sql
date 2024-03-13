@@ -130,3 +130,7 @@ SET
 WHERE 
   user_id = $1 AND playlist_id = $2
 RETURNING *;
+
+-- name: ListDishesByCuisine :many
+SELECT * FROM dishes
+WHERE cuisine ILIKE '%'||$1||'%';

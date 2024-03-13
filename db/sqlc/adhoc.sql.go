@@ -102,6 +102,43 @@ func (q *Queries) GetUserPlaylistByPlaylistID(ctx context.Context, playlistID in
 	return i, err
 }
 
+const listDishesByCuisine = `-- name: ListDishesByCuisine :many
+SELECT id, restaurant_id, is_available, name, description, price, cuisine, image_url FROM dishes
+WHERE cuisine ILIKE '%'||$1||'%'
+`
+
+func (q *Queries) ListDishesByCuisine(ctx context.Context, dollar_1 sql.NullString) ([]Dish, error) {
+	rows, err := q.db.QueryContext(ctx, listDishesByCuisine, dollar_1)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Dish{}
+	for rows.Next() {
+		var i Dish
+		if err := rows.Scan(
+			&i.ID,
+			&i.RestaurantID,
+			&i.IsAvailable,
+			&i.Name,
+			&i.Description,
+			&i.Price,
+			&i.Cuisine,
+			&i.ImageUrl,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listPlaylistByCategory = `-- name: ListPlaylistByCategory :many
 SELECT id, name, description, image_url, is_public, delivery_day, category, created_at, added_at
 FROM

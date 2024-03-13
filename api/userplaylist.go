@@ -3,7 +3,9 @@ package api
 import (
 	"database/sql"
 	"fmt"
+	"math/rand"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -205,4 +207,76 @@ func (server *Server) updateUserPlaylist(ctx *gin.Context) {
 
 	server.getPlaylistCurrent(ctx)
 
+}
+
+type getPlaylistRandomUri struct {
+	Cuisine string  `uri:"cuisine" binding:"required"`
+	Num     int     `uri:"num" binding:"required"`
+	Budget  float64 `uri:"budget" binding:"required"`
+}
+
+func (server *Server) getPlaylistRandom(ctx *gin.Context) {
+
+	var req getPlaylistRandomUri
+	// var playlist currentPlaylist
+	// var foodItems []foodItem
+
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errResponse(err))
+		return
+	}
+
+	searchArg := sql.NullString{
+		String: strings.ToLower(req.Cuisine),
+		Valid:  true}
+
+	dishesDB, err := server.store.ListDishesByCuisine(ctx, searchArg)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			ctx.JSON(http.StatusNotFound, errResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusInternalServerError, errResponse(err))
+		return
+	}
+
+	selectedDishesDB := randomSelectDishes(dishesDB, req.Num, req.Budget/(float64(req.Num)))
+
+	foodItems, cost, err := server.maptoModelDishes(ctx, selectedDishesDB)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errResponse(err))
+		return
+	}
+
+	resp := currentPlaylist{
+		Name: "Random Playlist",
+		// IsPublic:             false,
+		Restuarant_FoodItems: foodItems,
+		Cost:                 cost,
+	}
+
+	ctx.JSON(http.StatusOK, resp)
+}
+
+func randomSelectDishes(dishes []db.Dish, count int, price float64) []db.Dish {
+
+	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
+	selectedDishes := make([]db.Dish, count)
+	selectedIndices := make(map[int]bool)
+
+	tryCount := 10 //try 10 times to get the dish within the price range
+	j := 0
+	for i := 0; i < count; {
+		randomIndex := randGenerator.Intn(len(dishes))
+		if !selectedIndices[randomIndex] {
+			j++
+			if (selectedDishes[i].Price >= price-5 && selectedDishes[i].Price <= price+5) || j > tryCount {
+				selectedDishes[i] = dishes[randomIndex]
+				selectedIndices[randomIndex] = true
+				i++
+			}
+		}
+	}
+
+	return selectedDishes
 }

@@ -45,6 +45,7 @@ func (server *Server) setupRouter() {
 
 	router.POST("/playlist/add/:userid", server.createUserPlaylist)
 	router.PUT("/playlist/update/:userid", server.updateUserPlaylist)
+	router.GET("/playlists/random/:cuisine/:num/:budget", server.getPlaylistRandom)
 
 	server.router = router
 }
