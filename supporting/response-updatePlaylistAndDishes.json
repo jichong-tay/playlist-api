@@ -1,0 +1,39 @@
+{
+  "id": 67,
+  "name": "Seoul 1",
+  "deliveryDay": "Mon,Sat",
+  "deliveryTime": "19:30",
+  "isPublic": false,
+  "foodItems": [
+      {
+          "restaurantName": "Chicken Rice Express",
+          "foodItems": [
+              {
+                  "name": "Hainanese Chicken Rice",
+                  "description": "Classic Hainanese chicken with fragrant rice",
+                  "quantity": 1,
+                  "price": 5.5,
+                  "imageUrl": "chicken_rice_image_url_1",
+                  "dishId": 1
+              },
+              {
+                  "name": "Roast Chicken Noodles",
+                  "description": "Roasted chicken served with noodles",
+                  "quantity": 3,
+                  "price": 6.5,
+                  "imageUrl": "chicken_rice_image_url_2",
+                  "dishId": 2
+              },
+              {
+                  "name": "Chicken Satay Rice",
+                  "description": "Hainanese-style chicken rice with chicken satay",
+                  "quantity": 1,
+                  "price": 8.5,
+                  "imageUrl": "chicken_rice_image_url_3",
+                  "dishId": 3
+              }
+          ]
+      }
+  ],
+  "cost": "33.50"
+}

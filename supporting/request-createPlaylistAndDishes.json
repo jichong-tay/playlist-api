@@ -1,0 +1,51 @@
+{
+  "cost": 32.5,
+  "deliveryTime": "19:30",
+  "deliveryDay": "Mon,Sat",
+  "foodItems": [
+    {
+      "foodItems": [
+        {
+          "description": "Spiral-cut fried potato skewer",
+          "dishId": 23,
+          "imageUrl": "https://images.unsplash.com/photo-1624176193860-dd7866e5a8aa?q=80&w=3089&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "name": "Tornado Potato",
+          "price": 4.2,
+          "quantity": 1
+        }
+      ],
+      "restaurantName": "Seorae Village"
+    },
+    {
+      "foodItems": [
+        {
+          "description": "Sweet syrup-filled pancakes",
+          "dishId": 25,
+          "imageUrl": "https://images.unsplash.com/photo-1624176193860-dd7866e5a8aa?q=80&w=3089&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "name": "Hotteok",
+          "price": 5.5,
+          "quantity": 3
+        }
+      ],
+      "restaurantName": "Seoul Garden"
+    },
+    {
+      "foodItems": [
+        {
+          "description": "Beef patty with crispy bacon, avocado, lettuce, and mayo on a brioche bun",
+          "dishId": 49,
+          "imageUrl": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=2915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "name": "Bacon Avocado Burger",
+          "price": 11.8,
+          "quantity": 1
+        }
+      ],
+      "restaurantName": "La Petite Boulangerie"
+    }
+  ],
+  "id": 14,
+  "isPublic": false,
+  "name": "Seoul 1",
+  "status": "Subscribed",
+  "userId": "TREXYz4kNPYjBfLUpUQwasqUWXF2"
+}

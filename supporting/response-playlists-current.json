@@ -2,30 +2,9 @@
   "id": 2,
   "name": "Healthy Choices",
   "deliveryDay": "Sunday",
-  "deliveryTime": "12:00:00",
+  "deliveryTime": "12:00",
   "isPublic": true,
   "foodItems": [
-      {
-          "restaurantName": "Sushi Haven",
-          "foodItems": [
-              {
-                  "name": "Sashimi Deluxe",
-                  "description": "Premium slices of assorted sashimi",
-                  "quantity": 1,
-                  "price": 15,
-                  "imageUrl": "sushi_image_url_2",
-                  "dishId": 10
-              },
-              {
-                  "name": "Dragon Roll",
-                  "description": "Sushi roll with eel, avocado, and cucumber",
-                  "quantity": 1,
-                  "price": 14,
-                  "imageUrl": "sushi_image_url_4",
-                  "dishId": 12
-              }
-          ]
-      },
       {
           "restaurantName": "Noodle Delight",
           "foodItems": [
@@ -44,6 +23,27 @@
                   "price": 8.5,
                   "imageUrl": "noodle_image_url_4",
                   "dishId": 8
+              }
+          ]
+      },
+      {
+          "restaurantName": "Sushi Haven",
+          "foodItems": [
+              {
+                  "name": "Sashimi Deluxe",
+                  "description": "Premium slices of assorted sashimi",
+                  "quantity": 1,
+                  "price": 15,
+                  "imageUrl": "sushi_image_url_2",
+                  "dishId": 10
+              },
+              {
+                  "name": "Dragon Roll",
+                  "description": "Sushi roll with eel, avocado, and cucumber",
+                  "quantity": 1,
+                  "price": 14,
+                  "imageUrl": "sushi_image_url_4",
+                  "dishId": 12
               }
           ]
       }

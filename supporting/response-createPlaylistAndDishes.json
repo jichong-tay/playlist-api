@@ -1,8 +1,8 @@
 {
-  "id": 65,
+  "id": 71,
   "name": "Seoul 1",
   "deliveryDay": "Mon,Sat",
-  "deliveryTime": "",
+  "deliveryTime": "19:30",
   "isPublic": false,
   "foodItems": [
       {
