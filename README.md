@@ -41,6 +41,7 @@ Install SQLC
 https://docs.sqlc.dev/en/latest/overview/install.html
 
 Install Go Mock
+https://github.com/uber-go/mock
 
 ```
 go install go.uber.org/mock/mockgen@latest
