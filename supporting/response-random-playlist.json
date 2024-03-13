@@ -1,0 +1,31 @@
+{
+  "id": 0,
+  "name": "Random Playlist",
+  "deliveryDay": "",
+  "deliveryTime": "",
+  "isPublic": false,
+  "foodItems": [
+      {
+          "restaurantName": "Chicken Rice Express",
+          "foodItems": [
+              {
+                  "name": "Spicy Chicken Noodles",
+                  "description": "Spicy chicken noodles with a kick",
+                  "quantity": 1,
+                  "price": 7,
+                  "imageUrl": "chicken_rice_image_url_4",
+                  "dishId": 4
+              },
+              {
+                  "name": "Chicken Satay Rice",
+                  "description": "Hainanese-style chicken rice with chicken satay",
+                  "quantity": 1,
+                  "price": 8.5,
+                  "imageUrl": "chicken_rice_image_url_3",
+                  "dishId": 3
+              }
+          ]
+      }
+  ],
+  "cost": 15.5
+}
