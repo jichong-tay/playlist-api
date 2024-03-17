@@ -116,10 +116,10 @@ VALUES
   ('Healthy Choices', 'Nutritious options for a balanced diet', 'healthy_choices_image_url', true, 'Sun', 'Healthy Living'),
   ('User 1 Playlist', 'My favorite', 'user_1_playlist_image_url', false, 'Sun','');
 
--- Insert sample user playlists
+-- Insert sample user playlists | use these seed data hours only: "11:00","11:30","12:00","12:30","13:00","13:30","17:00","17:30", "18:00","18:30","19:00","19:30","20:00","20:30"
 INSERT INTO user_playlists (user_id, playlist_id, delivery_day, delivery_time, status)
 VALUES
-  (1,3, 'Sunday', '12:00 PM', 'Pending');
+  (1,3, 'Sunday', '11:00', 'Pending');
 
 -- Insert sample playlist dishes
 INSERT INTO playlist_dishes (order_id, playlist_id, dish_id, dish_quantity)
