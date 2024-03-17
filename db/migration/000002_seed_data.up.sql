@@ -112,9 +112,9 @@ VALUES
 -- Insert sample playlists
 INSERT INTO playlists (name, description, image_url, is_public, delivery_day, category)
 VALUES
-  ('Best of Singapore', 'A selection of the finest dishes in Singapore', 'best_of_singapore_image_url', true, 'Saturday', 'Local Delights'),
-  ('Healthy Choices', 'Nutritious options for a balanced diet', 'healthy_choices_image_url', true, 'Sunday', 'Healthy Living'),
-  ('User 1 Playlist', 'My favorite', 'user_1_playlist_image_url', false, 'Sunday','');
+  ('Best of Singapore', 'A selection of the finest dishes in Singapore', 'best_of_singapore_image_url', true, 'Sat', 'Local Delights'),
+  ('Healthy Choices', 'Nutritious options for a balanced diet', 'healthy_choices_image_url', true, 'Sun', 'Healthy Living'),
+  ('User 1 Playlist', 'My favorite', 'user_1_playlist_image_url', false, 'Sun','');
 
 -- Insert sample user playlists
 INSERT INTO user_playlists (user_id, playlist_id, delivery_day, delivery_time, status)
