@@ -240,7 +240,11 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 		return
 	}
 
-	selectedDishesDB := randomSelectDishes(dishesDB, req.Num, req.Budget/(float64(req.Num)))
+	selectedDishesDB, err := randomSelectDishes(dishesDB, req.Num, req.Budget/(float64(req.Num)))
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errResponse(err))
+		return
+	}
 
 	foodItems, cost, err := server.maptoModelDishes(ctx, selectedDishesDB)
 	if err != nil {
@@ -258,7 +262,7 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, resp)
 }
 
-func randomSelectDishes(dishes []db.Dish, count int, price float64) []db.Dish {
+func randomSelectDishes(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
 
 	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
 	selectedDishes := make([]db.Dish, count)
@@ -266,6 +270,9 @@ func randomSelectDishes(dishes []db.Dish, count int, price float64) []db.Dish {
 
 	tryCount := 10 //try 10 times to get the dish within the price range
 	j := 0
+	if count > len(dishes) { //check if there are enough dishes else return error
+		return selectedDishes, fmt.Errorf("not enough dishes for selection")
+	}
 	for i := 0; i < count; {
 		randomIndex := randGenerator.Intn(len(dishes))
 		if !selectedIndices[randomIndex] {
@@ -278,5 +285,5 @@ func randomSelectDishes(dishes []db.Dish, count int, price float64) []db.Dish {
 		}
 	}
 
-	return selectedDishes
+	return selectedDishes, error(nil)
 }
