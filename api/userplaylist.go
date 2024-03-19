@@ -126,7 +126,7 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 	arg := db.PlaylistDishTxParams{
 		Name:         reqPlaylist.Name,
 		Description:  null.NewString("", true),
-		ImageUrl:     null.NewString("", true),
+		ImageUrl:     null.NewString("./images/dummy.png", true),
 		IsPublic:     false,
 		DeliveryDay:  null.NewString(reqPlaylist.DeliveryDay, true),
 		Category:     null.NewString("", true),
@@ -175,13 +175,16 @@ func (server *Server) updateUserPlaylist(ctx *gin.Context) {
 	const timeFormat = "15:04"
 	deliveryTime, _ := time.Parse(timeFormat, reqPlaylist.DeliveryTime)
 
+	//get the playlist from the database
+	playlist, _ := server.store.GetPlaylist(ctx, reqPlaylist.ID)
+
 	arg := db.PlaylistDishTxParams{
 		Name:         reqPlaylist.Name,
-		Description:  null.NewString("", true),
-		ImageUrl:     null.NewString("", true),
+		Description:  playlist.Description,
+		ImageUrl:     playlist.ImageUrl,
 		IsPublic:     false,
 		DeliveryDay:  null.NewString(reqPlaylist.DeliveryDay, true),
-		Category:     null.NewString("", true),
+		Category:     playlist.Category,
 		UserID:       reqUser.UserID,
 		PlaylistID:   reqPlaylist.ID,
 		DeliveryTime: null.NewTime(deliveryTime, true),

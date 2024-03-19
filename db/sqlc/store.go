@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"time"
 
 	null "gopkg.in/guregu/null.v4"
 )
@@ -208,10 +209,11 @@ func (store *SQLStore) UpdatePlaylistDishTx(ctx context.Context, arg PlaylistDis
 			ID:          arg.PlaylistID,
 			Name:        arg.Name,
 			Description: arg.Description,
-			// ImageUrl:    arg.ImageUrl,
-			// IsPublic:    arg.IsPublic,
+			ImageUrl:    arg.ImageUrl,
+			IsPublic:    arg.IsPublic,
 			DeliveryDay: arg.DeliveryDay,
-			// Category:    arg.Category,
+			Category:    arg.Category,
+			AddedAt:     time.Now(),
 		})
 		if err != nil {
 			return err
