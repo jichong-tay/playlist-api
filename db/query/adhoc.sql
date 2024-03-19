@@ -113,7 +113,7 @@ OFFSET $3;
 
 -- name: DeleteSearchByKeyword :many
 DELETE FROM searches
-WHERE keyword = $1 AND user_id = $2
+WHERE keyword ILIKE $1 AND user_id = $2
 RETURNING *;
 
 -- name: DeletePlaylistDishes :many

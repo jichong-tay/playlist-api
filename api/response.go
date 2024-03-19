@@ -8,6 +8,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	db "github.com/jichong-tay/playlist-api/db/sqlc"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 type dish struct {
@@ -429,10 +431,11 @@ type searchResult struct {
 
 func (server *Server) maptoModelSearch(searches []db.Search) []searchResult {
 	var result []searchResult
+	caser := cases.Title(language.English)
 	for _, s := range searches {
 		searchResult := searchResult{
 			ID:       s.ID,
-			Keywords: s.Keyword.String,
+			Keywords: caser.String(s.Keyword.String),
 		}
 		result = append(result, searchResult)
 	}

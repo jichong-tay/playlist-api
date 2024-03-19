@@ -105,9 +105,9 @@ VALUES
 -- Insert sample searches
 INSERT INTO searches (user_id, keyword)
 VALUES
-  (1, 'Noodle Delight'),
-  (1, 'Sushi Haven'),
-  (1, 'Pizza Paradise');
+  (1, 'noodle delight'),
+  (1, 'sushi haven'),
+  (1, 'pizza paradise');
 
 -- Insert sample playlists
 INSERT INTO playlists (name, description, image_url, is_public, delivery_day, category)

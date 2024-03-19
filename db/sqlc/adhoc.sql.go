@@ -51,7 +51,7 @@ func (q *Queries) DeletePlaylistDishes(ctx context.Context, playlistID int64) ([
 
 const deleteSearchByKeyword = `-- name: DeleteSearchByKeyword :many
 DELETE FROM searches
-WHERE keyword = $1 AND user_id = $2
+WHERE keyword ILIKE $1 AND user_id = $2
 RETURNING id, user_id, keyword
 `
 
