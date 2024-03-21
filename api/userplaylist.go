@@ -238,6 +238,7 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 	var req getPlaylistRandomUri
 	// var playlist currentPlaylist
 	// var foodItems []foodItem
+	empty := make([]string, 0)
 
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
@@ -258,9 +259,9 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 		return
 	}
 
-	selectedDishesDB, err := randomSelectDishes(dishesDB, req.Num, req.Budget/(float64(req.Num)))
+	selectedDishesDB, err := randomSelectDishesv2(dishesDB, req.Num, req.Budget/(float64(req.Num)))
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, errResponse(err))
+		ctx.JSON(http.StatusInternalServerError, empty) //to return empty array
 		return
 	}
 
@@ -280,7 +281,8 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, resp)
 }
 
-func randomSelectDishes(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
+// randomSelectDishesv1 selects dishes randomly from the list of dishes and will always return
+func randomSelectDishesv1(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
 
 	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
 	selectedDishes := make([]db.Dish, count)
@@ -295,8 +297,38 @@ func randomSelectDishes(dishes []db.Dish, count int, price float64) ([]db.Dish, 
 		randomIndex := randGenerator.Intn(len(dishes))
 		if !selectedIndices[randomIndex] {
 			j++
+			selectedDishes[i] = dishes[randomIndex]
 			if (selectedDishes[i].Price >= price-5 && selectedDishes[i].Price <= price+5) || j > tryCount {
-				selectedDishes[i] = dishes[randomIndex]
+				selectedIndices[randomIndex] = true
+				i++
+			}
+		}
+	}
+
+	return selectedDishes, error(nil)
+}
+
+// randomSelectDishesv2 selects dishes randomly from the list of dishes and will NOT always return
+func randomSelectDishesv2(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
+
+	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
+	selectedDishes := make([]db.Dish, count)
+	selectedIndices := make(map[int]bool)
+
+	tryCount := 50 //try x times to get the dish within the price range
+	j := 0
+	if count > len(dishes) { //check if there are enough dishes else return error
+		return selectedDishes, fmt.Errorf("not enough dishes for selection")
+	}
+	for i := 0; i < count; {
+		randomIndex := randGenerator.Intn(len(dishes))
+		if !selectedIndices[randomIndex] {
+			if j > tryCount {
+				return selectedDishes, fmt.Errorf("no dishes found")
+			}
+			j++
+			selectedDishes[i] = dishes[randomIndex]
+			if selectedDishes[i].Price >= price*0.95 && selectedDishes[i].Price <= price*1.1 {
 				selectedIndices[randomIndex] = true
 				i++
 			}
