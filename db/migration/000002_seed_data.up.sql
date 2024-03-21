@@ -110,7 +110,6 @@ VALUES
   (1, 'chinese'),
   (1, 'pizza');
 
-// https://source.unsplash.com/random/400x400/?food
 -- Insert sample playlists
 INSERT INTO playlists (name, description, image_url, is_public, delivery_day, category)
 VALUES
