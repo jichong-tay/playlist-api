@@ -14,7 +14,6 @@ VALUES
   ('Satay Street', 'Famous for delicious satay skewers', '111 Marina Bay, Singapore', 'Satay', './images/dummy.png'),
   ('Dim Sum Delight', 'Authentic Cantonese dim sum experience', '222 Chinatown, Singapore', 'Chinese', './images/dummy.png'),
   ('Ramen House', 'Specializing in various ramen varieties', '333 Orchard Road, Singapore', 'Japanese', './images/dummy.png');
-
 -- Insert dishes for each restaurant
 INSERT INTO dishes (restaurant_id, is_available, name, description, price, cuisine, image_url)
 VALUES
@@ -111,11 +110,17 @@ VALUES
   (1, 'chinese'),
   (1, 'pizza');
 
+// https://source.unsplash.com/random/400x400/?food
 -- Insert sample playlists
 INSERT INTO playlists (name, description, image_url, is_public, delivery_day, category)
 VALUES
-  ('Best of Singapore', 'A selection of the finest dishes in Singapore', 'https://www.planetware.com/wpimages/2020/03/singapore-in-pictures-beautiful-places-to-photograph-marina-bay-sands.jpg', true, 'Sat', 'Local Delights'),
-  ('Healthy Choices', 'Nutritious options for a balanced diet', 'https://ch-api.healthhub.sg/api/public/content/2534118f690b4d4d8191831d743cb8c7?v=886c3102', true, 'Sun', 'Healthy Living'),
+  ('Best of Singapore', 'A selection of the finest dishes in Singapore', 'https://www.planetware.com/wpimages/2020/03/singapore-in-pictures-beautiful-places-to-photograph-marina-bay-sands.jpg', true,'', ''),
+  ('Tasty Delights Delivery Mix', 'Enhance your culinary journey with curated tracks.', 'https://images.unsplash.com/photo-1700937192759-2a86c88128cc?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcxMTAyNDM4OQ&ixlib=rb-4.0.3&q=80&w=400', true,'', ''),
+  ('Foodie Favorites Express', 'Enjoy top foodie tunes during your delivery.', 'https://images.unsplash.com/photo-1559598467-8be25b6dc34f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjUzNjk&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
+  ('Quick Bite Delivery Tunes', 'Upbeat tracks for quick bites on the go.', 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjU1MDI&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
+  ('Flavorful Feast Playlist', 'Dive into flavor sensations with this playlist.', 'https://images.unsplash.com/photo-1556040220-4096d522378d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjU1MTE&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
+  ('Yum yum Express Hits', 'Nutritious options for a balanced diet', 'https://images.unsplash.com/photo-1543362906-acfc16c67564?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjU1MjQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
+  ('Healthy Choices', 'Top hits for waiting on delicious deliveries.', 'https://ch-api.healthhub.sg/api/public/content/2534118f690b4d4d8191831d743cb8c7?v=886c3102', true, 'Sun', ''),
   ('Favourite', 'My favorite', './images/dummy.png', false, 'Sun','');
 
 -- Insert sample user playlists | use these seed data hours only: "11:00","11:30","12:00","12:30","13:00","13:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30"
@@ -129,9 +134,22 @@ VALUES
   (1, 1, 1, 2),
   (1, 1, 4, 1),
   (1, 1, 10, 1),
-  (2, 2, 7, 1),
-  (2, 2, 8, 2),
-  (3, 2, 10, 1),
-  (3, 2, 12, 1),
-  (4, 3, 10, 1),
-  (4, 3, 12, 1);
+  (2, 2, 11, 2),
+  (2, 2, 15, 1),
+  (2, 2, 20, 1),
+  (3, 3, 12, 1),
+  (3, 3, 18, 1),
+  (3, 3, 21, 1),
+  (4, 4, 5, 1),
+  (4, 4, 9, 1),
+  (4, 4, 10, 1),
+  (5, 5, 11, 1),
+  (5, 5, 12, 1),
+  (5, 5, 13, 1),
+  (6, 6, 40, 1),
+  (6, 6, 41, 1),
+  (6, 6, 42, 1),
+  (7, 7, 10, 1),
+  (7, 7, 12, 1),
+  (7, 7, 12, 1);
+  
