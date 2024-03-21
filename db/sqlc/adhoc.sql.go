@@ -380,6 +380,8 @@ JOIN
     user_playlists ON playlists.id = user_playlists.playlist_id
 WHERE
     user_playlists.user_id = $1
+ORDER BY
+    playlists.added_at DESC
 `
 
 func (q *Queries) ListPlaylistsByUserIDAll(ctx context.Context, userID int64) ([]Playlist, error) {
