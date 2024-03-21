@@ -118,14 +118,14 @@ VALUES
   ('Foodie Favorites Express', 'Enjoy top foodie tunes during your delivery.', 'https://images.unsplash.com/photo-1559598467-8be25b6dc34f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjUzNjk&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
   ('Quick Bite Delivery Tunes', 'Upbeat tracks for quick bites on the go.', 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjU1MDI&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
   ('Flavorful Feast Playlist', 'Dive into flavor sensations with this playlist.', 'https://images.unsplash.com/photo-1556040220-4096d522378d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjU1MTE&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
-  ('Yum yum Express Hits', 'Nutritious options for a balanced diet', 'https://images.unsplash.com/photo-1543362906-acfc16c67564?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjU1MjQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
+  ('Yum Yum Express Hits', 'Nutritious options for a balanced diet', 'https://images.unsplash.com/photo-1543362906-acfc16c67564?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MTEwMjU1MjQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=400', true, '', ''),
   ('Healthy Choices', 'Top hits for waiting on delicious deliveries.', 'https://ch-api.healthhub.sg/api/public/content/2534118f690b4d4d8191831d743cb8c7?v=886c3102', true, 'Sun', ''),
   ('Favourite', 'My favorite', './images/dummy.png', false, 'Sun','');
 
 -- Insert sample user playlists | use these seed data hours only: "11:00","11:30","12:00","12:30","13:00","13:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30"
 INSERT INTO user_playlists (user_id, playlist_id, delivery_day, delivery_time, status)
 VALUES
-  (1,3, 'Sunday', '11:00', 'Pending');
+  (1,8, 'Sunday', '11:00', 'Pending');
 
 -- Insert sample playlist dishes
 INSERT INTO playlist_dishes (order_id, playlist_id, dish_id, dish_quantity)
@@ -148,7 +148,15 @@ VALUES
   (6, 6, 40, 1),
   (6, 6, 41, 1),
   (6, 6, 42, 1),
-  (7, 7, 10, 1),
-  (7, 7, 12, 1),
-  (7, 7, 12, 1);
+  (7, 7, 31, 1),
+  (7, 7, 32, 1),
+  (7, 7, 33, 1),
+  (7, 7, 34, 1),
+  (8, 8, 10, 1),
+  (8, 8, 3, 1),
+  (8, 8, 2, 1),
+  (8, 8, 30, 1),
+  (8, 8, 29, 1),
+  (8, 8, 35, 1),
+  (8, 8, 49, 1);
   
