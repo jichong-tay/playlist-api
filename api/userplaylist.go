@@ -9,7 +9,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/goombaio/namegenerator"
 	db "github.com/jichong-tay/playlist-api/db/sqlc"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"gopkg.in/guregu/null.v4"
 )
 
@@ -119,12 +122,20 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 		return
 	}
 
+	//random name generator for playlist
+	seed := time.Now().UTC().UnixNano()
+	nameGenerator := namegenerator.NewNameGenerator(seed)
+	name := nameGenerator.Generate()
+	// format playlist name
+	caser := cases.Title(language.English)
+	playlistName := caser.String(fmt.Sprint(reqPlaylist.Name, " ", name))
+
 	//convert string to time
 	const timeFormat = "15:04"
 	deliveryTime, _ := time.Parse(timeFormat, reqPlaylist.DeliveryTime)
 
 	arg := db.PlaylistDishTxParams{
-		Name:         reqPlaylist.Name,
+		Name:         playlistName,
 		Description:  null.NewString("", true),
 		ImageUrl:     null.NewString("./images/dummy.png", true),
 		IsPublic:     false,
