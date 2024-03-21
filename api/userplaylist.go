@@ -129,7 +129,8 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 	name := nameGenerator.Generate()
 	// format playlist name
 	caser := cases.Title(language.English)
-	playlistName := caser.String(fmt.Sprint(reqPlaylist.Name, " ", name))
+	playlistName := caser.String(fmt.Sprint(name))
+	playlistNameDesc := caser.String(fmt.Sprint("Playlist created from ", reqPlaylist.Name))
 
 	//convert string to time
 	const timeFormat = "15:04"
@@ -140,7 +141,7 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 
 	arg := db.PlaylistDishTxParams{
 		Name:         playlistName,
-		Description:  null.NewString("", true),
+		Description:  null.NewString(playlistNameDesc, true),
 		ImageUrl:     null.NewString(imageURL, true),
 		IsPublic:     false,
 		DeliveryDay:  null.NewString(reqPlaylist.DeliveryDay, true),
