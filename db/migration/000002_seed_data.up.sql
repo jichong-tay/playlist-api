@@ -31,8 +31,8 @@ VALUES
 
   -- Sushi Haven
   (3, true, 'Assorted Sushi Platter', 'Chef''s selection of fresh sushi', 12.00, 'All Japanese Fish Seafood', 'https://media-cdn.tripadvisor.com/media/photo-s/0d/ae/65/c3/assorted-sushi-platter.jpg'),
-  (3, true, 'Sashimi Deluxe', 'Premium slices of assorted sashimi', 15.00, 'All Japanese Fish Seafood', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS-7OMRf_up9mGAfJeRBSpA6hGtVKnaaKjuP9FowAV6w&s'),
-  (3, true, 'Chirashi Bowl', 'Assorted sashimi over a bed of sushi rice', 18.00, 'All Japanese Fish Seafood', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgfCEVSz0a33WshHR1g4WtZ20wR6xIFbvMA34Gbvwezg&s'),
+  (3, true, 'Sashimi Deluxe', 'Premium slices of assorted sashimi', 15.00, 'All Japanese Fish Seafood', 'https://sushihousemenu.com/Media/Default/Menu%20Items/sashimi-deluxe-1.jpg'),
+  (3, true, 'Chirashi Bowl', 'Assorted sashimi over a bed of sushi rice', 18.00, 'All Japanese Fish Seafood', 'https://recipes.net/wp-content/uploads/2024/02/what-is-a-chirashi-bowl-1707367230.jpg'),
   (3, true, 'Dragon Roll', 'Sushi roll with eel, avocado, and cucumber', 14.00, 'All Japanese Fish Seafood', 'https://www.afarmgirlsdabbles.com/wp-content/uploads/2022/10/Dragon-Roll38797_1400.jpg'),
 
   -- Spicy Noodle House
@@ -44,22 +44,22 @@ VALUES
   -- Pizza Paradise
   (5, true, 'Margherita Pizza', 'Classic pizza with tomato, mozzarella, and basil', 14.00, 'All Pizza', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa8X3YDM_ozN0RVGcb199-_PvkfNxyaVGaXDyEsD06iw&s'),
   (5, true, 'Pepperoni Delight', 'Pizza topped with pepperoni and cheese', 16.50, 'All Pizza', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa9wV2crmZZJp53q9yuGSQ_hBvjaO6DJjVBp2UYpZZ3Q&s'),
-  (5, true, 'Seafood Pizza', 'Pizza topped with assorted seafood and herbs', 17.00, 'All Pizza', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IxFAGf5ObWl51dnodEtLNuUICadZU4J4Yve5_kVlSA&s'),
-  (5, true, 'Vegetarian Supreme', 'Pizza loaded with assorted vegetables and cheese', 15.50, 'All Pizza', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbu7ig1ApKey54TTu_GXyk-XSauOu4y5cwR2e0QdyNbA&s'),
+  (5, true, 'Seafood Pizza', 'Pizza topped with assorted seafood and herbs', 17.00, 'All Pizza', 'https://mymoorishplate.com/wp-content/uploads/2020/07/Moroccan-Pizza-7-500x500.jpg'),
+  (5, true, 'Vegetarian Supreme', 'Pizza loaded with assorted vegetables and cheese', 15.50, 'All Pizza', 'https://www.nordicware.com/wp-content/uploads/2021/05/46400_traditional_pizza_pan_02_e.jpg'),
 
   -- Curry House
-  (6, true, 'Chicken Curry', 'Spicy chicken curry with fragrant rice', 9.00, 'All Indian', 'https://sinfullyspicy.com/wp-content/uploads/2022/03/Dhaba-Style-Chicken-Curry-Featured-Image-480x270.jpg'),
+  (6, true, 'Chicken Curry', 'Spicy chicken curry with fragrant rice', 9.00, 'All Indian', 'https://myfoodstory.com/wp-content/uploads/2020/10/Dhaba-Style-Chicken-Curry-2-500x500.jpg'),
   (6, true, 'Vegetable Biryani', 'Flavorful biryani with mixed vegetables', 11.00, 'All Indian', 'https://www.cookwithkushi.com/wp-content/uploads/2015/04/best_vegetable_biryani_recipe.jpg'),
-  (6, true, 'Butter Chicken', 'Creamy and flavorful butter chicken curry', 12.00, 'All Indian', 'https://cafedelites.com/wp-content/uploads/2019/01/Butter-Chicken-IMAGE-64.jpg'),
+  (6, true, 'Butter Chicken', 'Creamy and flavorful butter chicken curry', 12.00, 'All Indian', 'https://www.licious.in/blog/wp-content/uploads/2020/10/butter-chicken--750x750.jpg'),
   (6, true, 'Paneer Tikka Masala', 'Paneer in a spicy tomato-based curry', 13.50, 'All Indian', 'https://www.indianhealthyrecipes.com/wp-content/uploads/2014/11/paneer-tikka-masala-recipe-1.jpg'),
 
   -- Thai Delights
-  (7, true, 'Tom Yum Soup', 'Spicy and sour soup with shrimp', 8.50, 'All Thai', 'https://nomadette.com/wp-content/uploads/2022/07/Tom-Yum-Soup.jpg'),
+  (7, true, 'Tom Yum Soup', 'Spicy and sour soup with shrimp', 8.50, 'All Thai', 'https://spicecravings.com/wp-content/uploads/2022/03/Tom-Yum-Soup-Featured-2.jpg'),
   (7, true, 'Green Curry Chicken', 'Rich green curry with tender chicken', 10.50, 'All Thai', 'https://www.kitchensanctuary.com/wp-content/uploads/2019/06/Thai-Green-Curry-square-FS.jpg'),
 
   -- Dessert Dreamland
   (8, true, 'Mango Sticky Rice', 'Sweet sticky rice topped with fresh mango', 6.00, 'All Dessert', 'https://hot-thai-kitchen.com/wp-content/uploads/2022/09/Mango-sticky-rice-blog.jpg'),
-  (8, true, 'Chocolate Lava Cake', 'Decadent chocolate cake with a gooey center', 7.50, 'All Dessert', 'https://preppykitchen.com/wp-content/uploads/2022/03/Chocolate-Lava-Cake-Recipe.jpg'),
+  (8, true, 'Chocolate Lava Cake', 'Decadent chocolate cake with a gooey center', 7.50, 'All Dessert', 'https://sugarspunrun.com/wp-content/uploads/2019/01/Lava-Cakes-1-of-1-2.jpg'),
   (8, true, 'Durian Ice Cream', 'Creamy durian-flavored ice cream', 7.00, 'All Dessert', 'https://static.wixstatic.com/media/ebc1d6_900b2b8457524e119452303beb94858c~mv2.webp'),
   (8, true, 'Pandan Cake', 'Light and fluffy pandan-flavored cake', 6.50, 'All Dessert', 'https://ucarecdn.com/52208c4f-1597-4168-a233-7d9acfb338c9/-/scale_crop/1280x1280/center/-/quality/normal/-/format/jpeg/pandan-chiffon-cake.jpg'),
 
@@ -83,7 +83,7 @@ VALUES
 
   -- Dim Sum Delight
   (12, true, 'Har Gow', 'Steamed shrimp dumplings with a thin translucent skin', 5.50, 'All Chinese', 'https://thewoksoflife.com/wp-content/uploads/2015/10/har-gow-6.jpg'),
-  (12, true, 'Siu Mai', 'Steamed pork dumplings with a savory filling', 6.50, 'All Chinese', 'https://recipetineats.com/wp-content/uploads/2020/02/Siu-Mai_Chinese-steamed-dumplings_2.jpg'),
+  (12, true, 'Siu Mai', 'Steamed pork dumplings with a savory filling', 6.50, 'All Chinese', 'https://redhousespice.com/wp-content/uploads/2022/11/dim-sum-siu-mai-scaled.jpg'),
   (12, true, 'Xiao Long Bao', 'Soup dumplings with a burst of flavorful broth inside', 7.50, 'All Chinese', 'https://static.thehoneycombers.com/wp-content/uploads/sites/2/2019/09/xiao-long-bao-singapore.png'),
   (12, true, 'Fried Spring Rolls', 'Crispy spring rolls filled with vegetables and shrimp', 6.00, 'All Chinese', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTM0nJRZyuAaio0b4JwAqadCOUciUc9qM1QMghuRNL0g&s'),
 
@@ -91,7 +91,7 @@ VALUES
   (13, true, 'Shoyu Ramen', 'Soy-based ramen with tender slices of pork', 10.00, 'All Japanese', 'https://media-cdn.tripadvisor.com/media/photo-s/1c/a6/36/97/ramen-shoyu-classic.jpg'),
   (13, true, 'Miso Ramen', 'Ramen in a rich miso broth with vegetables', 11.50, 'All Japanese', 'https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/601FDD58-68E1-47B8-A925-5A7DA7C8E7DE/Derivates/00ab9024-d404-47ef-810b-c48dcf1fdb39.jpg'),
   (13, true, 'Spicy Tan Tan Ramen', 'Spicy sesame-based broth with ground pork', 12.00, 'All Japanese', 'https://www.marionskitchen.com/wp-content/uploads/2020/03/Easy-%E2%80%98Tantanmen%E2%80%99-Ramen1.jpg'),
-  (13, true, 'Vegetarian Miso Ramen', 'Ramen in miso broth with tofu and assorted vegetables', 11.00, 'All Japanese', 'https://images.squarespace-cdn.com/content/v1/5e185ce3e56525704fdae715/285175dc-3dda-4f26-8136-397d8d61dad6/DSC02846.jpg');
+  (13, true, 'Vegetarian Miso Ramen', 'Ramen in miso broth with tofu and assorted vegetables', 11.00, 'All Japanese', 'https://loveandgoodstuff.com/wp-content/uploads/2019/01/spicy_miso_ramen2-500x500.jpg');
 
 
 -- Insert sample users
