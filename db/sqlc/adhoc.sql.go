@@ -498,7 +498,7 @@ SELECT d.id AS dish_id,
        r.id AS restaurant_id
 FROM dishes d
 JOIN restaurants r ON d.restaurant_id = r.id
-WHERE d.name ILIKE '%'||$1||'%' OR d.description ILIKE '%'||$1||'%'
+WHERE d.name ILIKE '%'||$1||'%' OR d.description ILIKE '%'||$1||'%' OR d.cuisine ILIKE '%'||$1||'%'
 `
 
 type SearchDishesRow struct {

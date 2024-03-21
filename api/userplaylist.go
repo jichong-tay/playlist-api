@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/goombaio/namegenerator"
 	db "github.com/jichong-tay/playlist-api/db/sqlc"
+	"github.com/jichong-tay/playlist-api/util"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 	"gopkg.in/guregu/null.v4"
@@ -134,10 +135,13 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 	const timeFormat = "15:04"
 	deliveryTime, _ := time.Parse(timeFormat, reqPlaylist.DeliveryTime)
 
+	//random image url
+	imageURL, _ := util.RandomImageURL(400, 400)
+
 	arg := db.PlaylistDishTxParams{
 		Name:         playlistName,
 		Description:  null.NewString("", true),
-		ImageUrl:     null.NewString("./images/dummy.png", true),
+		ImageUrl:     null.NewString(imageURL, true),
 		IsPublic:     false,
 		DeliveryDay:  null.NewString(reqPlaylist.DeliveryDay, true),
 		Category:     null.NewString("", true),

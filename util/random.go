@@ -3,6 +3,7 @@ package util
 import (
 	"fmt"
 	"math/rand"
+	"net/http"
 	"strings"
 	"time"
 )
@@ -38,4 +39,16 @@ func RandomName() string {
 // RandomEmail generates a random email
 func RandomEmail() string {
 	return fmt.Sprintf("%s@email.com", RandomString(6))
+}
+
+// RandomImage generates a random image URL
+func RandomImageURL(width, height int) (string, error) {
+	url := fmt.Sprintf("https://source.unsplash.com/random/%dx%d/?food", width, height)
+	res, err := http.Get(url)
+	if err != nil {
+		return "", err
+	}
+	defer res.Body.Close()
+	redirectURL := res.Request.URL.String()
+	return redirectURL, nil
 }
