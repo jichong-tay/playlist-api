@@ -65,19 +65,25 @@ func (server *Server) updateUserPlaylistStatus(ctx *gin.Context) {
 		return
 	}
 
+	var t time.Time
+
 	if ctx.Request.Method == "PUT" {
 		arg = db.UpdateStatusForUser_PlaylistParams{
-			UserID:     req.UserID,
-			PlaylistID: req.PlaylistID,
-			Status:     null.NewString("Cancelled", true),
+			UserID:       req.UserID,
+			PlaylistID:   req.PlaylistID,
+			Status:       null.NewString("Cancelled", true),
+			DeliveryDay:  null.NewString("", true),
+			DeliveryTime: null.NewTime(time.Time{}, false),
 		}
 	}
 
 	if ctx.Request.Method == "POST" {
 		arg = db.UpdateStatusForUser_PlaylistParams{
-			UserID:     req.UserID,
-			PlaylistID: req.PlaylistID,
-			Status:     null.NewString("Pending", true),
+			UserID:       req.UserID,
+			PlaylistID:   req.PlaylistID,
+			Status:       null.NewString("Pending", true),
+			DeliveryDay:  null.NewString("", true),
+			DeliveryTime: null.NewTime(time.Time{}, false),
 		}
 	}
 
@@ -123,7 +129,7 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 		return
 	}
 
-	//random name generator for playlist
+	// random name generator for playlist
 	seed := time.Now().UTC().UnixNano()
 	nameGenerator := namegenerator.NewNameGenerator(seed)
 	name := nameGenerator.Generate()
@@ -132,11 +138,11 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 	playlistName := caser.String(fmt.Sprint(name))
 	playlistNameDesc := caser.String(fmt.Sprint("Playlist created from ", reqPlaylist.Name))
 
-	//convert string to time
+	// convert string to time
 	const timeFormat = "15:04"
 	deliveryTime, _ := time.Parse(timeFormat, reqPlaylist.DeliveryTime)
 
-	//random image url
+	// random image url
 	imageURL, _ := util.RandomImageURL(400, 400)
 
 	arg := db.PlaylistDishTxParams{
@@ -187,12 +193,10 @@ func (server *Server) updateUserPlaylist(ctx *gin.Context) {
 		return
 	}
 
-	//convert string to time
-	const timeFormat = "15:04"
+	const timeFormat = "15:04" // convert string to time
 	deliveryTime, _ := time.Parse(timeFormat, reqPlaylist.DeliveryTime)
 
-	//get the playlist from the database
-	playlist, _ := server.store.GetPlaylist(ctx, reqPlaylist.ID)
+	playlist, _ := server.store.GetPlaylist(ctx, reqPlaylist.ID) // get the playlist from the database
 
 	arg := db.PlaylistDishTxParams{
 		Name:         reqPlaylist.Name,
@@ -282,32 +286,32 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, resp)
 }
 
-// randomSelectDishesv1 selects dishes randomly from the list of dishes and will always return
-func randomSelectDishesv1(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
+// // randomSelectDishesv1 selects dishes randomly from the list of dishes and will always return
+// func randomSelectDishesv1(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
 
-	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
-	selectedDishes := make([]db.Dish, count)
-	selectedIndices := make(map[int]bool)
+// 	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
+// 	selectedDishes := make([]db.Dish, count)
+// 	selectedIndices := make(map[int]bool)
 
-	tryCount := 10 //try 10 times to get the dish within the price range
-	j := 0
-	if count > len(dishes) { //check if there are enough dishes else return error
-		return selectedDishes, fmt.Errorf("not enough dishes for selection")
-	}
-	for i := 0; i < count; {
-		randomIndex := randGenerator.Intn(len(dishes))
-		if !selectedIndices[randomIndex] {
-			j++
-			selectedDishes[i] = dishes[randomIndex]
-			if (selectedDishes[i].Price >= price-5 && selectedDishes[i].Price <= price+5) || j > tryCount {
-				selectedIndices[randomIndex] = true
-				i++
-			}
-		}
-	}
+// 	tryCount := 10 //try 10 times to get the dish within the price range
+// 	j := 0
+// 	if count > len(dishes) { //check if there are enough dishes else return error
+// 		return selectedDishes, fmt.Errorf("not enough dishes for selection")
+// 	}
+// 	for i := 0; i < count; {
+// 		randomIndex := randGenerator.Intn(len(dishes))
+// 		if !selectedIndices[randomIndex] {
+// 			j++
+// 			selectedDishes[i] = dishes[randomIndex]
+// 			if (selectedDishes[i].Price >= price-5 && selectedDishes[i].Price <= price+5) || j > tryCount {
+// 				selectedIndices[randomIndex] = true
+// 				i++
+// 			}
+// 		}
+// 	}
 
-	return selectedDishes, error(nil)
-}
+// 	return selectedDishes, error(nil)
+// }
 
 // randomSelectDishesv2 selects dishes randomly from the list of dishes and will NOT always return
 func randomSelectDishesv2(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {

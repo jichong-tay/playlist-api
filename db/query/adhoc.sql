@@ -84,7 +84,9 @@ WHERE playlist_id = $1 LIMIT 1;
 -- name: UpdateStatusForUser_Playlist :many
 UPDATE user_playlists
 SET 
-  status = $3
+  status = $3,
+  delivery_day = $4,  
+  delivery_time = $5
 WHERE 
   user_id = $1 AND playlist_id = $2
 RETURNING *;

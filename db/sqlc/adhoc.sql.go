@@ -545,20 +545,30 @@ func (q *Queries) SearchDishes(ctx context.Context, dollar_1 sql.NullString) ([]
 const updateStatusForUser_Playlist = `-- name: UpdateStatusForUser_Playlist :many
 UPDATE user_playlists
 SET 
-  status = $3
+  status = $3,
+  delivery_day = $4,  
+  delivery_time = $5
 WHERE 
   user_id = $1 AND playlist_id = $2
 RETURNING id, user_id, playlist_id, delivery_day, delivery_time, status
 `
 
 type UpdateStatusForUser_PlaylistParams struct {
-	UserID     int64       `json:"user_id"`
-	PlaylistID int64       `json:"playlist_id"`
-	Status     null.String `json:"status"`
+	UserID       int64       `json:"user_id"`
+	PlaylistID   int64       `json:"playlist_id"`
+	Status       null.String `json:"status"`
+	DeliveryDay  null.String `json:"delivery_day"`
+	DeliveryTime null.Time   `json:"delivery_time"`
 }
 
 func (q *Queries) UpdateStatusForUser_Playlist(ctx context.Context, arg UpdateStatusForUser_PlaylistParams) ([]UserPlaylist, error) {
-	rows, err := q.db.QueryContext(ctx, updateStatusForUser_Playlist, arg.UserID, arg.PlaylistID, arg.Status)
+	rows, err := q.db.QueryContext(ctx, updateStatusForUser_Playlist,
+		arg.UserID,
+		arg.PlaylistID,
+		arg.Status,
+		arg.DeliveryDay,
+		arg.DeliveryTime,
+	)
 	if err != nil {
 		return nil, err
 	}
