@@ -54,14 +54,15 @@ type playlistv1 struct {
 }
 
 type playlistv2 struct {
-	ID          int64  `form:"id" json:"id"`
-	Name        string `form:"name" json:"name"`
-	ImageURL    string `form:"imageUrl" json:"imageUrl"`
-	IsPublic    bool   `form:"isPublic" json:"isPublic"`
-	DeliveryDay string `form:"deliveryDay" json:"deliveryDay"`
-	Category    string `form:"category" json:"category"`
-	Cost        string `form:"cost" json:"cost"`
-	Status      string `form:"status" json:"status"`
+	ID           int64  `form:"id" json:"id"`
+	Name         string `form:"name" json:"name"`
+	ImageURL     string `form:"imageUrl" json:"imageUrl"`
+	IsPublic     bool   `form:"isPublic" json:"isPublic"`
+	DeliveryDay  string `form:"deliveryDay" json:"deliveryDay"`
+	DeliveryTime string `form:"deliveryTime" json:"deliveryTime"`
+	Category     string `form:"category" json:"category"`
+	Cost         string `form:"cost" json:"cost"`
+	Status       string `form:"status" json:"status"`
 }
 
 type playlistLatestResponsev1 struct {
@@ -203,11 +204,30 @@ func (server *Server) maptoModelV2(ctx *gin.Context, playlistsDB []db.Playlist) 
 			cost += dishDB.Price * float64(playlistdishDB.DishQuantity)
 		}
 
+		//check if playlist is public
+		if playlistDB.IsPublic {
+			playlist.DeliveryTime = ""
+		} else {
+			userplaylistDB, err := server.store.GetUserPlaylistByPlaylistID(ctx, playlistDB.ID)
+			if err != nil {
+				if err == sql.ErrNoRows {
+					ctx.JSON(http.StatusNotFound, errResponse(err))
+					return nil, err
+				}
+				ctx.JSON(http.StatusInternalServerError, errResponse(err))
+				return nil, err
+			}
+			//convert time to string
+			deliveryTime := userplaylistDB.DeliveryTime.Time.Format("15:04")
+			playlist.DeliveryTime = deliveryTime
+		}
+
 		playlist.ID = playlistDB.ID
 		playlist.Name = playlistDB.Name
 		playlist.ImageURL = playlistDB.ImageUrl.String
 		playlist.IsPublic = playlistDB.IsPublic
 		playlist.DeliveryDay = playlistDB.DeliveryDay.String
+
 		playlist.Category = playlistDB.Category.String
 		playlist.Cost = fmt.Sprintf("%.2f", cost)
 
