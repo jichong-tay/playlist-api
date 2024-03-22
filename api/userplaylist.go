@@ -305,8 +305,12 @@ func randomSelectDishesv2(dishes []db.Dish, count int, price float64) ([]db.Dish
 	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
 	selectedDishes := make([]db.Dish, count)
 	selectedIndices := make(map[int]bool)
-	tryCount := 50 // try x times to get the dish within the price range
+
+	tryCount := 1000 // try x times to get the dish within the price range
 	j := 0
+	tol := 0.2
+
+	// tolerance for price range
 	if count > len(dishes) { // check if there are enough dishes else return error
 		return selectedDishes, fmt.Errorf("not enough dishes for selection")
 	}
@@ -318,7 +322,7 @@ func randomSelectDishesv2(dishes []db.Dish, count int, price float64) ([]db.Dish
 			}
 			j++
 			selectedDishes[i] = dishes[randomIndex]
-			if selectedDishes[i].Price >= price*0.95 && selectedDishes[i].Price <= price*1.1 {
+			if selectedDishes[i].Price >= price*(1-tol) && selectedDishes[i].Price <= price*(1+tol) {
 				selectedIndices[randomIndex] = true
 				i++
 			}
