@@ -315,6 +315,7 @@ type currentPlaylist struct {
 	IsPublic             bool                  `form:"isPublic" json:"isPublic"`
 	Restuarant_FoodItems []restaurant_foodItem `form:"foodItems" json:"foodItems"`
 	Cost                 interface{}           `form:"cost" json:"cost"`
+	Status               string                `form:"status" json:"status"`
 }
 
 type restaurant_foodItem struct {

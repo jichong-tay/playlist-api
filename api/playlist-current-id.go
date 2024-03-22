@@ -70,6 +70,7 @@ func (server *Server) getPlaylistCurrent(ctx *gin.Context) {
 		IsPublic:             playlist.IsPublic,
 		Restuarant_FoodItems: restuarant_foodItems,
 		Cost:                 fmt.Sprintf("%.2f", cost),
+		Status:               userPlaylist.Status.String,
 	}
 
 	ctx.JSON(http.StatusOK, resp)
