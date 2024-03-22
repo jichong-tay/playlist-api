@@ -25,5 +25,4 @@ func TestPassword(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, hashedPassword2)
 	require.NotEqual(t, hashedPassword1, hashedPassword2)
-
 }

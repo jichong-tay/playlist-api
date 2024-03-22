@@ -1,0 +1,25 @@
+# More info on config here: https://github.com/golangci/golangci-lint#config-file
+output:
+  format: colored-line-number
+linters:
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
+    - gocyclo
+    - goconst
+    - goimports
+    - misspell
+    - unconvert
+    - unparam
+    - bodyclose
+    - nakedret
+    - tparallel
+    - gofumpt
+    - revive
+issues:
+  exclude-use-default: false

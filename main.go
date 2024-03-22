@@ -1,3 +1,4 @@
+// package main is the entry point for the playlist service.
 package main
 
 import (

@@ -17,7 +17,6 @@ type getPlaylistLatestRequest struct {
 }
 
 func (server *Server) getPlaylistLatest(ctx *gin.Context) {
-
 	var req getPlaylistLatestRequest
 	var resp playlistLatestResponsev1
 
@@ -46,7 +45,6 @@ func (server *Server) getPlaylistLatest(ctx *gin.Context) {
 
 	publicPlaylist, _ = server.maptoModelCategory(ctx, publicPlaylistDB)
 
-	//build userPlaylist
 	var userPlaylist []playlistv1
 
 	argUser := db.ListPlaylistsByUserIDParams{
@@ -67,7 +65,6 @@ func (server *Server) getPlaylistLatest(ctx *gin.Context) {
 
 	userPlaylist, _ = server.maptoModelV1(ctx, userPlaylistDB)
 
-	//build response
 	resp = playlistLatestResponsev1{
 		CategoryPlaylist: publicPlaylist,
 		UserPlaylist:     userPlaylist,

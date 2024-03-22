@@ -10,8 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func createRandomPlaylist_Dish(t *testing.T) PlaylistDish {
-
+func createRandomPlaylistDish(t *testing.T) PlaylistDish {
 	playlist := createRandomPlaylist(t)
 	dish := createRandomDish(t)
 
@@ -22,75 +21,73 @@ func createRandomPlaylist_Dish(t *testing.T) PlaylistDish {
 		DishQuantity: util.RandomInt(1, 5),
 	}
 
-	playlist_dish, err := testQueries.CreatePlaylist_Dish(context.Background(), arg)
+	playlistDish, err := testQueries.CreatePlaylist_Dish(context.Background(), arg)
 	require.NoError(t, err)
-	require.NotEmpty(t, playlist_dish)
+	require.NotEmpty(t, playlistDish)
 
-	require.Equal(t, arg.OrderID, playlist_dish.OrderID)
-	require.Equal(t, arg.PlaylistID, playlist_dish.PlaylistID)
-	require.Equal(t, arg.DishID, playlist_dish.DishID)
-	require.Equal(t, arg.DishQuantity, playlist_dish.DishQuantity)
+	require.Equal(t, arg.OrderID, playlistDish.OrderID)
+	require.Equal(t, arg.PlaylistID, playlistDish.PlaylistID)
+	require.Equal(t, arg.DishID, playlistDish.DishID)
+	require.Equal(t, arg.DishQuantity, playlistDish.DishQuantity)
 
-	return playlist_dish
+	return playlistDish
 }
 
 func TestCreatePlaylist_Dish(t *testing.T) {
-	createRandomPlaylist_Dish(t)
+	createRandomPlaylistDish(t)
 }
 
 func TestGetPlaylist_Dish(t *testing.T) {
-	playlist_dish1 := createRandomPlaylist_Dish(t)
-	playlist_dish2, err := testQueries.GetPlaylist_Dish(context.Background(), playlist_dish1.ID)
+	playlistDish1 := createRandomPlaylistDish(t)
+	playlistDish2, err := testQueries.GetPlaylist_Dish(context.Background(), playlistDish1.ID)
 	require.NoError(t, err)
-	require.NotEmpty(t, playlist_dish2)
+	require.NotEmpty(t, playlistDish2)
 
-	require.Equal(t, playlist_dish1.OrderID, playlist_dish2.OrderID)
-	require.Equal(t, playlist_dish1.PlaylistID, playlist_dish2.PlaylistID)
-	require.Equal(t, playlist_dish1.DishID, playlist_dish2.DishID)
-	require.Equal(t, playlist_dish1.DishQuantity, playlist_dish2.DishQuantity)
-
+	require.Equal(t, playlistDish1.OrderID, playlistDish2.OrderID)
+	require.Equal(t, playlistDish1.PlaylistID, playlistDish2.PlaylistID)
+	require.Equal(t, playlistDish1.DishID, playlistDish2.DishID)
+	require.Equal(t, playlistDish1.DishQuantity, playlistDish2.DishQuantity)
 }
 
 func TestUpdatePlaylistDish(t *testing.T) {
-	playlist_dish1 := createRandomPlaylist_Dish(t)
+	playlistDish1 := createRandomPlaylistDish(t)
 
 	arg := UpdatePlaylist_DishParams{
-		ID:           playlist_dish1.ID,
-		OrderID:      playlist_dish1.OrderID,
-		PlaylistID:   playlist_dish1.PlaylistID,
-		DishID:       playlist_dish1.DishID,
+		ID:           playlistDish1.ID,
+		OrderID:      playlistDish1.OrderID,
+		PlaylistID:   playlistDish1.PlaylistID,
+		DishID:       playlistDish1.DishID,
 		DishQuantity: util.RandomInt(0, 5),
 		AddedAt:      time.Now(),
 	}
 
-	playlist_dish2, err := testQueries.UpdatePlaylist_Dish(context.Background(), arg)
+	playlistDish2, err := testQueries.UpdatePlaylist_Dish(context.Background(), arg)
 	require.NoError(t, err)
-	require.NotEmpty(t, playlist_dish2)
+	require.NotEmpty(t, playlistDish2)
 
-	require.Equal(t, arg.ID, playlist_dish2.ID)
-	require.Equal(t, arg.OrderID, playlist_dish2.OrderID)
-	require.Equal(t, arg.PlaylistID, playlist_dish2.PlaylistID)
-	require.Equal(t, arg.DishID, playlist_dish2.DishID)
-	require.Equal(t, arg.DishQuantity, playlist_dish2.DishQuantity)
-	require.NotEqual(t, arg.AddedAt, playlist_dish2.CreatedAt)
-
+	require.Equal(t, arg.ID, playlistDish2.ID)
+	require.Equal(t, arg.OrderID, playlistDish2.OrderID)
+	require.Equal(t, arg.PlaylistID, playlistDish2.PlaylistID)
+	require.Equal(t, arg.DishID, playlistDish2.DishID)
+	require.Equal(t, arg.DishQuantity, playlistDish2.DishQuantity)
+	require.NotEqual(t, arg.AddedAt, playlistDish2.CreatedAt)
 }
 
 func TestDeletePlaylist_Dish(t *testing.T) {
-	playlist_dish1 := createRandomPlaylist_Dish(t)
-	err := testQueries.DeletePlaylist_Dish(context.Background(), playlist_dish1.ID)
+	playlistDish1 := createRandomPlaylistDish(t)
+	err := testQueries.DeletePlaylist_Dish(context.Background(), playlistDish1.ID)
 	require.NoError(t, err)
 
-	user_playlist2, err := testQueries.GetPlaylist_Dish(context.Background(), playlist_dish1.ID)
+	userPlaylist2, err := testQueries.GetPlaylist_Dish(context.Background(), playlistDish1.ID)
 	require.Error(t, err)
 	require.EqualError(t, err, sql.ErrNoRows.Error())
-	require.Empty(t, user_playlist2)
+	require.Empty(t, userPlaylist2)
 }
 
 func TestListPlaylist_Dish(t *testing.T) {
 	var lastPlaylistDish PlaylistDish
 	for i := 0; i < 10; i++ {
-		lastPlaylistDish = createRandomPlaylist_Dish(t)
+		lastPlaylistDish = createRandomPlaylistDish(t)
 	}
 	arg := ListPlaylist_DishesParams{
 		ID:     lastPlaylistDish.ID,
@@ -98,12 +95,11 @@ func TestListPlaylist_Dish(t *testing.T) {
 		Offset: 5,
 	}
 
-	playlist_dishes, err := testQueries.ListPlaylist_Dishes(context.Background(), arg)
+	playlistDishes, err := testQueries.ListPlaylist_Dishes(context.Background(), arg)
 	require.NoError(t, err)
-	//require.Len(t, playlists, 5)
 
-	for _, playlist_dish := range playlist_dishes {
-		require.NotEmpty(t, playlist_dish)
-		require.Equal(t, arg.ID, playlist_dish.ID)
+	for _, playlistDish := range playlistDishes {
+		require.NotEmpty(t, playlistDish)
+		require.Equal(t, arg.ID, playlistDish.ID)
 	}
 }

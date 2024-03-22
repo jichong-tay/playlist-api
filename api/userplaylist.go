@@ -17,13 +17,12 @@ import (
 	"gopkg.in/guregu/null.v4"
 )
 
-type getUserUri struct {
+type getUserURI struct {
 	UserID int64 `uri:"userid" binding:"required,min=0"`
 }
 
 func (server *Server) getUserPlaylist(ctx *gin.Context) {
-
-	var req getUserUri
+	var req getUserURI
 	var playlists []playlistv2
 
 	if err := ctx.ShouldBindUri(&req); err != nil {
@@ -56,7 +55,6 @@ type updateUserPlaylistRequest struct {
 }
 
 func (server *Server) updateUserPlaylistStatus(ctx *gin.Context) {
-
 	var req updateUserPlaylistRequest
 	var arg db.UpdateStatusForUser_PlaylistParams
 
@@ -64,8 +62,6 @@ func (server *Server) updateUserPlaylistStatus(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
 		return
 	}
-
-	var t time.Time
 
 	if ctx.Request.Method == "PUT" {
 		arg = db.UpdateStatusForUser_PlaylistParams{
@@ -115,8 +111,7 @@ func (server *Server) updateUserPlaylistStatus(ctx *gin.Context) {
 }
 
 func (server *Server) createUserPlaylist(ctx *gin.Context) {
-
-	var reqUser getUserUri
+	var reqUser getUserURI
 	var reqPlaylist currentPlaylist
 
 	if err := ctx.ShouldBindUri(&reqUser); err != nil {
@@ -148,7 +143,7 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 	arg := db.PlaylistDishTxParams{
 		Name:         playlistName,
 		Description:  null.NewString(playlistNameDesc, true),
-		ImageUrl:     null.NewString(imageURL, true),
+		ImageURL:     null.NewString(imageURL, true),
 		IsPublic:     false,
 		DeliveryDay:  null.NewString(reqPlaylist.DeliveryDay, true),
 		Category:     null.NewString("", true),
@@ -156,11 +151,10 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 		PlaylistID:   reqPlaylist.ID,
 		DeliveryTime: null.NewTime(deliveryTime, true),
 		Status:       null.NewString("Pending", true),
-		DishItems:    server.maptoModelFoodItemV2(reqPlaylist.Restuarant_FoodItems),
+		DishItems:    server.maptoModelFoodItemV2(reqPlaylist.RestaurantFoodItems),
 	}
 
 	userPlaylistsDB, err := server.store.CreatePlaylistDishTx(ctx, arg)
-
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errResponse(err))
@@ -172,15 +166,14 @@ func (server *Server) createUserPlaylist(ctx *gin.Context) {
 
 	ctx.Params = append(ctx.Params, gin.Param{
 		Key:   "playlistid",
-		Value: fmt.Sprintf("%d", userPlaylistsDB.ID)})
+		Value: fmt.Sprintf("%d", userPlaylistsDB.ID),
+	})
 
 	server.getPlaylistCurrent(ctx)
-
 }
 
 func (server *Server) updateUserPlaylist(ctx *gin.Context) {
-
-	var reqUser getUserUri
+	var reqUser getUserURI
 	var reqPlaylist currentPlaylist
 
 	if err := ctx.ShouldBindUri(&reqUser); err != nil {
@@ -201,7 +194,7 @@ func (server *Server) updateUserPlaylist(ctx *gin.Context) {
 	arg := db.PlaylistDishTxParams{
 		Name:         reqPlaylist.Name,
 		Description:  playlist.Description,
-		ImageUrl:     playlist.ImageUrl,
+		ImageURL:     playlist.ImageUrl,
 		IsPublic:     false,
 		DeliveryDay:  null.NewString(reqPlaylist.DeliveryDay, true),
 		Category:     playlist.Category,
@@ -209,11 +202,10 @@ func (server *Server) updateUserPlaylist(ctx *gin.Context) {
 		PlaylistID:   reqPlaylist.ID,
 		DeliveryTime: null.NewTime(deliveryTime, true),
 		Status:       null.NewString("Pending", true),
-		DishItems:    server.maptoModelFoodItemV2(reqPlaylist.Restuarant_FoodItems),
+		DishItems:    server.maptoModelFoodItemV2(reqPlaylist.RestaurantFoodItems),
 	}
 
 	userPlaylistsDB, err := server.store.UpdatePlaylistDishTx(ctx, arg)
-
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errResponse(err))
@@ -229,18 +221,16 @@ func (server *Server) updateUserPlaylist(ctx *gin.Context) {
 	})
 
 	server.getPlaylistCurrent(ctx)
-
 }
 
-type getPlaylistRandomUri struct {
+type getPlaylistRandomURI struct {
 	Cuisine string  `uri:"cuisine" binding:"required"`
 	Num     int     `uri:"num" binding:"required"`
 	Budget  float64 `uri:"budget" binding:"required"`
 }
 
 func (server *Server) getPlaylistRandom(ctx *gin.Context) {
-
-	var req getPlaylistRandomUri
+	var req getPlaylistRandomURI
 	// var playlist currentPlaylist
 	// var foodItems []foodItem
 	empty := make([]string, 0)
@@ -250,9 +240,7 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 		return
 	}
 
-	searchArg := sql.NullString{
-		String: strings.ToLower(req.Cuisine),
-		Valid:  true}
+	searchArg := sql.NullString{String: strings.ToLower(req.Cuisine), Valid: true}
 
 	dishesDB, err := server.store.ListDishesByCuisine(ctx, searchArg)
 	if err != nil {
@@ -266,10 +254,9 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 
 	selectedDishesDB, err := randomSelectDishesv2(dishesDB, req.Num, req.Budget/(float64(req.Num)))
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, empty) //to return empty array
+		ctx.JSON(http.StatusInternalServerError, empty) // to return empty array
 		return
 	}
-
 	foodItems, cost, err := server.maptoModelDishes(ctx, selectedDishesDB)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
@@ -279,8 +266,8 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 	resp := currentPlaylist{
 		Name: "Random Playlist",
 		// IsPublic:             false,
-		Restuarant_FoodItems: foodItems,
-		Cost:                 cost,
+		RestaurantFoodItems: foodItems,
+		Cost:                cost,
 	}
 
 	ctx.JSON(http.StatusOK, resp)
@@ -315,14 +302,12 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 
 // randomSelectDishesv2 selects dishes randomly from the list of dishes and will NOT always return
 func randomSelectDishesv2(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
-
 	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
 	selectedDishes := make([]db.Dish, count)
 	selectedIndices := make(map[int]bool)
-
-	tryCount := 50 //try x times to get the dish within the price range
+	tryCount := 50 // try x times to get the dish within the price range
 	j := 0
-	if count > len(dishes) { //check if there are enough dishes else return error
+	if count > len(dishes) { // check if there are enough dishes else return error
 		return selectedDishes, fmt.Errorf("not enough dishes for selection")
 	}
 	for i := 0; i < count; {

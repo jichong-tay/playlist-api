@@ -37,7 +37,6 @@ func (e eqCreateUserParamsMatcher) Matches(x any) bool {
 	}
 	e.arg.PasswordHash = arg.PasswordHash
 	return reflect.DeepEqual(e.arg, arg)
-
 }
 
 func (e eqCreateUserParamsMatcher) String() string {
@@ -130,7 +129,6 @@ func TestCreateUserAPI(t *testing.T) {
 			tc.checkResponse(recorder)
 		})
 	}
-
 }
 
 func randomUser(t *testing.T) (user db.User, password string) {

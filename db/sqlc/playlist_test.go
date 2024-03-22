@@ -51,7 +51,6 @@ func TestGetPlaylist(t *testing.T) {
 	require.Equal(t, playlist1.IsPublic, playlist2.IsPublic)
 	require.Equal(t, playlist1.DeliveryDay, playlist2.DeliveryDay)
 	require.Equal(t, playlist1.Category, playlist2.Category)
-
 }
 
 func TestUpdatePlaylist(t *testing.T) {
@@ -79,7 +78,6 @@ func TestUpdatePlaylist(t *testing.T) {
 	require.Equal(t, arg.DeliveryDay, playlist2.DeliveryDay)
 	require.Equal(t, arg.Category, playlist2.Category)
 	require.WithinDuration(t, arg.AddedAt, playlist2.AddedAt, 1*time.Second)
-
 }
 
 func TestDeletePlaylist(t *testing.T) {
@@ -94,7 +92,6 @@ func TestDeletePlaylist(t *testing.T) {
 }
 
 func TestListPlaylist(t *testing.T) {
-
 	for i := 0; i < 10; i++ {
 		createRandomPlaylist(t)
 	}
@@ -105,8 +102,6 @@ func TestListPlaylist(t *testing.T) {
 
 	playlists, err := testQueries.ListPlaylists(context.Background(), arg)
 	require.NoError(t, err)
-	//require.Len(t, playlists, 5)
-
 	for _, playlist := range playlists {
 		require.NotEmpty(t, playlist)
 	}

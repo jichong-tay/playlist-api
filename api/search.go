@@ -16,7 +16,6 @@ type searchRequest struct {
 }
 
 func (server *Server) searchDishes(ctx *gin.Context) {
-
 	var req searchRequest
 
 	if err := ctx.ShouldBindUri(&req); err != nil {
@@ -35,9 +34,7 @@ func (server *Server) searchDishes(ctx *gin.Context) {
 		return
 	}
 
-	searchDishArg := sql.NullString{
-		String: req.SearchKeyword,
-		Valid:  true}
+	searchDishArg := sql.NullString{String: req.SearchKeyword, Valid: true}
 
 	searchDishesDB, err := server.store.SearchDishes(ctx, searchDishArg)
 	if err != nil {
@@ -55,7 +52,6 @@ func (server *Server) searchDishes(ctx *gin.Context) {
 }
 
 func (server *Server) getRecentSearch(ctx *gin.Context) {
-
 	var req searchRequest
 	var recentSearchDB []db.Search
 
@@ -88,9 +84,7 @@ func (server *Server) getRecentSearch(ctx *gin.Context) {
 }
 
 func (server *Server) searchDishesDelete(ctx *gin.Context) {
-
 	var req searchRequest
-
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
 		return

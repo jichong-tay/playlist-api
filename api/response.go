@@ -77,13 +77,13 @@ type playlistUserResponse struct {
 	UserPlaylist []playlistv2 `form:"userPlaylist" json:"userPlaylist"`
 }
 
-type playlistResponsev1 struct {
-	Playlist []playlistv1 `form:"list" json:"list"`
-}
+// type playlistResponsev1 struct {
+// 	Playlist []playlistv1 `form:"list" json:"list"`
+// }
 
-type playlistResponsev2 struct {
-	Playlist []playlistv2 `form:"list" json:"list"`
-}
+// type playlistResponsev2 struct {
+// 	Playlist []playlistv2 `form:"list" json:"list"`
+// }
 
 func (server *Server) maptoModelV1(ctx *gin.Context, playlistsDB []db.Playlist) ([]playlistv1, error) {
 	var playlists []playlistv1
@@ -220,13 +220,11 @@ func (server *Server) maptoModelV2(ctx *gin.Context, playlistsDB []db.Playlist) 
 }
 
 func (server *Server) maptoModelCategory(ctx *gin.Context, playlistsDB []db.Playlist) ([]categoryPlaylist, error) {
-
 	var categoryPlaylists []categoryPlaylist
 	var categoryplaylist categoryPlaylist
-	var playlistMap = make(map[string][]playlistv1)
-
 	var playlists []playlistv1
 	var dishes []dish
+	playlistMap := make(map[string][]playlistv1)
 
 	for _, PlaylistDB := range playlistsDB {
 		var playlist playlistv1
@@ -308,17 +306,17 @@ func (server *Server) maptoModelCategory(ctx *gin.Context, playlistsDB []db.Play
 }
 
 type currentPlaylist struct {
-	ID                   int64                 `form:"id" json:"id"`
-	Name                 string                `form:"name" json:"name"`
-	DeliveryDay          string                `form:"deliveryDay" json:"deliveryDay"`
-	DeliveryTime         string                `form:"deliveryTime" json:"deliveryTime"`
-	IsPublic             bool                  `form:"isPublic" json:"isPublic"`
-	Restuarant_FoodItems []restaurant_foodItem `form:"foodItems" json:"foodItems"`
-	Cost                 interface{}           `form:"cost" json:"cost"`
-	Status               string                `form:"status" json:"status"`
+	ID                  int64                `form:"id" json:"id"`
+	Name                string               `form:"name" json:"name"`
+	DeliveryDay         string               `form:"deliveryDay" json:"deliveryDay"`
+	DeliveryTime        string               `form:"deliveryTime" json:"deliveryTime"`
+	IsPublic            bool                 `form:"isPublic" json:"isPublic"`
+	RestaurantFoodItems []restaurantFoodItem `form:"foodItems" json:"foodItems"`
+	Cost                interface{}          `form:"cost" json:"cost"`
+	Status              string               `form:"status" json:"status"`
 }
 
-type restaurant_foodItem struct {
+type restaurantFoodItem struct {
 	RestaurantName string     `form:"restaurantName" json:"restaurantName"`
 	FoodItems      []foodItem `form:"foodItems" json:"foodItems"`
 }
@@ -332,13 +330,12 @@ type foodItem struct {
 	DishID      int64   `form:"dishId" json:"dishId"`
 }
 
-func (server *Server) maptoModelFoodItems(ctx *gin.Context, playlistDishesDB []db.PlaylistDish) ([]restaurant_foodItem, float64, error) {
-
-	var restaurant_fooditem restaurant_foodItem
+func (server *Server) maptoModelFoodItems(ctx *gin.Context, playlistDishesDB []db.PlaylistDish) ([]restaurantFoodItem, float64, error) {
+	var restaurantFooditem restaurantFoodItem
 	var foodItems []foodItem
-	var restaurant_foodItems []restaurant_foodItem
-	var playlistDishesMap = make(map[string][]foodItem)
+	var restaurantFoodItems []restaurantFoodItem
 	var cost float64
+	playlistDishesMap := make(map[string][]foodItem)
 
 	// Loop through the playlist_dishes and create the map
 	for _, playlistDishDB := range playlistDishesDB {
@@ -385,13 +382,13 @@ func (server *Server) maptoModelFoodItems(ctx *gin.Context, playlistDishesDB []d
 
 	for restaurantName, dishes := range playlistDishesMap {
 
-		restaurant_fooditem.RestaurantName = restaurantName
-		restaurant_fooditem.FoodItems = dishes
+		restaurantFooditem.RestaurantName = restaurantName
+		restaurantFooditem.FoodItems = dishes
 
-		restaurant_foodItems = append(restaurant_foodItems, restaurant_fooditem)
+		restaurantFoodItems = append(restaurantFoodItems, restaurantFooditem)
 	}
 
-	return restaurant_foodItems, cost, nil
+	return restaurantFoodItems, cost, nil
 }
 
 type searchDish struct {
@@ -405,7 +402,6 @@ type searchDish struct {
 }
 
 func (server *Server) maptoModelSearchDish(searchDishesRow []db.SearchDishesRow) []searchDish {
-
 	var searchDishes []searchDish
 	var searchDish searchDish
 
@@ -443,12 +439,10 @@ func (server *Server) maptoModelSearch(searches []db.Search) []searchResult {
 	return result
 }
 
-func (server *Server) maptoModelFoodItemV2(restuarantFoodItems []restaurant_foodItem) []db.Restaurant_foodItem {
-
+func (server *Server) maptoModelFoodItemV2(restuarantFoodItems []restaurantFoodItem) []db.RestaurantFoodItem {
 	var foodItemDB db.FoodItem
-
-	var restuarantFoodItemsDB []db.Restaurant_foodItem
-	var restuarantFoodItemDB db.Restaurant_foodItem
+	var restuarantFoodItemsDB []db.RestaurantFoodItem
+	var restuarantFoodItemDB db.RestaurantFoodItem
 
 	for _, restuarantfooditem := range restuarantFoodItems {
 		restuarantFoodItemDB.RestaurantName = restuarantfooditem.RestaurantName
@@ -474,13 +468,12 @@ func (server *Server) maptoModelFoodItemV2(restuarantFoodItems []restaurant_food
 	return restuarantFoodItemsDB
 }
 
-func (server *Server) maptoModelDishes(ctx *gin.Context, dishesDB []db.Dish) ([]restaurant_foodItem, float64, error) {
-
-	var restaurant_fooditem restaurant_foodItem
+func (server *Server) maptoModelDishes(ctx *gin.Context, dishesDB []db.Dish) ([]restaurantFoodItem, float64, error) {
+	var restaurantFooditem restaurantFoodItem
 	var foodItems []foodItem
-	var restaurant_foodItems []restaurant_foodItem
-	var playlistDishesMap = make(map[string][]foodItem)
+	var restaurantFoodItems []restaurantFoodItem
 	var cost float64
+	playlistDishesMap := make(map[string][]foodItem)
 
 	// Loop through the dishes and create the map
 	for _, dishDB := range dishesDB {
@@ -527,11 +520,11 @@ func (server *Server) maptoModelDishes(ctx *gin.Context, dishesDB []db.Dish) ([]
 
 	for restaurantName, dishes := range playlistDishesMap {
 
-		restaurant_fooditem.RestaurantName = restaurantName
-		restaurant_fooditem.FoodItems = dishes
+		restaurantFooditem.RestaurantName = restaurantName
+		restaurantFooditem.FoodItems = dishes
 
-		restaurant_foodItems = append(restaurant_foodItems, restaurant_fooditem)
+		restaurantFoodItems = append(restaurantFoodItems, restaurantFooditem)
 	}
 
-	return restaurant_foodItems, cost, nil
+	return restaurantFoodItems, cost, nil
 }

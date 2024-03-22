@@ -92,10 +92,10 @@ func TestGetPlaylistAPI(t *testing.T) {
 			defer ctrl.Finish()
 
 			store := mockdb.NewMockStore(ctrl)
-			//build stubs
+			// build stubs
 			tc.buildStubs(store)
 
-			//start test server and send request
+			// start test server and send request
 			server := NewServer(store)
 			recorder := httptest.NewRecorder()
 
@@ -104,9 +104,8 @@ func TestGetPlaylistAPI(t *testing.T) {
 			require.NoError(t, err)
 
 			server.router.ServeHTTP(recorder, request)
-			//check response
+			// check response
 			tc.checkResponse(t, recorder)
-
 		})
 
 	}
@@ -132,5 +131,4 @@ func requireBodyMatchPlaylist(t *testing.T, body *bytes.Buffer, playlist db.Play
 	err = json.Unmarshal(data, &gotPlaylist)
 	require.NoError(t, err)
 	require.Equal(t, playlist, gotPlaylist)
-
 }

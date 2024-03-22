@@ -27,11 +27,12 @@ func (server *Server) getPlaylistCategory(ctx *gin.Context) {
 	}
 
 	var playlistlist playlistv1
-	var categoryplaylistMap = make(map[string][]playlistv1)
 	var playlistlists []playlistv1
 	var dishes []dish
 	var dish dish
 	var costCat float64
+
+	categoryplaylistMap := make(map[string][]playlistv1)
 
 	arg := req.Category
 

@@ -42,7 +42,6 @@ func (server *Server) getPlaylistCurrent(ctx *gin.Context) {
 	}
 
 	playlistDishes, err := server.store.ListPlaylist_DishesByPlaylistID(ctx, playlist.ID)
-
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errResponse(err))
@@ -53,7 +52,7 @@ func (server *Server) getPlaylistCurrent(ctx *gin.Context) {
 		return
 	}
 
-	restuarant_foodItems, cost, _ := server.maptoModelFoodItems(ctx, playlistDishes)
+	restaurantFoodItems, cost, _ := server.maptoModelFoodItems(ctx, playlistDishes)
 
 	userPlaylist, _ := server.store.GetUserPlaylistByPlaylistID(ctx, req.ID)
 
@@ -63,16 +62,15 @@ func (server *Server) getPlaylistCurrent(ctx *gin.Context) {
 	}
 
 	resp := currentPlaylist{
-		ID:                   playlist.ID,
-		Name:                 playlist.Name,
-		DeliveryDay:          playlist.DeliveryDay.String,
-		DeliveryTime:         deliveryTime,
-		IsPublic:             playlist.IsPublic,
-		Restuarant_FoodItems: restuarant_foodItems,
-		Cost:                 fmt.Sprintf("%.2f", cost),
-		Status:               userPlaylist.Status.String,
+		ID:                  playlist.ID,
+		Name:                playlist.Name,
+		DeliveryDay:         playlist.DeliveryDay.String,
+		DeliveryTime:        deliveryTime,
+		IsPublic:            playlist.IsPublic,
+		RestaurantFoodItems: restaurantFoodItems,
+		Cost:                fmt.Sprintf("%.2f", cost),
+		Status:              userPlaylist.Status.String,
 	}
 
 	ctx.JSON(http.StatusOK, resp)
-
 }

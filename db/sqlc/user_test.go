@@ -37,8 +37,6 @@ func createRandomUser(t *testing.T) User {
 
 func TestCreateUser(t *testing.T) {
 	user1 := createRandomUser(t)
-
-	//create user with same email
 	hashedPassword, err := util.HashPassword(util.RandomString(6))
 	require.NoError(t, err)
 
@@ -87,7 +85,6 @@ func TestUpdateUser(t *testing.T) {
 	require.Equal(t, arg.PasswordHash, user2.PasswordHash)
 	require.Equal(t, arg.Address, user2.Address)
 	require.Equal(t, arg.Uuid, user2.Uuid)
-
 }
 
 func TestDeleteUser(t *testing.T) {
@@ -114,8 +111,6 @@ func TestListUsers(t *testing.T) {
 
 	users, err := testQueries.ListUsers(context.Background(), arg)
 	require.NoError(t, err)
-	//require.Len(t, users, 5)
-
 	for _, user := range users {
 		require.NotEmpty(t, user)
 		require.Equal(t, arg.ID, user.ID)

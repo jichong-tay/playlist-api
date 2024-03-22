@@ -58,10 +58,11 @@ Transaction to create
 //2. create a playlist, add dishes to playlist
 */
 
+// CreatePlaylistTxParams defines the parameters to create a playlist
 type CreatePlaylistTxParams struct {
 	Name         string      `json:"name"`
 	Description  null.String `json:"description"`
-	ImageUrl     null.String `json:"image_url"`
+	ImageURL     null.String `json:"image_url"`
 	IsPublic     bool        `json:"is_public"`
 	DeliveryDay  null.String `json:"delivery_day"`
 	Category     null.String `json:"category"`
@@ -71,17 +72,16 @@ type CreatePlaylistTxParams struct {
 	Status       null.String `json:"status"`
 }
 
+// CreatePlaylistTx creates a new playlist and adds it to the user's playlist
 func (store *SQLStore) CreatePlaylistTx(ctx context.Context, arg CreatePlaylistTxParams) (Playlist, error) {
-
 	var playlist Playlist
 	var err error
 
 	err = store.execTx(ctx, func(q *Queries) error {
-
 		playlist, err = q.CreatePlaylist(ctx, CreatePlaylistParams{
 			Name:        arg.Name,
 			Description: arg.Description,
-			ImageUrl:    arg.ImageUrl,
+			ImageUrl:    arg.ImageURL,
 			IsPublic:    arg.IsPublic,
 			DeliveryDay: arg.DeliveryDay,
 			Category:    arg.Category,
@@ -107,10 +107,11 @@ func (store *SQLStore) CreatePlaylistTx(ctx context.Context, arg CreatePlaylistT
 	return playlist, err
 }
 
+// PlaylistDishTxParams defines the parameters to create a playlist with dishes
 type PlaylistDishTxParams struct {
 	Name         string
 	Description  null.String
-	ImageUrl     null.String
+	ImageURL     null.String
 	IsPublic     bool
 	DeliveryDay  null.String
 	Category     null.String
@@ -118,13 +119,16 @@ type PlaylistDishTxParams struct {
 	PlaylistID   int64
 	DeliveryTime null.Time
 	Status       null.String
-	DishItems    []Restaurant_foodItem
+	DishItems    []RestaurantFoodItem
 }
-type Restaurant_foodItem struct {
+
+// RestaurantFoodItem defines the parameters to create a restaurant food item
+type RestaurantFoodItem struct {
 	RestaurantName string     `form:"restaurantName" json:"restaurantName"`
 	FoodItems      []FoodItem `form:"foodItems" json:"foodItems"`
 }
 
+// FoodItem defines the parameters to create a food item
 type FoodItem struct {
 	Name        string  `form:"name" json:"name"`
 	Description string  `form:"description" json:"description"`
@@ -134,17 +138,16 @@ type FoodItem struct {
 	DishID      int64   `form:"dishId" json:"dishId"`
 }
 
+// CreatePlaylistDishTx creates a new playlist and adds it to the user's playlist
 func (store *SQLStore) CreatePlaylistDishTx(ctx context.Context, arg PlaylistDishTxParams) (Playlist, error) {
-
 	var playlist Playlist
 	var err error
 
 	err = store.execTx(ctx, func(q *Queries) error {
-
 		playlist, err = q.CreatePlaylist(ctx, CreatePlaylistParams{
 			Name:        arg.Name,
 			Description: arg.Description,
-			ImageUrl:    arg.ImageUrl,
+			ImageUrl:    arg.ImageURL,
 			IsPublic:    arg.IsPublic,
 			DeliveryDay: arg.DeliveryDay,
 			Category:    arg.Category,
@@ -164,9 +167,8 @@ func (store *SQLStore) CreatePlaylistDishTx(ctx context.Context, arg PlaylistDis
 			return err
 		}
 
-		//create playlist_dishes
-		for _, restaurant_foodItem := range arg.DishItems {
-			for _, foodItem := range restaurant_foodItem.FoodItems {
+		for _, restaurantFoodItem := range arg.DishItems {
+			for _, foodItem := range restaurantFoodItem.FoodItems {
 				_, err = q.CreatePlaylist_Dish(ctx, CreatePlaylist_DishParams{
 					OrderID:      playlist.ID,
 					PlaylistID:   playlist.ID,
@@ -185,13 +187,12 @@ func (store *SQLStore) CreatePlaylistDishTx(ctx context.Context, arg PlaylistDis
 	return playlist, err
 }
 
+// UpdatePlaylistDishTx updates a playlist and adds it to the user's playlist
 func (store *SQLStore) UpdatePlaylistDishTx(ctx context.Context, arg PlaylistDishTxParams) (Playlist, error) {
-
 	var playlist Playlist
 	var err error
 
 	err = store.execTx(ctx, func(q *Queries) error {
-
 		playlist, err = q.GetPlaylist(ctx, arg.PlaylistID)
 		if err != nil {
 			return err
@@ -209,7 +210,7 @@ func (store *SQLStore) UpdatePlaylistDishTx(ctx context.Context, arg PlaylistDis
 			ID:          arg.PlaylistID,
 			Name:        arg.Name,
 			Description: arg.Description,
-			ImageUrl:    arg.ImageUrl,
+			ImageUrl:    arg.ImageURL,
 			IsPublic:    arg.IsPublic,
 			DeliveryDay: arg.DeliveryDay,
 			Category:    arg.Category,
@@ -230,9 +231,8 @@ func (store *SQLStore) UpdatePlaylistDishTx(ctx context.Context, arg PlaylistDis
 			return err
 		}
 
-		//create playlist_dishes
-		for _, restaurant_foodItem := range arg.DishItems {
-			for _, foodItem := range restaurant_foodItem.FoodItems {
+		for _, restaurantFoodItem := range arg.DishItems {
+			for _, foodItem := range restaurantFoodItem.FoodItems {
 				_, err := q.CreatePlaylist_Dish(ctx, CreatePlaylist_DishParams{
 					OrderID:      playlist.ID,
 					PlaylistID:   playlist.ID,

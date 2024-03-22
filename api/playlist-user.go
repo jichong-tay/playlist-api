@@ -12,7 +12,6 @@ type getPlaylistUserRequest struct {
 }
 
 func (server *Server) getPlaylistUser(ctx *gin.Context) {
-
 	var req getPlaylistUserRequest
 	var resp playlistUserResponse
 
@@ -38,7 +37,6 @@ func (server *Server) getPlaylistUser(ctx *gin.Context) {
 
 	userplaylists, _ = server.maptoModelV2(ctx, userPlaylistsDB)
 
-	//build response
 	resp = playlistUserResponse{
 		UserPlaylist: userplaylists,
 	}

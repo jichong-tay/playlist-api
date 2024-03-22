@@ -1,3 +1,4 @@
+// package api is a package that contains the API handlers for the playlist service.
 package api
 
 import (

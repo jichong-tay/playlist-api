@@ -10,7 +10,6 @@ import (
 )
 
 func createRandomSearch(t *testing.T) Search {
-
 	user := createRandomUser(t)
 	arg := CreateSearchParams{
 		UserID:  user.ID,
@@ -39,7 +38,6 @@ func TestGetSearch(t *testing.T) {
 
 	require.Equal(t, search1.UserID, search2.UserID)
 	require.Equal(t, search1.Keyword, search2.Keyword)
-
 }
 
 func TestListSearch(t *testing.T) {
@@ -61,5 +59,4 @@ func TestListSearch(t *testing.T) {
 		require.NotEmpty(t, search)
 		require.Equal(t, arg.ID, search.ID)
 	}
-
 }

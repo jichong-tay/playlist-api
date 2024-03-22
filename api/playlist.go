@@ -13,7 +13,7 @@ import (
 type createPlaylistRequest struct {
 	Name        string `json:"name" binding:"required"`
 	Description string `json:"description"`
-	ImageUrl    string `json:"image_url"`
+	ImageURL    string `json:"image_url"`
 	IsPublic    bool   `json:"is_public"`
 	DeliveryDay string `json:"delivery_day"`
 	Category    string `json:"category"`
@@ -29,7 +29,7 @@ func (server *Server) createPlaylist(ctx *gin.Context) {
 	arg := db.CreatePlaylistParams{
 		Name:        req.Name,
 		Description: null.NewString(req.Description, true),
-		ImageUrl:    null.NewString(req.ImageUrl, true),
+		ImageUrl:    null.NewString(req.ImageURL, true),
 		IsPublic:    req.IsPublic,
 		DeliveryDay: null.NewString(req.DeliveryDay, true),
 		Category:    null.NewString(req.Category, true),

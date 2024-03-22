@@ -18,7 +18,7 @@ func createRandomPlaylistTx(t *testing.T) Playlist {
 	arg := CreatePlaylistTxParams{
 		Name:         util.RandomName(),
 		Description:  null.NewString(util.RandomName(), true),
-		ImageUrl:     null.NewString(util.RandomName(), true),
+		ImageURL:     null.NewString(util.RandomName(), true),
 		IsPublic:     true,
 		DeliveryDay:  null.NewString("Monday", true),
 		Category:     null.NewString(util.RandomName(), true),
@@ -31,18 +31,18 @@ func createRandomPlaylistTx(t *testing.T) Playlist {
 	require.NoError(t, err)
 	require.NotEmpty(t, playlist)
 
-	var user_playlists []UserPlaylist
-	user_playlists, err = store.ListUser_Playlists(context.Background(), ListUser_PlaylistsParams{
+	var userPlaylists []UserPlaylist
+	userPlaylists, err = store.ListUser_Playlists(context.Background(), ListUser_PlaylistsParams{
 		UserID: user.ID,
 		Limit:  5,
 		Offset: 5,
 	})
 	require.NoError(t, err)
 
-	for _, user_playlist := range user_playlists {
-		require.NotEmpty(t, user_playlist)
-		require.Equal(t, arg.UserID, user_playlist.UserID)
-		require.Equal(t, playlist.ID, user_playlist.PlaylistID)
+	for _, userPlaylist := range userPlaylists {
+		require.NotEmpty(t, userPlaylist)
+		require.Equal(t, arg.UserID, userPlaylist.UserID)
+		require.Equal(t, playlist.ID, userPlaylist.PlaylistID)
 	}
 
 	return playlist
@@ -50,13 +50,10 @@ func createRandomPlaylistTx(t *testing.T) Playlist {
 
 func TestCreatePlaylistTx(t *testing.T) {
 	createRandomPlaylistTx(t)
-
 }
 
 func TestCreatePlaylistTxConcurrency(t *testing.T) {
-
 	store := NewStore(testDB)
-
 	n := 5
 	errs := make(chan error)
 	playlists := make(chan Playlist)
@@ -70,7 +67,7 @@ func TestCreatePlaylistTxConcurrency(t *testing.T) {
 			playlist, err := store.CreatePlaylistTx(context.Background(), CreatePlaylistTxParams{
 				Name:         util.RandomName(),
 				Description:  null.NewString(util.RandomName(), true),
-				ImageUrl:     null.NewString(util.RandomName(), true),
+				ImageURL:     null.NewString(util.RandomName(), true),
 				IsPublic:     true,
 				DeliveryDay:  null.NewString("Monday", true),
 				Category:     null.NewString(util.RandomName(), true),
@@ -85,8 +82,6 @@ func TestCreatePlaylistTxConcurrency(t *testing.T) {
 		}()
 	}
 
-	//check results
-
 	for i := 0; i < n; i++ {
 		err := <-errs
 		require.NoError(t, err)
@@ -97,20 +92,18 @@ func TestCreatePlaylistTxConcurrency(t *testing.T) {
 		user := <-users
 		require.NotEmpty(t, user)
 
-		var user_playlists []UserPlaylist
-		user_playlists, err = store.ListUser_Playlists(context.Background(), ListUser_PlaylistsParams{
+		var userPlaylists []UserPlaylist
+		userPlaylists, err = store.ListUser_Playlists(context.Background(), ListUser_PlaylistsParams{
 			UserID: user.ID,
 			Limit:  5,
 			Offset: 5,
 		})
 		require.NoError(t, err)
 
-		for _, user_playlist := range user_playlists {
-			require.NotEmpty(t, user_playlist)
-			require.Equal(t, user.ID, user_playlist.UserID)
-			require.Equal(t, playlist.ID, user_playlist.PlaylistID)
+		for _, userPlaylist := range userPlaylists {
+			require.NotEmpty(t, userPlaylist)
+			require.Equal(t, user.ID, userPlaylist.UserID)
+			require.Equal(t, playlist.ID, userPlaylist.PlaylistID)
 		}
-
 	}
-
 }

@@ -11,6 +11,7 @@ import (
 )
 
 var testQueries *Queries
+
 var testDB *sql.DB
 
 func TestMain(m *testing.M) {

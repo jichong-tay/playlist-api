@@ -8,7 +8,6 @@ import (
 )
 
 func (server *Server) getPublicPlaylist(ctx *gin.Context) {
-
 	playlistsDB, err := server.store.ListPlaylistPublicAndCategoryAll(ctx)
 	if err != nil {
 		if err == sql.ErrNoRows {

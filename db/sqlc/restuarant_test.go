@@ -70,7 +70,6 @@ func TestUpdateRestaurant(t *testing.T) {
 	require.Equal(t, arg.Location, Restaurant2.Location)
 	require.Equal(t, arg.Cuisine, Restaurant2.Cuisine)
 	require.Equal(t, arg.ImageUrl, Restaurant2.ImageUrl)
-
 }
 
 func TestDeleteRestuarant(t *testing.T) {
@@ -97,8 +96,6 @@ func TestListRestaurants(t *testing.T) {
 
 	restaurants, err := testQueries.ListRestaurants(context.Background(), arg)
 	require.NoError(t, err)
-	//require.Len(t, restaurants, 5)
-
 	for _, restaurant := range restaurants {
 		require.NotEmpty(t, restaurant)
 		require.Equal(t, arg.ID, restaurant.ID)

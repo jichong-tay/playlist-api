@@ -1,3 +1,4 @@
+// package db is a package that contains the database access code for the playlist service.
 package db
 
 import (
@@ -54,11 +55,9 @@ func TestGetDish(t *testing.T) {
 	require.Equal(t, dish1.Price, dish2.Price)
 	require.Equal(t, dish1.Cuisine, dish2.Cuisine)
 	require.Equal(t, dish1.ImageUrl, dish2.ImageUrl)
-
 }
 
 func TestUpdateDish(t *testing.T) {
-
 	dish1 := createRandomDish(t)
 
 	arg := UpdateDishParams{
@@ -84,7 +83,6 @@ func TestUpdateDish(t *testing.T) {
 	require.Equal(t, arg.Price, dish2.Price)
 	require.Equal(t, arg.Cuisine, dish2.Cuisine)
 	require.Equal(t, arg.ImageUrl, dish2.ImageUrl)
-
 }
 
 func TestDeleteDish(t *testing.T) {
@@ -112,8 +110,6 @@ func TestListDish(t *testing.T) {
 
 	dishes, err := testQueries.ListDishes(context.Background(), arg)
 	require.NoError(t, err)
-	//require.Len(t, dishes, 5)
-
 	for _, dish := range dishes {
 		require.NotEmpty(t, dish)
 	}

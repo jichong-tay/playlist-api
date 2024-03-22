@@ -76,3 +76,7 @@ networkconnectdb:
 playlist:
 	docker run --name playlist --network playlist-network -p 8080:8080 -e GIN_MODE=release -e DB_SOURCE="postgresql://root:secret@postgres16:5432/foodpanda-playlist?sslmode=disable" playlist:latest 
 
+
+.PHONY: lint
+lint:
+	golangci-lint run
