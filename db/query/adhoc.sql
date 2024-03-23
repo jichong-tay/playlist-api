@@ -135,6 +135,15 @@ WHERE
   user_id = $1 AND playlist_id = $2
 RETURNING *;
 
+-- name: UpdatePlaylistDelivery :one
+UPDATE playlists
+SET 
+  delivery_day = $2
+WHERE 
+  id = $1
+RETURNING *;
+
+
 -- name: ListDishesByCuisine :many
 SELECT * FROM dishes
 WHERE cuisine ILIKE '%'||$1||'%' OR description ILIKE '%'||$1||'%';

@@ -55,6 +55,7 @@ type Querier interface {
 	SearchDishes(ctx context.Context, dollar_1 sql.NullString) ([]SearchDishesRow, error)
 	UpdateDish(ctx context.Context, arg UpdateDishParams) (Dish, error)
 	UpdatePlaylist(ctx context.Context, arg UpdatePlaylistParams) (Playlist, error)
+	UpdatePlaylistDelivery(ctx context.Context, arg UpdatePlaylistDeliveryParams) (Playlist, error)
 	UpdatePlaylist_Dish(ctx context.Context, arg UpdatePlaylist_DishParams) (PlaylistDish, error)
 	UpdateRestaurant(ctx context.Context, arg UpdateRestaurantParams) (Restaurant, error)
 	UpdateStatusForUser_Playlist(ctx context.Context, arg UpdateStatusForUser_PlaylistParams) ([]UserPlaylist, error)

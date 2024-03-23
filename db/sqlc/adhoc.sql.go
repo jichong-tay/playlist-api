@@ -542,6 +542,37 @@ func (q *Queries) SearchDishes(ctx context.Context, dollar_1 sql.NullString) ([]
 	return items, nil
 }
 
+const updatePlaylistDelivery = `-- name: UpdatePlaylistDelivery :one
+UPDATE playlists
+SET 
+  delivery_day = $2
+WHERE 
+  id = $1
+RETURNING id, name, description, image_url, is_public, delivery_day, category, created_at, added_at
+`
+
+type UpdatePlaylistDeliveryParams struct {
+	ID          int64       `json:"id"`
+	DeliveryDay null.String `json:"delivery_day"`
+}
+
+func (q *Queries) UpdatePlaylistDelivery(ctx context.Context, arg UpdatePlaylistDeliveryParams) (Playlist, error) {
+	row := q.db.QueryRowContext(ctx, updatePlaylistDelivery, arg.ID, arg.DeliveryDay)
+	var i Playlist
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.Description,
+		&i.ImageUrl,
+		&i.IsPublic,
+		&i.DeliveryDay,
+		&i.Category,
+		&i.CreatedAt,
+		&i.AddedAt,
+	)
+	return i, err
+}
+
 const updateStatusForUser_Playlist = `-- name: UpdateStatusForUser_Playlist :many
 UPDATE user_playlists
 SET 

@@ -83,12 +83,25 @@ func (server *Server) updateUserPlaylistStatus(ctx *gin.Context) {
 		}
 	}
 
-	playlist, err := server.store.UpdateStatusForUser_Playlist(ctx, arg)
+	userPlaylist, err := server.store.UpdateStatusForUser_Playlist(ctx, arg)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
 		return
 	}
-	if len(playlist) == 0 {
+	if len(userPlaylist) == 0 {
+		ctx.JSON(http.StatusNotFound, errResponse(sql.ErrNoRows))
+		return
+	}
+
+	_, err = server.store.UpdatePlaylistDelivery(ctx, db.UpdatePlaylistDeliveryParams{
+		ID:          req.PlaylistID,
+		DeliveryDay: null.NewString("", true),
+	})
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errResponse(err))
+		return
+	}
+	if len(userPlaylist) == 0 {
 		ctx.JSON(http.StatusNotFound, errResponse(sql.ErrNoRows))
 		return
 	}
