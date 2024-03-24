@@ -146,4 +146,4 @@ RETURNING *;
 
 -- name: ListDishesByCuisine :many
 SELECT * FROM dishes
-WHERE cuisine ILIKE '%'||$1||'%' OR description ILIKE '%'||$1||'%';
+WHERE cuisine ILIKE '%'||$1||'%' OR description ILIKE '%'||$1||'%' OR name ILIKE '%'||$1||'%';

@@ -265,7 +265,7 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 		return
 	}
 
-	selectedDishesDB, err := randomSelectDishesv2(dishesDB, req.Num, req.Budget/(float64(req.Num)))
+	selectedDishesDB, err := enrichRandomSelectDishes(dishesDB, req.Num, req.Budget/(float64(req.Num)))
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, empty) // to return empty array
 		return
@@ -288,14 +288,15 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 
 // // randomSelectDishesv1 selects dishes randomly from the list of dishes and will always return
 // func randomSelectDishesv1(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
-
 // 	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
 // 	selectedDishes := make([]db.Dish, count)
 // 	selectedIndices := make(map[int]bool)
 
-// 	tryCount := 10 //try 10 times to get the dish within the price range
+// 	tryCount := 1000 // try x times to get the dish within the price range
 // 	j := 0
-// 	if count > len(dishes) { //check if there are enough dishes else return error
+// 	tol := 0.2
+
+// 	if count > len(dishes) { // check if there are enough dishes else return error
 // 		return selectedDishes, fmt.Errorf("not enough dishes for selection")
 // 	}
 // 	for i := 0; i < count; {
@@ -303,7 +304,7 @@ func (server *Server) getPlaylistRandom(ctx *gin.Context) {
 // 		if !selectedIndices[randomIndex] {
 // 			j++
 // 			selectedDishes[i] = dishes[randomIndex]
-// 			if (selectedDishes[i].Price >= price-5 && selectedDishes[i].Price <= price+5) || j > tryCount {
+// 			if (selectedDishes[i].Price <= price*(1+tol)) || j > tryCount {
 // 				selectedIndices[randomIndex] = true
 // 				i++
 // 			}
@@ -327,6 +328,7 @@ func randomSelectDishesv2(dishes []db.Dish, count int, price float64) ([]db.Dish
 	if count > len(dishes) { // check if there are enough dishes else return error
 		return selectedDishes, fmt.Errorf("not enough dishes for selection")
 	}
+
 	for i := 0; i < count; {
 		randomIndex := randGenerator.Intn(len(dishes))
 		if !selectedIndices[randomIndex] {
@@ -338,9 +340,57 @@ func randomSelectDishesv2(dishes []db.Dish, count int, price float64) ([]db.Dish
 			if selectedDishes[i].Price >= price*(1-tol) && selectedDishes[i].Price <= price*(1+tol) {
 				selectedIndices[randomIndex] = true
 				i++
+			} else {
+				selectedDishes[i] = db.Dish{}
 			}
 		}
 	}
 
 	return selectedDishes, error(nil)
+}
+
+// randomSelectDishesv3 selects dishes randomly from the list of dishes and will NOT always return
+func randomSelectDishesv3(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
+	randGenerator := rand.New(rand.NewSource(time.Now().UnixNano()))
+	selectedDishes := make([]db.Dish, count)
+	selectedIndices := make(map[int]bool)
+
+	tryCount := 1000 // try x times to get the dish within the price range
+	j := 0
+	tol := 0.2
+
+	// tolerance for price range
+	if count > len(dishes) { // check if there are enough dishes else return error
+		return selectedDishes, fmt.Errorf("not enough dishes for selection")
+	}
+
+	for i := 0; i < count; {
+		randomIndex := randGenerator.Intn(len(dishes))
+		if !selectedIndices[randomIndex] {
+			if j > tryCount {
+				return selectedDishes, fmt.Errorf("no dishes found")
+			}
+			j++
+			selectedDishes[i] = dishes[randomIndex]
+			if selectedDishes[i].Price <= price*(1+tol) {
+				selectedIndices[randomIndex] = true
+				i++
+			} else {
+				selectedDishes[i] = db.Dish{}
+			}
+		}
+	}
+
+	return selectedDishes, error(nil)
+}
+
+func enrichRandomSelectDishes(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
+
+	randomDishv2, err := randomSelectDishesv2(dishes, count, price)
+	if randomDishv2[count-1].ID == 0 {
+		randomDishv3, err := randomSelectDishesv3(dishes, count, price)
+		return randomDishv3, err
+	}
+
+	return randomDishv2, err
 }

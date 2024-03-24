@@ -104,7 +104,7 @@ func (q *Queries) GetUserPlaylistByPlaylistID(ctx context.Context, playlistID in
 
 const listDishesByCuisine = `-- name: ListDishesByCuisine :many
 SELECT id, restaurant_id, is_available, name, description, price, cuisine, image_url FROM dishes
-WHERE cuisine ILIKE '%'||$1||'%' OR description ILIKE '%'||$1||'%'
+WHERE cuisine ILIKE '%'||$1||'%' OR description ILIKE '%'||$1||'%' OR name ILIKE '%'||$1||'%'
 `
 
 func (q *Queries) ListDishesByCuisine(ctx context.Context, dollar_1 sql.NullString) ([]Dish, error) {
