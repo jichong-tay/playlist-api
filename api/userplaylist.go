@@ -385,7 +385,6 @@ func randomSelectDishesv3(dishes []db.Dish, count int, price float64) ([]db.Dish
 }
 
 func enrichRandomSelectDishes(dishes []db.Dish, count int, price float64) ([]db.Dish, error) {
-
 	randomDishv2, err := randomSelectDishesv2(dishes, count, price)
 	if randomDishv2[count-1].ID == 0 {
 		randomDishv3, err := randomSelectDishesv3(dishes, count, price)
