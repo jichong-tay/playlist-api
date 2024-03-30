@@ -71,6 +71,11 @@ export PATH=$PATH:~/go/bin
 5. make migrateup (make migratedown)
 6. make test
 
+## Database Design
+![playlist](https://github.com/jichong-tay/playlist-api/assets/151018920/7e2b63a1-2d60-4f41-9f02-03abd092338a)
+
+
+
 ## Demo Preview
 
 [![Demo Preview Video](https://img.youtube.com/vi/gyShESf7SCc/0.jpg)](https://www.youtube.com/watch?v=gyShESf7SCc)
