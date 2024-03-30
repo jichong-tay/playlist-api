@@ -70,3 +70,7 @@ export PATH=$PATH:~/go/bin
 4. make sqlc (if sql files are not generated)
 5. make migrateup (make migratedown)
 6. make test
+
+## Demo Preview
+
+[![Demo Preview Video](https://img.youtube.com/vi/gyShESf7SCc/0.jpg)](https://www.youtube.com/watch?v=gyShESf7SCc)
